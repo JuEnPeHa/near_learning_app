@@ -14,7 +14,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const List screens = [HomePage()];
+  static const List screens = [
+    HomePage(),
+    HomePage(),
+    HomePage(),
+    HomePage(),
+    ProfilePage()
+  ];
 
   static int selectedIndex = 0;
 
@@ -34,12 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
     Icon(Icons.person),
   ];
 
-  List<NavigationItem> items = _icons
-      .map(
-        (e) => NavigationItem(
-            icon: _icons[selectedIndex], color: _bgColor[selectedIndex]),
-      )
-      .toList();
+  List<NavigationItem> items = [
+    for (int i = 0; i < screens.length; i++)
+      NavigationItem(
+        icon: _icons[i],
+        color: _bgColor[i],
+      ),
+  ];
 
   Widget _buildItem(NavigationItem item, bool isSelected) {
     return Container(
@@ -87,20 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[500],
       body: screens[selectedIndex],
-      //  const CustomScrollView(
-      //   slivers: [
-      //     SliverAppBar(
-      //       //floating: true,
-      //       //snap: true,
-      //       //backgroundColor: Colors.transparent,
-      //       elevation: 25,
-      //       flexibleSpace: FlexibleSpaceBar(
-      //         title: Text('NEAR Learning App', style: TextStyle(fontSize: 16)),
-      //       ),
-      //     ),
-      //   ],
-      // ),
       bottomNavigationBar: Container(
         width: MediaQuery.of(context).size.width,
         height: 100.0,
