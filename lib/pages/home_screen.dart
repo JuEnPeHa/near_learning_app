@@ -96,31 +96,43 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.blueGrey[500],
       body: screens[selectedIndex],
-      bottomNavigationBar: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 100.0,
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(15.0),
-              topRight: Radius.circular(15.0),
-            ),
-            color: Colors.grey[300]),
-        child: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: items.map((item) {
-              var itemIndex = items.indexOf(item);
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 75.0,
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                topRight: Radius.circular(15.0),
+                bottomLeft: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0),
+              ),
+              color: Colors.grey[300]),
+          child: SafeArea(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: items.map((item) {
+                var itemIndex = items.indexOf(item);
 
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedIndex = itemIndex;
-                  });
-                },
-                child: _buildItem(item, selectedIndex == itemIndex),
-              );
-            }).toList(),
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = itemIndex;
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Ejemplo" + itemIndex.toString()),
+                        behavior: SnackBarBehavior.fixed,
+                        duration: Duration(
+                            seconds: 1 * (itemIndex == 0 ? 5 : itemIndex)),
+                        elevation: 100,
+                      ));
+                    });
+                  },
+                  child: _buildItem(item, selectedIndex == itemIndex),
+                );
+              }).toList(),
+            ),
           ),
         ),
       ),

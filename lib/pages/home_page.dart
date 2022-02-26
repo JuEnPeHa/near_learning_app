@@ -101,6 +101,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               child: InkWell(
                                 onTap: () {
                                   print("InkWell 1");
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("Ejemplo"), behavior: SnackBarBehavior.floating,));
                                 },
                                 customBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),

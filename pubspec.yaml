@@ -16,6 +16,8 @@ dependencies:
   http: ^0.13.4
   curved_navigation_bar: ^1.0.1
   flutter_neumorphic: ^3.2.0
+  supabase_flutter: ^0.2.12
+  image_picker: ^0.8.4+9
 
 dev_dependencies:
   flutter_test:
