@@ -231,6 +231,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   return Container();
                 }),
           ),
+          Container(height: 100,color: Colors.transparent),
         ],
       ),
     );
