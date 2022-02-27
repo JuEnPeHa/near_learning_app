@@ -97,12 +97,26 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.blueGrey[500],
       body: screens[selectedIndex],
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.only(bottom: 20, left: 25, right: 25),
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: 75.0,
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
           decoration: BoxDecoration(
+              boxShadow: [
+                const BoxShadow(
+                  color: Colors.white54,
+                  offset: Offset(-2.5, -2.5),
+                  blurRadius: 2.0,
+                  spreadRadius: 0.5,
+                ),
+                BoxShadow(
+                  color: Colors.grey.shade500,
+                  offset: const Offset(2.5, 2.5),
+                  blurRadius: 2.0,
+                  spreadRadius: 0.5,
+                ),
+              ],
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(15.0),
                 topRight: Radius.circular(15.0),
@@ -110,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 bottomRight: Radius.circular(15.0),
               ),
               color: Colors.grey[300]),
-          child: SafeArea(
+          child: Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: items.map((item) {

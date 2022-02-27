@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:near_learning_app/models/supabase_keys.dart';
+import 'package:near_learning_app/pages/home_screen.dart';
 import 'package:near_learning_app/pages/pages.dart';
 import 'package:near_learning_app/router/routes.dart';
 import 'package:near_learning_app/theme/app_theme.dart';
@@ -31,12 +32,12 @@ class MyApp extends StatelessWidget {
       // routes: AppRoutes.getAppRoutes(),
       // initialRoute: AppRoutes.initialRoute,
       // onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: '/',
+      initialRoute: 'home',
       routes: <String, WidgetBuilder>{
-        '/': (BuildContext context) => const SplashPage(),
-        '/login': (BuildContext context) => const LoginPage2(),
-        '/home': (BuildContext context) => const HomePage(),
-        '/account': (BuildContext context) => const AccountPage(),
+        'root': (BuildContext context) => const SplashPage(),
+        'login': (BuildContext context) => const LoginPage2(),
+        'home': (BuildContext context) => const HomeScreen(),
+        'account': (BuildContext context) => const AccountPage(),
       },
     );
   }

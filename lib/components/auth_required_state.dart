@@ -7,7 +7,7 @@ class AuthRequiredState<T extends StatefulWidget>
       void onUnauthenticated() {
         if (mounted) {
           /// Users will be sent back to the LoginPage if they sign out.
-          Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+          Navigator.of(context).pushNamedAndRemoveUntil('login', (route) => false);
         }
       }
     }
