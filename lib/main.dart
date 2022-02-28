@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
         'login': (BuildContext context) => const LoginPage2(),
         'home': (BuildContext context) => const HomeScreen(),
         'account': (BuildContext context) => const AccountPage(),
+        'themes': (BuildContext context) => const ThemesPage(),
       },
     );
   }

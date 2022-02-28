@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:near_learning_app/pages/pages.dart';
 
+import '../models/models.dart';
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomePage(),
     HomePage(),
     HomePage(),
-    HomePage(),
+    ThemesPage(),
     ProfilePage()
   ];
 
@@ -47,49 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
         color: _bgColor[i],
       ),
   ];
-
-  Widget _buildItem(NavigationItem item, bool isSelected) {
-    return Container(
-      height: 50.0,
-      width: 50.0,
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: isSelected
-            ? []
-            : [
-                const BoxShadow(
-                  color: Colors.white,
-                  offset: Offset(-5.0, -5.0),
-                  blurRadius: 10.0,
-                  spreadRadius: 0.0,
-                ),
-                BoxShadow(
-                  color: Colors.grey.shade500,
-                  offset: const Offset(5.0, 5.0),
-                  blurRadius: 10.0,
-                  spreadRadius: 0.0,
-                ),
-              ],
-        gradient: isSelected
-            ? LinearGradient(colors: [
-                Colors.grey.shade500,
-                Colors.grey.shade400,
-                Colors.grey.shade300,
-                Colors.grey.shade200,
-                Colors.grey.shade100,
-              ], begin: Alignment.topLeft, end: Alignment.bottomRight)
-            : null,
-      ),
-      child: IconTheme(
-        data: IconThemeData(
-          size: 25.0,
-          color: isSelected ? item.color : Colors.grey[800],
-        ),
-        child: item.icon,
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ));
                     });
                   },
-                  child: _buildItem(item, selectedIndex == itemIndex),
+                  child: BuildItem(
+                      item: item, isSelected: selectedIndex == itemIndex),
                 );
               }).toList(),
             ),
@@ -154,11 +113,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-class NavigationItem {
-  final Icon icon;
-  final Color? color;
-
-  NavigationItem({required this.icon, required this.color});
 }

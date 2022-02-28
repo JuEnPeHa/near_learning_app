@@ -9,31 +9,40 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.all(8),
-      physics: BouncingScrollPhysics(),
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        userTile(),
-        divider(),
-        colorTiles(),
-        divider(),
-        SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: circularIndicator(MediaQuery.of(context).size.height / 2, 10, context)),
-        divider(),
-        bwTiles(),
-      ],
+    final size = MediaQuery.of(context).size;
+
+    return SafeArea(
+      child: ListView(
+        padding: const EdgeInsets.all(8),
+        physics: const BouncingScrollPhysics(),
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          userTile(),
+          divider(),
+          colorTiles(),
+          divider(),
+          SizedBox(
+            height: size.width / 2 + 20,
+              width: size.width,
+              child: CustomCircularIndicator(
+                radius: size.width,
+                lineWidth: 10,
+              )),
+          divider(),
+          bwTiles(),
+        ],
+      ),
     );
   }
 }
 
 Widget userTile() {
-  return ListTile(
+  return const ListTile(
     leading: CircleAvatar(
       radius: 50,
       backgroundColor: Colors.blue,
@@ -50,7 +59,7 @@ Widget userTile() {
 }
 
 Widget divider() {
-  return Padding(
+  return const Padding(
     padding: EdgeInsets.symmetric(horizontal: 15),
     child: Divider(
       thickness: 2,
@@ -113,36 +122,45 @@ Widget colorTile(IconData icon, Color color, String text,
   );
 }
 
-Widget circularIndicator(double radius, double width, BuildContext context) {
-  return Column(
-    children: [
-      const SizedBox(
-        height: 8.0,
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: CircularPercentIndicator(
-          radius: radius / 4,
-          lineWidth: width,
-          percent: getChapterCompleted() / 100,
-          animation: true,
-          circularStrokeCap: CircularStrokeCap.round,
-          center: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _percentText(context),
-              _subtitleText(context, "Capitulos Completados")
-            ],
-          ),
-          backgroundColor: Colors.grey[300]!,
-          progressColor: Theme.of(context).primaryColor.withBlue(100),
+class CustomCircularIndicator extends StatelessWidget {
+  final double radius;
+  final double lineWidth;
+  const CustomCircularIndicator(
+      {Key? key, required this.radius, required this.lineWidth})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 8.0,
         ),
-      ),
-      const SizedBox(
-        height: 8.0,
-      ),
-    ],
-  );
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: CircularPercentIndicator(
+            radius: radius / 4,
+            lineWidth: lineWidth,
+            percent: getChapterCompleted() / 100,
+            animation: true,
+            circularStrokeCap: CircularStrokeCap.round,
+            center: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _percentText(context),
+                _subtitleText(context, "Capitulos Completados")
+              ],
+            ),
+            backgroundColor: Colors.grey[300]!,
+            progressColor: Theme.of(context).primaryColor.withBlue(100),
+          ),
+        ),
+        const SizedBox(
+          height: 8.0,
+        ),
+      ],
+    );
+  }
 }
 
 double getChapterCompleted() {
