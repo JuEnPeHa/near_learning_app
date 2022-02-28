@@ -1,51 +1,51 @@
     [{
         "title": "Titulo de ejemplo 1",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 2",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 3",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 4",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 5",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 6",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 7",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 8",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 9",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 10",
         "color": "Color(0x12345678)",
-        "subtitles": {'Subtitle 1', 'Subtitle 2', 'Subtitle 3'}
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     }
 ]

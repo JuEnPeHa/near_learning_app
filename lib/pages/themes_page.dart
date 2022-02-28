@@ -25,7 +25,9 @@ class _ThemesPageState extends State<ThemesPage> {
 @override
 void initState() {
     // TODO: implement initState
-    getJson().then((value) => themes = value);
+    getJson().then((value) => setState(() {
+      themes = value;
+    }));
     super.initState();
   }
 
@@ -159,12 +161,28 @@ void initState() {
             ],
           ),
           ExpansionPanelList(),
-          ExpansionTile(title: Text('Expansion tile'), children: [
-            Text('This is the body'),
-          ]),
-          jsonString.isEmpty
+          themes.isEmpty
               ? Text('Loading...')
-              : Text(themes[1].title),
+              : Column(
+                children: [
+                  ...themes.map((EachTheme theme) {
+                    return Container(
+                      //margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: theme.color,
+                      ),
+                      child: ExpansionTile(
+                        title: Text(theme.title),
+                        children: [...theme.subtitles.map((e) {
+                          return ListTile(title: Text(e));
+                        })],),
+                    );
+                  }),
+                  Text(themes[0].title),
+                ],
+              ),
         ]))
       ],
     );

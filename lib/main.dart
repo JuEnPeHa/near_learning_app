@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:near_learning_app/models/supabase_keys.dart';
 import 'package:near_learning_app/pages/home_screen.dart';
 import 'package:near_learning_app/pages/pages.dart';
@@ -10,8 +11,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
   await Supabase.initialize(
-      url: YOUR_SUPABASE_URL, anonKey: YOUR_SUPABASE_ANON_KEY, );
+    url: YOUR_SUPABASE_URL,
+    anonKey: YOUR_SUPABASE_ANON_KEY,
+  );
   runApp(const MyApp());
 }
 
