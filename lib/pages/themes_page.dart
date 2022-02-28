@@ -18,110 +18,27 @@ class ThemesPage extends StatefulWidget {
 }
 
 class _ThemesPageState extends State<ThemesPage> {
-  String jsonString = "";
+  final ScrollController _scrollController = ScrollController();
+  bool _isLittle = false;
   List<EachTheme> themes = [];
 
-
-@override
-void initState() {
+  @override
+  void initState() {
     // TODO: implement initState
     getJson().then((value) => setState(() {
-      themes = value;
-    }));
+          themes = value;
+        }));
     super.initState();
   }
-
-  var listExplample = [
-    {
-      "title": "Red",
-      "color": Colors.red,
-    },
-    {
-      "title": "Green",
-      "color": Colors.green,
-    },
-    {
-      "title": "Blue",
-      "color": Colors.blue,
-    },
-    {
-      "title": "Yellow",
-      "color": Colors.yellow,
-    },
-    {
-      "title": "Orange",
-      "color": Colors.orange,
-    },
-    {
-      "title": "Purple",
-      "color": Colors.purple,
-    },
-    {
-      "title": "Black",
-      "color": Colors.black,
-    },
-    {
-      "title": "White",
-      "color": Colors.white,
-    },
-    {
-      "title": "Grey",
-      "color": Colors.grey,
-    },
-    {
-      "title": "Pink",
-      "color": Colors.pink,
-    },
-    {
-      "title": "Cyan",
-      "color": Colors.cyan,
-    },
-    {
-      "title": "Brown",
-      "color": Colors.brown,
-    },
-    {
-      "title": "Indigo",
-      "color": Colors.indigo,
-    },
-    {
-      "title": "Light Blue",
-      "color": Colors.lightBlue,
-    },
-    {
-      "title": "Light Green",
-      "color": Colors.lightGreen,
-    },
-    {
-      "title": "Deep Orange",
-      "color": Colors.deepOrange,
-    },
-    {
-      "title": "Deep Purple",
-      "color": Colors.deepPurple,
-    },
-    {
-      "title": "Teal",
-      "color": Colors.teal,
-    },
-    {
-      "title": "Lime",
-      "color": Colors.lime,
-    },
-    {
-      "title": "Indigo",
-      "color": Colors.indigo,
-    },
-    {"title": "Light Blue", "color": Colors.blue}
-  ];
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
+          pinned: true,
             expandedHeight: 100,
-            backgroundColor: Colors.red,
+            backgroundColor: _isLittle ? Colors.transparent : Colors.red,
             flexibleSpace: const FlexibleSpaceBar(
               title: Text('Available seats',
                   style: TextStyle(color: Colors.white)),
@@ -163,26 +80,47 @@ void initState() {
           ExpansionPanelList(),
           themes.isEmpty
               ? Text('Loading...')
-              : Column(
-                children: [
-                  ...themes.map((EachTheme theme) {
-                    return Container(
-                      //margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: theme.color,
+              : Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      ...themes.map(
+                        (EachTheme theme) {
+                          return ExpansionTile(
+                            collapsedBackgroundColor: theme.color,
+                            backgroundColor: Colors.blue,
+                            //backgroundColor: theme.color,
+                            title: Text(theme.title),
+                            children: [
+                              ...theme.subtitles.map((e) {
+                                return ListTile(
+                                    //tileColor: theme.color,
+                                    title: Text(e));
+                              })
+                            ],
+                          );
+                        },
                       ),
-                      child: ExpansionTile(
-                        title: Text(theme.title),
-                        children: [...theme.subtitles.map((e) {
-                          return ListTile(title: Text(e));
-                        })],),
-                    );
-                  }),
-                  Text(themes[0].title),
-                ],
-              ),
+                      ...themes.map(
+                        (EachTheme theme) {
+                          return ExpansionTile(
+                            collapsedBackgroundColor: theme.color,
+                            backgroundColor: Colors.blue,
+                            //backgroundColor: theme.color,
+                            title: Text(theme.title),
+                            children: [
+                              ...theme.subtitles.map((e) {
+                                return ListTile(
+                                    //tileColor: theme.color,
+                                    title: Text(e));
+                              })
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
         ]))
       ],
     );
@@ -190,5 +128,3 @@ void initState() {
 }
 
 enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
-
-

@@ -1,11 +1,11 @@
     [{
         "title": "Titulo de ejemplo 1",
-        "color": "Color(0x12345678)",
+        "color": "Color(0xFFFFFFFF)",
         "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
         "title": "Titulo de ejemplo 2",
-        "color": "Color(0x12345678)",
+        "color": "Color(0x12341678)",
         "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
@@ -15,7 +15,7 @@
     },
     {
         "title": "Titulo de ejemplo 4",
-        "color": "Color(0x12345678)",
+        "color": "Color(0x80FFFFFF)",
         "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {
@@ -30,7 +30,7 @@
     },
     {
         "title": "Titulo de ejemplo 7",
-        "color": "Color(0x12345678)",
+        "color": "Color(0x14345678)",
         "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
     },
     {

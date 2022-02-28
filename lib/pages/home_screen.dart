@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      backgroundColor: Colors.blueGrey[500],
+      backgroundColor: selectedIndex != 3 ? Color(0xFF5d9b9b) : Color(0xFFF9F9F2),
       body: screens[selectedIndex],
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 25, right: 25),
