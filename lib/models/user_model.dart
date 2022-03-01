@@ -4,25 +4,25 @@ part 'user_model.g.dart';
 
 @HiveType(typeId: 0)
 class User extends HiveObject {
-  @HiveObject(0)
+  @HiveField(0)
    String name;
-  @HiveObject(1)
+  @HiveField(1)
    String email;
-  @HiveObject(2)
+  @HiveField(2)
    String lastName;
-  @HiveObject(3)
+  @HiveField(3)
    int userLevel;
-  @HiveObject(4)
+  @HiveField(4)
    int userLastSyncedLevel;
-  @HiveObject(5)
+  @HiveField(5)
    String preferedLanguage;
-  @HiveObject(6)
+  @HiveField(6)
    List<String> favoriteThemes;
-  @HiveObject(7)
+  @HiveField(7)
    String lastReadPath;
-  @HiveObject(8)
+  @HiveField(8)
    String lastReadSyncedPath;
-  @HiveObject(9)
+  @HiveField(9)
   User({
     required this.name,
     required this.email,

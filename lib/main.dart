@@ -5,8 +5,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:near_learning_app/models/supabase_keys.dart';
 import 'package:near_learning_app/pages/home_screen.dart';
 import 'package:near_learning_app/pages/pages.dart';
+import 'package:near_learning_app/providers/provider.dart';
 import 'package:near_learning_app/router/routes.dart';
 import 'package:near_learning_app/theme/app_theme.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -16,7 +18,21 @@ void main() async {
     url: YOUR_SUPABASE_URL,
     anonKey: YOUR_SUPABASE_ANON_KEY,
   );
-  runApp(const MyApp());
+  runApp(const AppState());
+}
+
+class AppState extends StatelessWidget {
+  const AppState({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ( _ ) => UserProvider(), lazy: false,)
+      ],
+      child: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
