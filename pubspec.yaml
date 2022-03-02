@@ -24,6 +24,9 @@ dependencies:
   nil: ^1.1.1
   dio: ^4.0.4
   provider: ^6.0.2
+  flutter_localizations:
+    sdk: flutter
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +40,7 @@ flutter:
 
   assets:
     - assets/json/
+    - assets/images_logos/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

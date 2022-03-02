@@ -11,7 +11,8 @@ Future<List<EachTheme>> getJson() async {
 }
 
 class ThemesPage extends StatefulWidget {
-  const ThemesPage({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const ThemesPage({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   State<ThemesPage> createState() => _ThemesPageState();

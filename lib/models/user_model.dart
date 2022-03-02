@@ -3,27 +3,27 @@ import 'package:hive_flutter/hive_flutter.dart';
 part 'user_model.g.dart';
 
 @HiveType(typeId: 0)
-class User extends HiveObject {
+class UserApp extends HiveObject {
   @HiveField(0)
-   String name;
+  String name;
   @HiveField(1)
-   String email;
+  String email;
   @HiveField(2)
-   String lastName;
+  String lastName;
   @HiveField(3)
-   int userLevel;
+  int userLevel;
   @HiveField(4)
-   int userLastSyncedLevel;
+  int userLastSyncedLevel;
   @HiveField(5)
-   String preferedLanguage;
+  String preferedLanguage;
   @HiveField(6)
-   List<String> favoriteThemes;
+  List<String> favoriteThemes;
   @HiveField(7)
-   String lastReadPath;
+  String lastReadPath;
   @HiveField(8)
-   String lastReadSyncedPath;
+  String lastReadSyncedPath;
   @HiveField(9)
-  User({
+  UserApp({
     required this.name,
     required this.email,
     required this.lastName,
@@ -35,7 +35,7 @@ class User extends HiveObject {
     required this.lastReadSyncedPath,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserApp.fromJson(Map<String, dynamic> json) => UserApp(
         name: json['name'],
         email: json['email'],
         lastName: json['lastName'],
@@ -63,6 +63,6 @@ class User extends HiveObject {
 
   @override
   String toString() {
-    return 'User{name: $name, email: $email, lastName: $lastName, userLevel: $userLevel, userLastSyncedLevel: $userLastSyncedLevel, preferedLanguage: $preferedLanguage, favoriteThemes: $favoriteThemes, lastReadPath: $lastReadPath, lastReadSyncedPath: $lastReadSyncedPath}';
+    return 'UserApp{name: $name, email: $email, lastName: $lastName, userLevel: $userLevel, userLastSyncedLevel: $userLastSyncedLevel, preferedLanguage: $preferedLanguage, favoriteThemes: $favoriteThemes, lastReadPath: $lastReadPath, lastReadSyncedPath: $lastReadSyncedPath}';
   }
 }

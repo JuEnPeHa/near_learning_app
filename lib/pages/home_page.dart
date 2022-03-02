@@ -1,15 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:near_learning_app/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const HomePage({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  static const Map<String, String> imagesLogos = {
+    "mintbase.jpeg": "Mintbase",
+    "near-docs.jpeg": "NEAR docs",
+    "paras.jpeg": "Paras",
+    "aurora-dev.jpeg": "Aurora Dev",
+  };
+
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
@@ -22,10 +29,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             padding: const EdgeInsets.only(top: 50, left: 20),
             child: Row(
               children: [
-                const Icon(
-                  Icons.menu,
-                  size: 30,
-                  color: Colors.black54,
+                IconButton(
+                  icon: const Icon(
+                    Icons.menu,
+                    size: 30,
+                    color: Colors.black54,
+                  ),
+                  onPressed: () {
+                    widget.scaffoldKey.currentState?.openDrawer();
+                  },
                 ),
                 Expanded(child: Container()),
                 Neumorphic(
@@ -101,8 +113,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               child: InkWell(
                                 onTap: () {
                                   print("InkWell 1");
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("Ejemplo"), behavior: SnackBarBehavior.floating,));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text("Ejemplo"),
+                                    behavior: SnackBarBehavior.floating,
+                                  ));
                                 },
                                 customBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),
@@ -111,7 +126,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Neumorphic(
                                     //margin: const EdgeInsets.only(right: 20),
-                                    child: Container(),
+                                    child: Container(
+                                      color: Color(0xFF495371),
+                                      child: Text(
+                                          "Excepteur reprehenderit culpa ipsum deserunt eiusmod consectetur proident quis culpa duis incididunt enim. Qui deserunt do nisi exercitation deserunt Lorem sint do sunt Lorem officia in ut magna. Incididunt consequat proident non dolor deserunt culpa laboris anim laboris adipisicing consectetur. Veniam incididunt ad Lorem aliquip. Veniam elit quis ut ullamco non commodo laborum et tempor amet culpa officia exercitation."),
+                                    ),
                                     style: const NeumorphicStyle(
                                         border: NeumorphicBorder(
                                       isEnabled: true,
@@ -135,7 +154,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Neumorphic(
                                     //margin: const EdgeInsets.only(right: 20),
-                                    child: Container(),
+                                    child: Container(
+                                      color: Color(0xFF98B4AA),
+                                      child: Text(
+                                          "Non sunt dolor qui anim nisi consectetur velit incididunt pariatur ullamco minim veniam. Qui ipsum ut consectetur incididunt eiusmod ex fugiat id voluptate occaecat velit. Deserunt officia veniam Lorem proident elit aute consequat ex nulla consequat ad."),
+                                    ),
                                     style: const NeumorphicStyle(
                                         border: NeumorphicBorder(
                                       isEnabled: true,
@@ -169,7 +192,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 color: Color(0x33000000),
                                 width: 0.8,
                               )),
-                              child: Container(),
+                              child: Container(
+                                color: Color(0xFFF1E0AC),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Center(
+                                      child: Text(
+                                    "Quis pariatur dolor ut nostrud ipsum. Proident irure eu sit est nulla aliqua velit. Incididunt mollit commodo proident deserunt cupidatat fugiat non fugiat minim magna magna nisi culpa dolore.",
+                                    textAlign: TextAlign.justify,
+                                  )),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -223,15 +256,40 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             margin: EdgeInsets.symmetric(horizontal: 15),
             width: double.maxFinite,
             height: 125,
-            color: Colors.red,
+            color: Colors.transparent,
             child: ListView.builder(
-                itemCount: 5,
+                itemCount: imagesLogos.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return Container();
+                  return Container(
+                    margin: const EdgeInsets.only(right: 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.black,
+                            image: DecorationImage(
+                                image: AssetImage("assets/images_logos/" +
+                                    imagesLogos.keys.elementAt(index)),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            imagesLogos.values.elementAt(index),
+                            style: TextStyle(fontSize: 18, color: Colors.black),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
                 }),
           ),
-          Container(height: 100,color: Colors.transparent),
+          Container(height: 100, color: Colors.transparent),
         ],
       ),
     );

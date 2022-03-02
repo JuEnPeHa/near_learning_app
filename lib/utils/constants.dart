@@ -1,13 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:near_learning_app/models/models.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final supabase = Supabase.instance.client;
+const Duration defaultDuration = Duration(milliseconds: 300);
+
+final itemsFirst = [
+  DrawerItem(
+      title: 'NEAR Forum',
+      icon: Icons.person_add,
+      url: "https://gov.near.org/"),
+  DrawerItem(
+      title: 'NFT Gallery',
+      icon: Icons.browse_gallery,
+      url: "https://juenpeha.github.io/flutter_web_nft_gallery/#/"),
+  DrawerItem(
+      title: 'NEAR Forum',
+      icon: Icons.person_add,
+      url: "https://gov.near.org/"),
+  DrawerItem(
+      title: 'NFT Gallery',
+      icon: Icons.browse_gallery,
+      url: "https://juenpeha.github.io/flutter_web_nft_gallery/#/"),
+];
+
+final itemsSecond = [
+  DrawerItem(
+      title: 'NEAR Forum',
+      icon: Icons.person_add,
+      url: "https://gov.near.org/"),
+  DrawerItem(
+      title: 'NFT Gallery',
+      icon: Icons.browse_gallery,
+      url: "https://juenpeha.github.io/flutter_web_nft_gallery/#/"),
+];
 
 extension ShowSnackBar on BuildContext {
   void showSnackBar(
       {required String message, Color backgroundColor = Colors.white}) {
     ScaffoldMessenger.of(this).showSnackBar(SnackBar(
-      content: Text(message, style: const TextStyle(color: Colors.white),),
+      content: Text(
+        message,
+        style: const TextStyle(color: Colors.white),
+      ),
       backgroundColor: backgroundColor,
     ));
   }

@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:near_learning_app/pages/pages.dart';
+import 'package:flutter/services.dart';
 
 import '../models/models.dart';
 import '../widgets/widgets.dart';
@@ -15,22 +18,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static const List screens = [
-    HomePage(),
-    HomePage(),
-    HomePage(),
-    ThemesPage(),
-    ProfilePage()
-  ];
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<Widget> _screens() => [
+        HomePage(scaffoldKey: _scaffoldKey),
+        HomePage(scaffoldKey: _scaffoldKey),
+        HomePage(scaffoldKey: _scaffoldKey),
+        ThemesPage(scaffoldKey: _scaffoldKey),
+        ProfilePage(scaffoldKey: _scaffoldKey)
+      ];
 
   static int selectedIndex = 0;
 
   static final List<Color> _bgColor = [
-    Colors.red.shade600,
-    Colors.blue.shade900,
-    Colors.deepOrange.shade600,
-    Colors.cyan.shade600,
-    Colors.deepPurple.shade500,
+    Color(0xFF8BDB81),
+    Color(0xFF8BDB81),
+    Color(0xFF8BDB81),
+    Color(0xFF8BDB81),
+    Color(0xFF8BDB81),
   ];
 
   static const List<Icon> _icons = [
@@ -41,20 +45,24 @@ class _HomeScreenState extends State<HomeScreen> {
     Icon(Icons.person),
   ];
 
-  List<NavigationItem> items = [
-    for (int i = 0; i < screens.length; i++)
-      NavigationItem(
-        icon: _icons[i],
-        color: _bgColor[i],
-      ),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = _screens();
+    List<NavigationItem> items = [
+      for (int i = 0; i < screens.length; i++)
+        NavigationItem(
+          icon: _icons[i],
+          color: _bgColor[i],
+        ),
+    ];
     return Scaffold(
+      drawer: NavigationDrawerWidget(),
       extendBodyBehindAppBar: true,
       extendBody: true,
-      backgroundColor: selectedIndex != 3 ? Color(0xFF5d9b9b) : Color(0xFFF9F9F2),
+      backgroundColor:
+          selectedIndex != 3 ? Color(0xFF74959A) : Color(0xFFF9F9F2),
       body: screens[selectedIndex],
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 25, right: 25),
@@ -92,6 +100,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 return GestureDetector(
                   onTap: () {
+                    if (Platform.isAndroid) {
+                      HapticFeedback.vibrate();
+                    }
+                    if (Platform.isIOS) {
+                      HapticFeedback.lightImpact();
+                    }
                     setState(() {
                       selectedIndex = itemIndex;
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

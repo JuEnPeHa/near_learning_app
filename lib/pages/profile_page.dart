@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const ProfilePage({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
