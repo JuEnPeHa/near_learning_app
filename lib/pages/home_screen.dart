@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:near_learning_app/pages/pages.dart';
@@ -18,14 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<Widget> _screens() => [
-        HomePage(scaffoldKey: _scaffoldKey),
-        HomePage(scaffoldKey: _scaffoldKey),
-        HomePage(scaffoldKey: _scaffoldKey),
-        ThemesPage(scaffoldKey: _scaffoldKey),
-        ProfilePage(scaffoldKey: _scaffoldKey)
-      ];
+  static List<Widget> _screens() =>
+      [HomePage(), HomePage(), HomePage(), ThemesPage(), ProfilePage()];
 
   static int selectedIndex = 0;
 
@@ -44,8 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Icon(Icons.notifications),
     Icon(Icons.person),
   ];
-
-
 
   @override
   Widget build(BuildContext context) {

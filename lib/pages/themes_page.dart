@@ -11,8 +11,9 @@ Future<List<EachTheme>> getJson() async {
 }
 
 class ThemesPage extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  const ThemesPage({Key? key, required this.scaffoldKey}) : super(key: key);
+  const ThemesPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ThemesPage> createState() => _ThemesPageState();
@@ -20,30 +21,50 @@ class ThemesPage extends StatefulWidget {
 
 class _ThemesPageState extends State<ThemesPage> {
   final ScrollController _scrollController = ScrollController();
+  bool _isLoading = false;
   bool _isLittle = false;
   List<EachTheme> themes = [];
 
   @override
   void initState() {
-    // TODO: implement initState
-    getJson().then((value) => setState(() {
-          themes = value;
-        }));
+    getJson().then((value) => setState(() => themes = value));
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >= 50) {
+        setState(() {
+          _isLittle = true;
+        });
+        // Future.delayed(const Duration(seconds: 2), () {
+        //   setState(() {
+        //     _isLoading = false;
+        //   });
+        // });
+      } else if (_scrollController.position.pixels <= 50) {
+        setState(() {
+          _isLittle = false;
+        });
+      }
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: _scrollController,
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
-          pinned: true,
+            pinned: true,
             expandedHeight: 100,
-            backgroundColor: _isLittle ? Colors.transparent : Colors.red,
-            flexibleSpace: const FlexibleSpaceBar(
-              title: Text('Available seats',
-                  style: TextStyle(color: Colors.white)),
-            ),
+            backgroundColor: _isLittle
+                ? Colors.transparent
+                : Color.fromARGB(255, 160, 158, 62),
+            flexibleSpace: FlexibleSpaceBar(
+                collapseMode: CollapseMode.parallax,
+                centerTitle: true,
+                title: Text('Themes',
+                    style: TextStyle(
+                        color: _isLittle ? Colors.black : Colors.white))),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.add_circle),
@@ -54,6 +75,7 @@ class _ThemesPageState extends State<ThemesPage> {
         SliverList(
             delegate: SliverChildListDelegate([
           PopupMenuButton<WhyFarther>(
+            child: CircularProgressIndicator(),
             onSelected: (WhyFarther result) {
               setState(() {
                 // result.toString();
@@ -78,9 +100,8 @@ class _ThemesPageState extends State<ThemesPage> {
               ),
             ],
           ),
-          ExpansionPanelList(),
           themes.isEmpty
-              ? Text('Loading...')
+              ? const Text('Loading...')
               : Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -89,7 +110,7 @@ class _ThemesPageState extends State<ThemesPage> {
                         (EachTheme theme) {
                           return ExpansionTile(
                             collapsedBackgroundColor: theme.color,
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.transparent,
                             //backgroundColor: theme.color,
                             title: Text(theme.title),
                             children: [

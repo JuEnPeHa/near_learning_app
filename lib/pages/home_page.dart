@@ -2,8 +2,8 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:near_learning_app/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  const HomePage({Key? key, required this.scaffoldKey}) : super(key: key);
+
+  const HomePage({Key? key,}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     color: Colors.black54,
                   ),
                   onPressed: () {
-                    widget.scaffoldKey.currentState?.openDrawer();
+                    Scaffold.of(context).openDrawer();
                   },
                 ),
                 Expanded(child: Container()),
