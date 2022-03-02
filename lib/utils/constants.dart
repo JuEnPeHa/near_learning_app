@@ -4,6 +4,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 final supabase = Supabase.instance.client;
 const Duration defaultDuration = Duration(milliseconds: 300);
+const double defaultPadding = 15.0;
+
+final int limitHeight = 1000;
+final int limitWidth = 500;
+
+const Color loginBg = Color(0xFF4FD1D9);
+const Color signupBg = Color(0xFFE3935B);
 
 final itemsFirst = [
   DrawerItem(

@@ -90,7 +90,8 @@ class _LoginFormState extends State<LoginForm> {
                           ? Icon(Icons.lock)
                           : Icon(Icons.lock_open)),
                   validator: (text) {
-                    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+                    SchedulerBinding.instance
+                        ?.addPostFrameCallback((timeStamp) {
                       //para que se ejecute despues de que se haya renderizado el widget
                       _checkPassword(text!);
                     });
