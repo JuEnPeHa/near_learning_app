@@ -21,7 +21,7 @@ class ThemesPage extends StatefulWidget {
 
 class _ThemesPageState extends State<ThemesPage> {
   final ScrollController _scrollController = ScrollController();
-  bool _isLoading = false;
+  //bool _isLoading = false;
   bool _isLittle = false;
   List<EachTheme> themes = [];
 

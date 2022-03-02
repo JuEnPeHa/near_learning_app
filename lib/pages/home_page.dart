@@ -1,21 +1,37 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:near_learning_app/models/models.dart';
 import 'package:near_learning_app/widgets/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
-
-  const HomePage({Key? key,}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  static const Map<String, String> imagesLogos = {
-    "mintbase.jpeg": "Mintbase",
-    "near-docs.jpeg": "NEAR docs",
-    "paras.jpeg": "Paras",
-    "aurora-dev.jpeg": "Aurora Dev",
-  };
+  static List<LogosExploreMore> imagesLogos = [
+    LogosExploreMore(
+        image: "mintbase.jpeg",
+        title: "Mintbase",
+        url: "https://www.mintbase.io/"),
+    LogosExploreMore(
+        image: "near-docs.jpeg",
+        title: "NEAR docs",
+        url: "https://docs.near.org/docs/develop/basics/getting-started"),
+    LogosExploreMore(
+      image: "paras.jpeg",
+      title: "Paras",
+      url: "https://paras.id/",
+    ),
+    LogosExploreMore(
+        image: "aurora-dev.jpeg",
+        title: "Aurora Dev",
+        url: "https://aurora.dev/"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -266,21 +282,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          width: 90,
-                          height: 90,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black,
-                            image: DecorationImage(
-                                image: AssetImage("assets/images_logos/" +
-                                    imagesLogos.keys.elementAt(index)),
-                                fit: BoxFit.cover),
+                        GestureDetector(
+                          onTap: () {
+                            _launchURL(imagesLogos[index].url);
+                          },
+                          child: Container(
+                            width: 90,
+                            height: 90,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.black,
+                              image: DecorationImage(
+                                  image: AssetImage("assets/images_logos/" +
+                                      imagesLogos[index].image),
+                                  fit: BoxFit.cover),
+                            ),
                           ),
                         ),
                         Container(
                           child: Text(
-                            imagesLogos.values.elementAt(index),
+                            imagesLogos[index].title,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         )
@@ -293,5 +314,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ],
       ),
     );
+  }
+}
+
+_launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
