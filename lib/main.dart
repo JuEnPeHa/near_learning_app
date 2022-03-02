@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
       // routes: AppRoutes.getAppRoutes(),
       // initialRoute: AppRoutes.initialRoute,
       // onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: 'home',
+      initialRoute: 'auth',
       routes: <String, WidgetBuilder>{
         'root': (BuildContext context) => const SplashPage(),
         'login': (BuildContext context) => const LoginPage2(),
