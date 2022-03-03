@@ -22,7 +22,8 @@ class OnboardingPage extends StatelessWidget {
           scrollDirection: Axis.vertical,
           itemCount: lottieAnim(index: _index)[1],
           itemBuilder: (context, index) {
-            int size = 30;
+            Color color = Colors.black;
+            double size = 30;
             return Stack(children: <Widget>[
               BodyBackGroundAnimation(
                 index: index,
@@ -40,7 +41,44 @@ class OnboardingPage extends StatelessWidget {
                             decoration: BoxDecoration(color: Colors.grey[50]))),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [Text("Example")],
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "data",
+                              style: TextStyle(
+                                  //backgroundColor: Vx.white,
+                                  color: color,
+                                  fontSize: size,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "data",
+                              style: TextStyle(
+                                  color: color,
+                                  fontSize: size * 0.85,
+                                  fontWeight: FontWeight.normal),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: 250,
+                              //color: redNEAR,
+                              child: Text(
+                                "textLottieAnim(index)",
+                                style: TextStyle(
+                                    fontSize: size * 0.60,
+                                    color: Color(0xFF878593)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                          ],
+                        )
+                      ],
                     )
                   ],
                 ),

@@ -53,9 +53,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final HiveData hiveData = HiveData();
   late UserApp userApp;
+  late bool isFirstTime;
 
   Future<void> _initHive() async {
     userApp = await hiveData.userApp;
+    isFirstTime = await hiveData.isFirstTime;
     setState(() {});
   }
 

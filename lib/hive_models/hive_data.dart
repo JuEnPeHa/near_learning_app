@@ -78,7 +78,41 @@ class HiveData {
       } else {
         user.lastReadSyncedPath = user.lastReadSyncedPath;
       }
+      box.deleteAt(0);
       box.putAt(0, user);
+    }
+  }
+
+  Future<void> deleteUserApp() async {
+    final box = await Hive.openBox<UserApp>('user');
+    box.deleteAt(0);
+  }
+
+  Future<void> deleteAll() async {
+    final box = await Hive.openBox<UserApp>('user');
+    box.clear();
+  }
+
+  Future<bool> isFirstTime2() async {
+    final box = await Hive.openBox<int>('onboarding');
+    if (box.values.isEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<void> setFirstTime() async {
+    final box = await Hive.openBox<int>('onboarding');
+    box.putAt(0, 1);
+  }
+
+  Future<bool> get isFirstTime async {
+    final box = await Hive.openBox<int>('onboarding');
+    if (box.values.isEmpty) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
