@@ -16,278 +16,456 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen>
     with SingleTickerProviderStateMixin {
-  final liquidPages = [
+  final pages = [
     Container(
-      child: LoginForm(),
-    ),
-    Container(
-      child: RegisterForm(),
-    ),
-    Container(
-      color: Colors.white,
-      child: Center(
-        child: Text(
-          'Welcome to Near',
-          style: TextStyle(
-            fontSize: 40,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+      color: Color(0xFF7F7689),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              "assets/images/mercury.png",
+              width: 400.0,
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFA1B6CC),
+                  ),
+                ),
+                Text(
+                  "Mercury",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFF3A342D),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Colors.black38),
+                Text(
+                  "The smallest and fastest planet,\nMercury is the "
+                  "closest planet to the Sun \nand whips around it "
+                  "every \n88 Earth days",
+                  style: TextStyle(
+                      color: Color(0xFFA1B6CC),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Color(0xFF34210B),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              "assets/images/venus.png",
+              width: 220.0,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFA1B6CC),
+                  ),
+                ),
+                Text(
+                  "Venus",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFFE8BB57),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Color(0xFFE8BB57)),
+                Text(
+                  "Spinning in the opposite direction \n"
+                  "to most planets, Venus is the  \n"
+                  "hottest planet, and one of the"
+                  "and one of the \n"
+                  "brightest objects in the sky",
+                  style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Color(0xFF21323D),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset("assets/images/earth.png", width: 250.0),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFA1B6CC),
+                  ),
+                ),
+                Text(
+                  "Earth",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFF888C76),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Colors.blueGrey),
+                Text(
+                  "The place we call home, \nEarth is the third rock\n"
+                  "from the sun and the only planet\n"
+                  "with known life on it",
+                  style: TextStyle(
+                      color: Color(0xFFD4D4D2),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Color(0xFF2F1B0A),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              "assets/images/mars.png",
+              width: 220.0,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFA1B6CC),
+                  ),
+                ),
+                Text(
+                  "Mars",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFFCC8E57),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Color(0xFFCC8E57)),
+                Text(
+                  "The red planet is dusty,\n"
+                  "cold world with a thin\n"
+                  "atmosphere and is home to four NASA robots",
+                  style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Color(0xFF5A504B),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              "assets/images/jupiter.png",
+              width: 220,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFC1C1C2),
+                  ),
+                ),
+                Text(
+                  "Jupiter",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFFCC8E57),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Colors.blueGrey),
+                Text(
+                  "Jupiter is a massive planet, twice the size of\n"
+                  "all other planets combined and has a\n"
+                  "centuries-old storm that is bigger than Earth",
+                  style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Color(0xFF717574),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              "assets/images/saturn.png",
+              width: 320,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFA1B6CC),
+                  ),
+                ),
+                Text(
+                  "Saturn",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFFBCB2A3),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Colors.black38),
+                Text(
+                  "The most recognizable\n"
+                  "planet with a system of icy rings, \n"
+                  "Saturn is a very unique \nand interesting ",
+                  style: TextStyle(
+                      color: Color(0xFFA1B6CC),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Color(0xFF5C787C),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              "assets/images/uranus.png",
+              width: 240,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFA1B6CC),
+                  ),
+                ),
+                Text(
+                  "Uranus",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFFD2F3F4),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Color(0xFFD2F3F4)),
+                Text(
+                  "Uranus has a very unique rotation–it\n spins on its"
+                  "side at an almost \n90-degree angle, unlike\n"
+                  "other planets.",
+                  style: TextStyle(
+                      color: Color(0xFFA1B6CC),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Color(0xFF1A224D),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              "assets/images/neptune.png",
+              width: 210,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFA1B6CC),
+                  ),
+                ),
+                Text(
+                  "Neptune",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFF5183F7),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Color(0xFF5183F7)),
+                Text(
+                  "Neptune is now the most\n "
+                  "distant planet and is a cold and\n dark world "
+                  "nearly 3 billion miles\n "
+                  "from the Sun.",
+                  style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+    Container(
+      color: Color(0xFF8A7F7C),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image.asset(
+              "assets/images/pluto.png",
+              width: 220,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Planet",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Color(0xFFA1B6CC),
+                  ),
+                ),
+                Text(
+                  "Pluto",
+                  style: TextStyle(
+                      fontSize: 50.0,
+                      color: Color(0xFFBCB2A3),
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20.0),
+                Divider(color: Colors.black38),
+                Text(
+                  "Pluto will consistently be the ninth  \nplanet to us!"
+                  "Smaller than Earth’s moon, \nPluto was a planet"
+                  "up until 2006 and has \nfive of its own moons!",
+                  style: TextStyle(
+                      color: Color(0xFFBCB2A3),
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.0),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     ),
   ];
 
-  bool _isShowingSignUp = false;
-  late AnimationController _animationController;
-  late Animation<double> _animationTextRotate;
-
-  void setUpAnimation() {
-    _animationController = AnimationController(
-      vsync: this,
-      duration: defaultDuration,
-    );
-    _animationTextRotate =
-        Tween<double>(begin: 0, end: 90).animate(_animationController);
-  }
-
-  void updateView() {
-    setState(() {
-      _isShowingSignUp = !_isShowingSignUp;
-    });
-    _isShowingSignUp
-        ? _animationController.forward()
-        : _animationController.reverse();
-  }
-
-  @override
-  void initState() {
-    setUpAnimation();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-    double _spaceBottom = MediaQuery.of(context).viewInsets.bottom;
+    var text = "Register";
     return Scaffold(
-  
       body: LiquidSwipe(
-        pages: liquidPages,
-        fullTransitionValue: 300,
+        pages: pages,
         enableLoop: true,
+        fullTransitionValue: 600,
+        slideIconWidget: TextButton.icon(label: Text(text),onPressed: (){
+        }, icon: Icon(Icons.arrow_back_ios, color: Colors.white,)),
         waveType: WaveType.liquidReveal,
         positionSlideIcon: 0.5,
-        //enableSideReveal: true,
-        onPageChangeCallback: (page) {
-          setState(() {
-            _isShowingSignUp = page == 1;
-            print(page);
-          });
-        },
-        currentUpdateTypeCallback: (page) {
-          print(page);
-        },
-        //liquidController: () => _animationController,
+        enableSideReveal: true,
+        liquidController: LiquidController(),
       ),
     );
-    // return Scaffold(
-    //   resizeToAvoidBottomInset: false,
-    //   body: AnimatedBuilder(
-    //     animation: _animationController,
-    //     builder: (context, _) {
-    //       return ConstrainedBox(
-    //         constraints: BoxConstraints(
-    //           minHeight: _size.height,
-    //           minWidth: _size.width,
-    //         ),
-    //         child: IntrinsicHeight(
-    //           child: Stack(
-    //             children: [
-    //               //Login
-    //               AnimatedPositioned(
-    //                 duration: defaultDuration,
-    //                 width: _size.width / 5 * 4.5,
-    //                 height: _size.height,
-    //                 left: _isShowingSignUp ? -_size.width / 5 * 4.0 : 0,
-    //                 child: Container(
-    //                   color: loginBg.withOpacity(0.75),
-    //                   child: LoginForm(),
-    //                 ),
-    //               ),
-    //               //Signup
-    //               AnimatedPositioned(
-    //                 duration: defaultDuration,
-    //                 height: _size.height,
-    //                 width: _size.width / 5 * 4.5,
-    //                 left: _isShowingSignUp
-    //                     ? _size.width / (5 * 2)
-    //                     : _size.width / 5 * 4.5,
-    //                 child: Container(
-    //                   color: signupBg.withOpacity(0.75),
-    //                   child: RegisterForm(),
-    //                 ),
-    //               ),
-    //               //Logo
-    //               AnimatedPositioned(
-    //                 duration: defaultDuration * 1.25,
-    //                 top: _size.height * 0.1,
-    //                 left: 0,
-    //                 right: _isShowingSignUp
-    //                     ? -_size.width * 0.06
-    //                     : _size.width * 0.06,
-    //                 child: CircleAvatar(
-    //                   radius: 35,
-    //                   backgroundColor: Colors.white54,
-    //                   child: Image.asset(
-    //                     "assets/logos_app/complete_logo_column.png",
-    //                     color: _isShowingSignUp
-    //                         ? signupBg.withOpacity(0.5)
-    //                         : loginBg.withOpacity(0.5),
-    //                   ),
-    //                 ),
-    //               ),
-
-    //               AnimatedPositioned(
-    //                 duration: defaultDuration,
-    //                 top: _size.height * 0.2,
-    //                 left: 0,
-    //                 right: _isShowingSignUp
-    //                     ? -_size.width * 0.06
-    //                     : _size.width * 0.06,
-    //                 child: AnimatedDefaultTextStyle(
-    //                   textAlign: TextAlign.center,
-    //                   duration: defaultDuration,
-    //                   style: TextStyle(
-    //                     fontSize: 20,
-    //                     fontWeight: FontWeight.bold,
-    //                     color: Colors.white,
-    //                   ),
-    //                   child: Text("NEAR Learning App"),
-    //                 ),
-    //               ),
-
-    //               Positioned(
-    //                 bottom: _size.height * 0.15,
-    //                 left: _isShowingSignUp
-    //                     ? _size.width * 0.225
-    //                     : _size.width * 0.175,
-    //                 child: SnakeButton(
-    //                   child: Text("Iniciar Sesión con NEAR Wallet"),
-    //                   onTap: () {
-    //                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //                         content: Text(
-    //                             "Sorry, this feature is not available yet.")));
-    //                   },
-    //                   snakeColor: Colors.green.withOpacity(0.75),
-    //                   borderColor: Colors.white.withOpacity(0.8),
-    //                   borderWidth: 10,
-    //                   duration: Duration(milliseconds: 1500),
-    //                 ),
-    //               ),
-    //               //Texto Login
-    //               AnimatedPositioned(
-    //                 duration: defaultDuration * 0.5,
-    //                 bottom: _isShowingSignUp
-    //                     ? _size.height / 100 + 100
-    //                     : _size.height * -0.175,
-    //                 left: _isShowingSignUp
-    //                     ? 0
-    //                     : _size.width <= limitWidth
-    //                         ? ((_size.width / 5 * 4.5) / 4)
-    //                         : _size.width * 0.35,
-    //                 child: AnimatedDefaultTextStyle(
-    //                   duration: defaultDuration,
-    //                   textAlign: TextAlign.center,
-    //                   style: TextStyle(
-    //                     fontSize: _isShowingSignUp ? 22 : 32,
-    //                     fontWeight: FontWeight.bold,
-    //                     color:
-    //                         !_isShowingSignUp ? Colors.white : Colors.white70,
-    //                   ),
-    //                   child: Transform.rotate(
-    //                     angle: -_animationTextRotate.value * pi / 180,
-    //                     alignment: Alignment.topLeft,
-    //                     child: InkWell(
-    //                       onTap: () {
-    //                         if (_isShowingSignUp) {
-    //                           updateView();
-    //                         } else {
-    //                           //TODO: Login
-    //                         }
-    //                       },
-    //                       child: Container(
-    //                         padding: EdgeInsets.symmetric(
-    //                             vertical: defaultPadding * 0.60),
-    //                         width: !_isShowingSignUp ? 160 : 640,
-    //                         //color: Colors.redAccent.withOpacity(0.2),
-    //                         child: true
-    //                             ? Text("Log in".toUpperCase())
-    //                             : Text("Iniciar Sesión".toUpperCase()),
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ),
-    //               ),
-
-    //               //Texto Sign Up
-    //               AnimatedPositioned(
-    //                 duration: defaultDuration * 0.5,
-    //                 bottom: !_isShowingSignUp
-    //                     ? _size.height / 100 + 100
-    //                     : _size.height * -0.175, //       _size.height * -0.175,
-    //                 right: !_isShowingSignUp
-    //                     ? 0
-    //                     : _size.width <= limitWidth
-    //                         ? ((_size.width / 5 * 4.5) / 4)
-    //                         : _size.width * 0.35,
-    //                 child: AnimatedDefaultTextStyle(
-    //                   duration: defaultDuration,
-    //                   textAlign: TextAlign.center,
-    //                   style: TextStyle(
-    //                     fontSize: !_isShowingSignUp ? 22 : 32,
-    //                     fontWeight: FontWeight.bold,
-    //                     color: _isShowingSignUp ? Colors.white : Colors.white70,
-    //                   ),
-    //                   child: Transform.rotate(
-    //                     angle: (90 - _animationTextRotate.value) * pi / 180,
-    //                     alignment: Alignment.topRight,
-    //                     child: InkWell(
-    //                       onTap: () {
-    //                         if (!_isShowingSignUp) {
-    //                           updateView();
-    //                         } else {
-    //                           //SignUp
-    //                         }
-    //                       },
-    //                       child: Container(
-    //                         padding: const EdgeInsets.symmetric(
-    //                             vertical: defaultPadding * 0.60),
-    //                         width: _isShowingSignUp ? 160 : 640,
-    //                         //color: Colors.redAccent.withOpacity(0.2),
-    //                         child: true
-    //                             ? Text("Sign Up".toUpperCase())
-    //                             : Text(
-    //                                 "Registrarse "
-    //                                     .toUpperCase(), // + _size.toString(),
-    //                               ),
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
   }
 }
