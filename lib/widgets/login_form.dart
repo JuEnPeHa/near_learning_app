@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'widgets.dart';
@@ -114,6 +115,50 @@ class _LoginFormState extends State<LoginForm> {
                       width: double.infinity,
                       child: Center(child: Text('Guardar'))),
                 ),
+                CupertinoButton(
+                    child: Text("Forgot Password?"),
+                    onPressed: () {
+                      showCupertinoDialog(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoAlertDialog(
+                              title: Text("Forgot Password?"),
+                              content: Column(
+                                children: [
+                                  Text("Please enter your email address"),
+                                  Material(
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                          labelText: "Email",
+                                          hintText: "Email",
+                                          prefixIcon: Icon(Icons.email)),
+                                          
+                                      keyboardType: TextInputType.emailAddress,
+                                      onChanged: (value) {
+                                        formData['email'] = value;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              actions: <Widget>[
+                                CupertinoDialogAction(
+                                  child: Text("Cancel"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                CupertinoDialogAction(
+                                  child: Text("Send"),
+                                  onPressed: () {
+                                    print(formData['email']);
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          });
+                    })
               ],
             )),
       ),

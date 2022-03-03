@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:near_learning_app/models/models.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -57,4 +58,17 @@ extension ShowSnackBar on BuildContext {
   void showErrorSnackBar({required String message}) {
     showSnackBar(message: message, backgroundColor: Colors.red);
   }
+}
+
+List lottieAnim(
+    {required int index, bool repeat = false, bool animate = false}) {
+  List lottieAnimations = [
+    Lottie.asset("assets/json_anim/video-learning.json",
+        repeat: repeat, fit: BoxFit.contain, animate: animate),
+    Lottie.asset("assets/json_anim/learning-concept.json",
+        repeat: repeat, fit: BoxFit.contain, animate: animate),
+    Lottie.asset("assets/json_anim/learn.json",
+        repeat: repeat, fit: BoxFit.contain, animate: animate),
+  ];
+  return [lottieAnimations[index], lottieAnimations.length];
 }
