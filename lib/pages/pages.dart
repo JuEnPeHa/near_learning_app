@@ -8,3 +8,4 @@ export 'package:near_learning_app/pages/themes_page.dart';
 export 'package:near_learning_app/pages/auth_screen.dart';
 export 'package:near_learning_app/pages/onboarding_page.dart';
 export 'package:near_learning_app/pages/text_lesson_page.dart';
+export 'package:near_learning_app/pages/snippets_page.dart';

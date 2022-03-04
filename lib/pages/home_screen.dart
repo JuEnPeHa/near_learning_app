@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> _screens() =>
-      [HomePage(), HomePage(), HomePage(), ThemesPage(), ProfilePage()];
+      [HomePage(), HomePage(), SnippetsPage(), ThemesPage(), ProfilePage()];
 
   static int selectedIndex = 0;
 
