@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_highlighter/flutter_highlighter.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 import 'package:near_learning_app/utils/constants.dart';
 import 'package:flutter/services.dart';
@@ -144,15 +143,6 @@ var result = fibonacci(20);
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          HighlightView(
-            code,
-            language: 'javascript',
-            padding: EdgeInsets.all(20),
-            textStyle: TextStyle(
-              fontFamily: 'My awesome monospace font',
-              fontSize: 16,
-            ),
-          ),
           SyntaxView(
             code: code, // Code text
             syntax: Syntax.JAVASCRIPT, // Language

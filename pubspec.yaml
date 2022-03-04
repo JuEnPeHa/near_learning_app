@@ -14,7 +14,6 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   http: ^0.13.4
-  curved_navigation_bar: ^1.0.1
   flutter_neumorphic: ^3.2.0
   supabase_flutter: ^0.2.12
   image_picker: ^0.8.4+9
@@ -30,7 +29,6 @@ dependencies:
   liquid_swipe: ^2.1.1
   lottie: ^1.2.2
   expandable_text: ^2.2.0
-  flutter_highlighter: ^0.1.1
   flutter_syntax_view: ^4.0.0
   expansion_tile_card: ^1.1.0
 
