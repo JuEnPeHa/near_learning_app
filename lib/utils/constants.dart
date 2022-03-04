@@ -63,7 +63,7 @@ extension ShowSnackBar on BuildContext {
 List lottieAnim(
     {required int index, bool repeat = false, bool animate = false}) {
   List lottieAnimations = [
-    Lottie.asset("assets/json_anim/video-learning.json",
+    Lottie.asset("assets/json_anim/swipe.json",
         repeat: repeat, fit: BoxFit.contain, animate: animate),
     Lottie.asset("assets/json_anim/learning-concept.json",
         repeat: repeat, fit: BoxFit.contain, animate: animate),

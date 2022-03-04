@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:near_learning_app/widgets/widgets.dart';
 
 class LoginWidget extends StatelessWidget {
-  const LoginWidget({
+  LoginWidget({
     Key? key,
     required this.context,
   }) : super(key: key);
   final BuildContext context;
+  ImageProvider logoColumn =
+      const AssetImage('assets/logos_app/complete_logo_column.png');
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +24,7 @@ class LoginWidget extends StatelessWidget {
             CircleAvatar(
               backgroundColor: Colors.white54,
               radius: 100,
-              child: Image.asset('assets/logos_app/complete_logo_column.png'),
+              child: Image(image: logoColumn),
             ),
             const LoginForm(),
             const Spacer(),

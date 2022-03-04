@@ -128,11 +128,10 @@ class _LoginFormState extends State<LoginForm> {
                                   Text("Please enter your email address"),
                                   Material(
                                     child: TextField(
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                           labelText: "Email",
                                           hintText: "Email",
                                           prefixIcon: Icon(Icons.email)),
-                                          
                                       keyboardType: TextInputType.emailAddress,
                                       onChanged: (value) {
                                         formData['email'] = value;
@@ -158,6 +157,11 @@ class _LoginFormState extends State<LoginForm> {
                               ],
                             );
                           });
+                    }),
+                CupertinoButton(
+                    child: Text("Botón solo para desarrollo"),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed('home');
                     })
               ],
             )),

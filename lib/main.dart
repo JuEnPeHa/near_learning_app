@@ -63,6 +63,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(
+        const AssetImage("assets/logos_app/complete_logo_column.png"), context);
+    precacheImage(
+        const AssetImage("assets/logos_app/complete_logo_row.png"), context);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -84,6 +88,7 @@ class _MyAppState extends State<MyApp> {
         //'themes': (BuildContext context) => const ThemesPage(),
         'auth': (BuildContext context) => const AuthScreen(),
         'onboarding': (BuildContext context) => OnboardingPage(),
+        'text': (BuildContext context) => TextLesson(),
       },
     );
   }

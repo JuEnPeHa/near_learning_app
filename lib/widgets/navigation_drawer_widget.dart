@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
-  const NavigationDrawerWidget({Key? key}) : super(key: key);
+  NavigationDrawerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -165,24 +165,41 @@ class BuildHeader extends StatelessWidget {
   final bool isCollapsed;
 
   BuildHeader({required this.isCollapsed, Key? key}) : super(key: key);
+  ImageProvider logoColumn =
+      const AssetImage('assets/logos_app/complete_logo_column.png');
+  ImageProvider logoRow =
+      const AssetImage('assets/logos_app/complete_logo_row.png');
 
   @override
   Widget build(BuildContext context) {
     return isCollapsed
-        ? FlutterLogo(
-            size: 48,
+        ? ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
+            child: Image(
+              image: logoColumn,
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width * 0.25,
+            ),
           )
         : Row(
             children: [
               const SizedBox(width: 24),
-              FlutterLogo(
-                size: 48,
+              ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(25)),
+                child: Image(
+                  image: logoColumn,
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width * 0.25,
+                ),
               ),
               const SizedBox(width: 24),
               Text(
-                "Flutter",
+                "NEAR Learning",
                 style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 24 /
+                        ((MediaQuery.of(context).devicePixelRatio /
+                                MediaQuery.of(context).textScaleFactor) *
+                            0.75),
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
