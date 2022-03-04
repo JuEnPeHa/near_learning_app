@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
       // routes: AppRoutes.getAppRoutes(),
       // initialRoute: AppRoutes.initialRoute,
       // onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: 'onboarding',
+      initialRoute: 'home',
       routes: <String, WidgetBuilder>{
         'root': (BuildContext context) => const SplashPage(),
         'login': (BuildContext context) => const LoginPage2(),
@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
         //'themes': (BuildContext context) => const ThemesPage(),
         'auth': (BuildContext context) => const AuthScreen(),
         'onboarding': (BuildContext context) => OnboardingPage(),
-        'text': (BuildContext context) => TextLesson(),
+        'text': (BuildContext context) => const TextLesson(),
       },
     );
   }

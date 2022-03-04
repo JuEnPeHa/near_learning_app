@@ -24,6 +24,12 @@ class _AuthScreenState extends State<AuthScreen> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   var textLogin = "Don't have an account yet?";
   var textRegister = "Already have an account?";
   bool isLogin = true;

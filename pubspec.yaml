@@ -31,6 +31,8 @@ dependencies:
   lottie: ^1.2.2
   expandable_text: ^2.2.0
   flutter_highlighter: ^0.1.1
+  flutter_syntax_view: ^4.0.0
+  expansion_tile_card: ^1.1.0
 
 dev_dependencies:
   flutter_test:
