@@ -30,9 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const List<Icon> _icons = [
     Icon(Icons.home),
-    Icon(Icons.settings),
-    Icon(Icons.dashboard),
-    Icon(Icons.notifications),
+    Icon(Icons.text_snippet),
+    Icon(Icons.code_outlined),
+    Icon(Icons.collections_bookmark_outlined),
     Icon(Icons.person),
   ];
 
@@ -47,6 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
     ];
     return Scaffold(
+      appBar: selectedIndex == 2
+          ? AppBar(
+              title: Text("Snippets"),
+              backgroundColor: Color.fromARGB(255, 145, 111, 9),
+              centerTitle: true,
+            )
+          : null,
       drawer: NavigationDrawerWidget(),
       extendBodyBehindAppBar: true,
       extendBody: true,

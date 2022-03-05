@@ -1,3 +1,4 @@
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
@@ -44,87 +45,104 @@ class _SnippetsPageState extends State<SnippetsPage> {
       children: [
         Container(
           height: MediaQuery.of(context).viewPadding.top,
-          color: Colors.white,
+          color: Colors.transparent,
         ),
         Flexible(
-            flex: 3,
-            child: Container(
-              color: Colors.yellow,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                  itemCount: _snipp.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      trailing: IconButton(
-                          onPressed: () {
-                            Clipboard.setData(
-                                ClipboardData(text: _snipp[index].code));
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Copied')));
-                          },
-                          icon: const Icon(Icons.copy_all)),
+          flex: 1,
+          child: Container(
+            color: Colors.transparent,
+            width: MediaQuery.of(context).size.width,
+            child: ListView.builder(
+                itemCount: _snipp.length,
+                itemBuilder: (context, index) {
+                  return ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15)),
+                    child: ExpansionTileCard(
+                      expandedTextColor: Colors.black,
+                      colorCurve: Curves.bounceIn,
+                      elevationCurve: Curves.easeInCubic,
+                      onExpansionChanged: (_) {
+                        print(_snipp[index].code.length);
+                      },
                       title: Text(
                         _snipp[index].title,
                         style: const TextStyle(fontSize: 17),
                       ),
+                      baseColor: Colors.white54,
+                      expandedColor: Colors.white70,
                       subtitle: Text(
                         _snipp[index].description,
                         style: const TextStyle(fontSize: 14),
                       ),
-                      onTap: () {
-                        setState(() {
-                          _codeToShow = _snipp[index].code;
-                        });
-                      },
-                    );
-                  }),
-            )),
-        Flexible(
-          flex: 2,
-          child: Container(
-            color: Colors.white,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20)),
-              child: CustomScrollView(
-                controller: _scrollController,
-                scrollDirection: Axis.horizontal,
-                scrollBehavior: const CupertinoScrollBehavior(),
-                physics: const BouncingScrollPhysics(),
-                slivers: [
-                  SliverList(
-                      delegate: SliverChildListDelegate.fixed([
-                    SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: SyntaxView(
-                        code: _codeToShow,
-                        syntax: Syntax.JAVASCRIPT,
-                        fontSize: 13,
-                        syntaxTheme: SyntaxTheme.vscodeDark(),
-                        expanded: false,
-                        withZoom: false,
+                      trailing: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _codeToShow = _snipp[index].code;
+                          });
+                          Clipboard.setData(
+                              ClipboardData(text: _snipp[index].code));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Copied')));
+                        },
+                        icon: const Icon(Icons.copy_all),
                       ),
+                      children: <Widget>[
+                        const Divider(
+                          thickness: 1.0,
+                          height: 1.0,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: _snipp[index].code.length < 500 ? 150 : _snipp[index].code.length < 1500 ? 300 : 500,
+                          color: Colors.transparent,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(0),
+                                bottomRight: Radius.circular(0)),
+                            child: CustomScrollView(
+                              controller: _scrollController,
+                              scrollDirection: Axis.horizontal,
+                              scrollBehavior: const CupertinoScrollBehavior(),
+                              physics: const BouncingScrollPhysics(),
+                              slivers: [
+                                SliverList(
+                                    delegate: SliverChildListDelegate.fixed([
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: SyntaxView(
+                                      code: _snipp[index].code,
+                                      syntax: Syntax.JAVASCRIPT,
+                                      fontSize: 13,
+                                      syntaxTheme: SyntaxTheme.vscodeDark(),
+                                      expanded: false,
+                                      withZoom: false,
+                                    ),
+                                  ),
+                                ])),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ])),
-                ],
-              ),
-            ),
+                  );
+                }),
           ),
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: 95,
-          color: Colors.white,
-        )
+        // Container(
+        //   width: MediaQuery.of(context).size.width,
+        //   height: 95,
+        //   color: Colors.transparent,
+        // )
       ],
     );
   }
 }
 
 Widget dinv() {
-  String code =
-      """
+  String code = """
 // Importing core libraries
 import 'dart:math';
 int fibonacci(int n) {

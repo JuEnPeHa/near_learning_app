@@ -24,13 +24,13 @@ final itemsFirst = [
       icon: Icons.browse_gallery,
       url: "https://juenpeha.github.io/flutter_web_nft_gallery/#/"),
   DrawerItem(
-      title: 'NEAR Forum',
-      icon: Icons.person_add,
-      url: "https://gov.near.org/"),
+      title: 'AWESOMENEAR',
+      icon: Icons.auto_awesome,
+      url: "https://awesomenear.com/"),
   DrawerItem(
-      title: 'NFT Gallery',
-      icon: Icons.browse_gallery,
-      url: "https://juenpeha.github.io/flutter_web_nft_gallery/#/"),
+      title: 'STATS.GALLERY',
+      icon: Icons.query_stats,
+      url: "https://stats.gallery/"),
 ];
 
 final itemsSecond = [

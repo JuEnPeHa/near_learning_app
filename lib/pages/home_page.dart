@@ -23,15 +23,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         title: "NEAR docs",
         url: "https://docs.near.org/docs/develop/basics/getting-started"),
     LogosExploreMore(
-      image: "paras.jpeg",
-      title: "Paras",
-      url: "https://paras.id/",
-    ),
+        image: "paras.jpeg", title: "Paras", url: "https://paras.id/"),
     LogosExploreMore(
         image: "aurora-dev.jpeg",
         title: "Aurora Dev",
         url: "https://aurora.dev/"),
+    LogosExploreMore(
+        title: "astrodao",
+        image: "astrodao.jpeg",
+        url: "https://astrodao.com/"),
+    LogosExploreMore(
+        image: "trisolaris.jpeg",
+        title: "Trisolaris",
+        url: "https://www.trisolaris.io/"),
+    LogosExploreMore(
+        title: "Ref Finance", image: "ref.png", url: "https://ref.finance/"),
+    LogosExploreMore(
+        image: "onet.jpeg", title: "Octopus", url: "https://oct.network/"),
   ];
+
+  bool _isOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -143,9 +154,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   child: Neumorphic(
                                     //margin: const EdgeInsets.only(right: 20),
                                     child: Container(
-                                      color: Color(0xFF495371),
-                                      child: Text(
-                                          "Excepteur reprehenderit culpa ipsum deserunt eiusmod consectetur proident quis culpa duis incididunt enim. Qui deserunt do nisi exercitation deserunt Lorem sint do sunt Lorem officia in ut magna. Incididunt consequat proident non dolor deserunt culpa laboris anim laboris adipisicing consectetur. Veniam incididunt ad Lorem aliquip. Veniam elit quis ut ullamco non commodo laborum et tempor amet culpa officia exercitation."),
+                                      color: Color(0xFFF1E0AC),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Center(
+                                            child: Text(
+                                          "Quis pariatur dolor ut nostrud ipsum. Proident irure eu sit est nulla aliqua velit. Incididunt mollit commodo proident deserunt cupidatat fugiat non fugiat minim magna magna nisi culpa dolore.",
+                                          textAlign: TextAlign.justify,
+                                        )),
+                                      ),
                                     ),
                                     style: const NeumorphicStyle(
                                         border: NeumorphicBorder(
@@ -171,9 +188,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   child: Neumorphic(
                                     //margin: const EdgeInsets.only(right: 20),
                                     child: Container(
-                                      color: Color(0xFF98B4AA),
-                                      child: Text(
-                                          "Non sunt dolor qui anim nisi consectetur velit incididunt pariatur ullamco minim veniam. Qui ipsum ut consectetur incididunt eiusmod ex fugiat id voluptate occaecat velit. Deserunt officia veniam Lorem proident elit aute consequat ex nulla consequat ad."),
+                                      color: Color(0xFFF1E0AC),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Center(
+                                            child: Text(
+                                          "Quis pariatur dolor ut nostrud ipsum. Proident irure eu sit est nulla aliqua velit. Incididunt mollit commodo proident deserunt cupidatat fugiat non fugiat minim magna magna nisi culpa dolore.",
+                                          textAlign: TextAlign.justify,
+                                        )),
+                                      ),
                                     ),
                                     style: const NeumorphicStyle(
                                         border: NeumorphicBorder(
@@ -252,21 +275,88 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   Text("ListView 3"),
                 ]),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              children: [
-                Text(
-                  "Explorar más en NEAR",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ExpansionPanelList(
+            expandedHeaderPadding: EdgeInsets.all(0),
+            elevation: 24,
+            children: [
+              ExpansionPanel(
+                canTapOnHeader: true,
+                isExpanded: _isOpen,
+                backgroundColor: Colors.transparent,
+                headerBuilder: (context, isOpen) {
+                  return ListTile(
+                    title: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 0, vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Explorar más en NEAR",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Expanded(child: Container()),
+                          const Text(
+                            "Ver más",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                body: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  width: double.maxFinite,
+                  height: 125,
+                  color: Colors.transparent,
+                  child: ListView.builder(
+                      itemCount: 4,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.only(right: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  _launchURL(imagesLogos[index].url);
+                                },
+                                child: Container(
+                                  width: 90,
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.black,
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images_logos/" +
+                                                imagesLogos[index + 4].image),
+                                        fit: BoxFit.cover),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                child: Text(
+                                  imagesLogos[index].title,
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.black),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
                 ),
-                Expanded(child: Container()),
-                Text(
-                  "Ver todo",
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
+              ),
+            ],
+            expansionCallback: (i, isOpen) {
+              setState(() {
+                _isOpen = !_isOpen;
+              });
+            },
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 15),
@@ -274,7 +364,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             height: 125,
             color: Colors.transparent,
             child: ListView.builder(
-                itemCount: imagesLogos.length,
+                itemCount: 4,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Container(

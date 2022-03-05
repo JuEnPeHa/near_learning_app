@@ -65,7 +65,7 @@ class _ThemesPageState extends State<ThemesPage> {
             expandedHeight: 100,
             backgroundColor: _isLittle
                 ? Colors.transparent
-                : Color.fromARGB(255, 160, 158, 62),
+                : Color.fromARGB(255, 145, 111, 9),
             flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.parallax,
                 centerTitle: true,
