@@ -103,6 +103,93 @@ Done in 2.16s.''';
   );
 }
 
+Widget a02() {
+  String code1 = '''{
+  "name": "starter--near-sdk-as",
+  "version": "0.0.1",
+  "description": "Start with a basic project",
+  "scripts": {
+    "dev": "watch -d -n 1 'clear && yarn test'",
+    "test": "yarn asp -f unit.spec",
+    "clean": "rm -rf ./build && rm -rf ./neardev",
+    "build": "asb --target debug",
+    "build:release": "asb",
+    "asp": "asp --verbose --nologo"
+  },
+  "keywords": [],
+  "author": "hello@near.org",
+  "license": "ISC",
+  "devDependencies": {
+    "near-sdk-as": "^3.1.0"
+  }
+}''';
+  String code2 = '''{
+  "workspaces": [
+    "src/simple",
+    "src/singleton"
+  ]
+}''';
+String code3 = '''// return the string 'hello world'
+export function helloWorld(): string {}
+
+// read the given key from account (contract) storage
+export function read(key: string): string {}
+
+// write the given value at the given key to account (contract) storage
+export function write(key: string, value: string): string {}
+
+// private helper method used by read() and write() above
+private storageReport(): string {}''';
+String code4 = '''@nearBindgen
+export class Contract {
+
+  // return the string 'hello world'
+  helloWorld(): string {}
+
+  // read the given key from account (contract) storage
+  read(key: string): string {}
+
+  // write the given value at the given key to account (contract) storage
+  @mutateState()
+  write(key: string, value: string): string {}
+
+  // private helper method used by read() and write() above
+  private storageReport(): string {}
+}''';
+  return Column( children: [
+    "Let’s have a closer look at the content of our project.".text.make(),
+
+"Overview".text.bold.make(),
+"package.json".text.bold.make(),
+gist(text: code1),
+"What we see here is a configuration file for our project containing the name of project, version etc. What we are interested in are scripts. Those are aliases for shell commands with specific options. For example, clean is a short name for a command that deletes folders build and neardev, and build:release executes AssemblyScript asb (build) command.".text.make(),
+
+"asconfig.json".text.bold.make(),
+gist(text: code2),
+"This file is a collection of folders with our contracts in them. When we execute build:release command, we compile contracts from each workspace into the output folder. More about them next.".text.make(),
+
+"src".text.bold.make(),
+"Inside src are simple and singleton - our workspaces. They have the same structure, including tests and assembly folders. The difference between them is style they’re written in.".text.make(),
+
+"simple".text.bold.make(),
+"We say that an AssemblyScript contract is written in the “simple style” when the index.ts file (the contract entry point) includes a series of exported functions.".text.make(),
+
+"In this case, all exported functions become public contract methods.".text.make(),
+gist(text: code3),
+
+"singleton".text.bold.make(),
+"We say that an AssemblyScript contract is written in the “singleton style” when the index.ts file (the contract entry point) has a single exported class (the name of the class doesn’t matter) that is decorated with @nearBindgen.".text.make(),
+"In this case, all methods on the class become public contract methods unless marked private. Also, all instance variables are stored as a serialized instance of the class under a special storage key named STATE. AssemblyScript uses JSON for storage serialization.".text.make(),
+gist(text: code4),
+
+'''Warning: be careful when creating a new workspace
+
+Don’t forget to add it’s location to asconfig.json
+Your workspace must have assembly folder and index.ts file!'''.text.red700.make(),
+]
+  );
+}
+
 Widget gist({required String text}) {
   return SingleChildScrollView(
     scrollDirection: Axis.horizontal,

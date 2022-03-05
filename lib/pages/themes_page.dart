@@ -125,14 +125,17 @@ class _ThemesPageState extends State<ThemesPage> {
                             title: Text(theme.title),
                             children: [
                               ...theme.subtitles.map((e) {
+                                var id = theme.subtitles.indexOf(e);
                                 return ListTile(
                                     onTap: () {
                                       print("object");
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TextLesson(child: a01(), title: e,)));
+                                              builder: (context) => TextLesson(
+                                                    child: _getTheme(theme.keys[id]),
+                                                    title: e,
+                                                  )));
                                     },
                                     //tileColor: theme.color,
                                     title: Text(e));
@@ -168,15 +171,65 @@ class _ThemesPageState extends State<ThemesPage> {
   }
 
   Widget _getTheme(final String key) {
-  switch (key) {
-    case key == 'a01':
-      return a01();
-      break;
-    default:
-      return Container();
+    switch (key) {
+      case 'a01':
+        return a01();
+        break;
+       case 'a02':
+         return a02();
+         break;
+      // case 'a03':
+      //   return a03();
+      //   break;
+      // case 'b01':
+      //   return b01();
+      //   break;
+      // case 'b02':
+      //   return b02();
+      //   break;
+      // case 'b03':
+      //   return b03();
+      //   break;
+      // case 'c01':
+      //   return c01();
+      //   break;
+      // case 'c02':
+      //   return c02();
+      //   break;
+      // case 'c03':
+      //   return c03();
+      //   break;
+      // case 'd01':
+      //   return d01();
+      //   break;
+      // case 'd02':
+      //   return d02();
+      //   break;
+      // case 'd03':
+      //   return d03();
+      //   break;
+      // case 'e01':
+      //   return e01();
+      //   break;
+      // case 'e02':
+      //   return e02();
+      //   break;
+      // case 'e03':
+      //   return e03();
+      //   break;
+      // case 'f01':
+      //   return f01();
+      //   break;
+      // case 'f02':
+      //   return f02();
+      //   break;
+      // case 'f03':
+      //   return f03();
+      //   break;
+      default:
+        return Container();
+    }
   }
-}
 }
 
 enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
-
