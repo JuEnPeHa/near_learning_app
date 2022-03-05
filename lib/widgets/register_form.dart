@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:near_learning_app/providers/authentication_notifier.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets.dart';
 
@@ -28,11 +29,6 @@ class _RegisterFormState extends State<RegisterForm> {
     'repeat_password': '',
     //'role': ''
   };
-
-  _submit() {
-    final isOk = _formRegisterKey.currentState?.validate();
-    print(isOk);
-  }
 
   String _password = "";
   double _strength = 0;
@@ -86,6 +82,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthenticationNotifier authenticationNotifier =
+        Provider.of<AuthenticationNotifier>(context, listen: false);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -154,11 +152,11 @@ class _RegisterFormState extends State<RegisterForm> {
                     _checkPassword(text!);
                   });
                   if (text != null) {
-                      if (text.length < 6) {
-                        return 'La contraseña debe tener al menos 6 caracteres';
-                      }
+                    if (text.length < 6) {
+                      return 'La contraseña debe tener al menos 6 caracteres';
                     }
-                    return null;
+                  }
+                  return null;
                 },
               ),
               ClipRRect(
@@ -219,10 +217,20 @@ class _RegisterFormState extends State<RegisterForm> {
                     child: Center(child: Text('Guardar'))),
                 onPressed: _strength < 1 / 2
                     ? null
-                    : () {
-                        _submit();
-                        //* imprimir valores del formulario
-                        print(formValues);
+                    : () async {
+                      FocusScope.of(context).unfocus();
+                        bool? isOk = _formRegisterKey.currentState?.validate();
+                        if (isOk != null && isOk) {
+                          //_formRegisterKey.currentState.save();
+                          await authenticationNotifier.signup(
+                            context: context,
+                              email: formValues['email'] ?? "",
+                              password: formValues['password'] ?? "");
+                          //* imprimir valores del formulario
+                          print(formValues);
+                        } else {
+                          
+                        }
                       },
               )
             ],

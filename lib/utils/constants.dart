@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:near_learning_app/models/models.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+//import 'package:supabase_flutter/supabase_flutter.dart';
 part 'snippets_constant.dart';
 
-final supabase = Supabase.instance.client;
+//final supabase = Supabase.instance.client;
 const Duration defaultDuration = Duration(milliseconds: 300);
 const double defaultPadding = 15.0;
 

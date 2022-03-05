@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:near_learning_app/providers/authentication_notifier.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ProfilePage extends StatefulWidget {
+  final AuthenticationNotifier authenticationNotifier;
 
-  const ProfilePage({Key? key,}) : super(key: key);
+  ProfilePage({
+    Key? key, required this.authenticationNotifier,
+  }) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -28,14 +31,14 @@ class _ProfilePageState extends State<ProfilePage> {
           colorTiles(),
           divider(),
           SizedBox(
-            height: size.width / 2 + 20,
+              height: size.width / 2 + 20,
               width: size.width,
               child: CustomCircularIndicator(
                 radius: size.width,
                 lineWidth: 10,
               )),
           divider(),
-          bwTiles(),
+          bwTiles((){}, () => widget.authenticationNotifier.logout(context: context)),
         ],
       ),
     );
@@ -81,14 +84,14 @@ Widget colorTiles() {
   );
 }
 
-Widget bwTiles() {
+Widget bwTiles(void Function()? onTap1, onTap2) {
   Color color = Colors.black;
   return Column(
     children: [
       colorTile(Icons.info_outline, color, "Preguntas Frecuentes",
-          blackAndWhite: true),
-      colorTile(Icons.auto_fix_normal, color, "Conocer Más",
-          blackAndWhite: true),
+          blackAndWhite: true, onTap: onTap1),
+      colorTile(Icons.handshake, color, "Cerrar Sesión - Logout",
+          blackAndWhite: true, onTap: onTap2),
       //colorTile(Icons.info_outline, color, "Preguntas Frecuentes",
       //    blackAndWhite: true),
     ],
@@ -96,8 +99,9 @@ Widget bwTiles() {
 }
 
 Widget colorTile(IconData icon, Color color, String text,
-    {bool blackAndWhite = false}) {
+    {bool blackAndWhite = false, onTap = null}) {
   return ListTile(
+    onTap: onTap,
     leading: Container(
       child: Icon(
         icon,

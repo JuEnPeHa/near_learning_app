@@ -128,12 +128,12 @@ class _ThemesPageState extends State<ThemesPage> {
                                 var id = theme.subtitles.indexOf(e);
                                 return ListTile(
                                     onTap: () {
-                                      print("object");
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => TextLesson(
-                                                    child: _getTheme(theme.keys[id]),
+                                                    child: _getTheme(
+                                                        theme.keys[id]),
                                                     title: e,
                                                   )));
                                     },
@@ -175,15 +175,15 @@ class _ThemesPageState extends State<ThemesPage> {
       case 'a01':
         return a01();
         break;
-       case 'a02':
-         return a02();
-         break;
-      // case 'a03':
-      //   return a03();
-      //   break;
-      // case 'b01':
-      //   return b01();
-      //   break;
+      case 'a02':
+        return a02();
+        break;
+      case 'a03':
+        return a03();
+        break;
+      case 'b01':
+        return b01();
+        break;
       // case 'b02':
       //   return b02();
       //   break;

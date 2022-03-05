@@ -7,22 +7,22 @@ import 'package:near_learning_app/models/supabase_keys.dart';
 import 'package:near_learning_app/models/user_model.dart';
 import 'package:near_learning_app/pages/home_screen.dart';
 import 'package:near_learning_app/pages/pages.dart';
+import 'package:near_learning_app/providers/authentication_notifier.dart';
 import 'package:near_learning_app/providers/navigation_provider.dart';
 import 'package:near_learning_app/providers/provider.dart';
 import 'package:near_learning_app/router/routes.dart';
 import 'package:near_learning_app/theme/app_theme.dart';
 import 'package:near_learning_app/utils/themes.dart';
 import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(UserAppAdapter());
-  await Supabase.initialize(
-    url: YOUR_SUPABASE_URL,
-    anonKey: YOUR_SUPABASE_ANON_KEY,
-  );
+  // await Supabase.initialize(
+  //   url: YOUR_SUPABASE_URL,
+  //   anonKey: YOUR_SUPABASE_ANON_KEY,
+  // );
   runApp(const AppState());
 }
 
@@ -33,11 +33,13 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AuthenticationNotifier()),
         ChangeNotifierProvider(create: (context) => NavigationProvider()),
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
           lazy: false,
-        )
+        ),
+        
       ],
       child: const MyApp(),
     );
@@ -80,12 +82,12 @@ class _MyAppState extends State<MyApp> {
       // routes: AppRoutes.getAppRoutes(),
       // initialRoute: AppRoutes.initialRoute,
       // onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: 'home',
+      initialRoute: 'onboarding',
       routes: <String, WidgetBuilder>{
-        'root': (BuildContext context) => const SplashPage(),
-        'login': (BuildContext context) => const LoginPage2(),
+        //'root': (BuildContext context) => const SplashPage(),
+        //'login': (BuildContext context) => const LoginPage2(),
         'home': (BuildContext context) => const HomeScreen(),
-        'account': (BuildContext context) => const AccountPage(),
+        //'account': (BuildContext context) => const AccountPage(),
         //'themes': (BuildContext context) => const ThemesPage(),
         'auth': (BuildContext context) => const AuthScreen(),
         'onboarding': (BuildContext context) => OnboardingPage(),

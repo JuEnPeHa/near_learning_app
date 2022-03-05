@@ -1,26 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:near_learning_app/components/auth_state.dart';
+// import 'package:flutter/material.dart';
+// import 'package:near_learning_app/components/auth_state.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+// class SplashPage extends StatefulWidget {
+//   const SplashPage({Key? key}) : super(key: key);
 
-  @override
-  _SplashPageState createState() => _SplashPageState();
-}
+//   @override
+//   _SplashPageState createState() => _SplashPageState();
+// }
 
-class _SplashPageState extends AuthState<SplashPage> {
+// class _SplashPageState extends AuthState<SplashPage> {
 
-  @override
-  void initState() {
-    recoverSupabaseSession();
-    super.initState();
-  }
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-}
+//   @override
+//   void initState() {
+//     //recoverSupabaseSession();
+//     super.initState();
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Scaffold(
+//       body: Center(
+//         child: CircularProgressIndicator(),
+//       ),
+//     );
+//   }
+// }

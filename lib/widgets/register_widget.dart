@@ -31,8 +31,7 @@ class RegisterWidget extends StatelessWidget {
             const Spacer(),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.090,
-                            width: MediaQuery.of(context).size.width * 0.80,
-
+              width: MediaQuery.of(context).size.width * 0.80,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50.0),
                 child: SnakeButton(

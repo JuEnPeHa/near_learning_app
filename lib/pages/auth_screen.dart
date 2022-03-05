@@ -48,6 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: LiquidSwipe(
+          disableUserGesture: true,
           pages: pages,
           enableLoop: true,
           fullTransitionValue: 400,

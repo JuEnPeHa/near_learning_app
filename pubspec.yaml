@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.4
   flutter_neumorphic: ^3.2.0
-  supabase_flutter: ^0.2.12
+  supabase: ^0.2.14
   image_picker: ^0.8.4+9
   percent_indicator: ^4.0.0
   hive: ^2.0.6
@@ -32,6 +32,7 @@ dependencies:
   flutter_syntax_view: ^4.0.0
   expansion_tile_card: ^2.0.0
   velocity_x: ^3.4.0
+  encrypted_shared_preferences: ^3.0.0
 
 dev_dependencies:
   flutter_test:

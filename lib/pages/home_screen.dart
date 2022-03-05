@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:near_learning_app/pages/pages.dart';
 import 'package:flutter/services.dart';
+import 'package:near_learning_app/providers/authentication_notifier.dart';
+import 'package:provider/provider.dart';
 
 import '../models/models.dart';
 import '../widgets/widgets.dart';
@@ -15,9 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static List<Widget> _screens() =>
-      [HomePage(), HomePage(), SnippetsPage(), ThemesPage(), ProfilePage()];
-
   static int selectedIndex = 0;
 
   static final List<Color> _bgColor = [
@@ -38,6 +37,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthenticationNotifier authenticationNotifier =
+        Provider.of<AuthenticationNotifier>(context, listen: false);
+    List<Widget> _screens() => [
+          HomePage(),
+          HomePage(),
+          SnippetsPage(),
+          ThemesPage(),
+          ProfilePage(
+            authenticationNotifier: authenticationNotifier,
+          )
+        ];
+
     final List<Widget> screens = _screens();
     List<NavigationItem> items = [
       for (int i = 0; i < screens.length; i++)
@@ -104,13 +115,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     }
                     setState(() {
                       selectedIndex = itemIndex;
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Ejemplo" + itemIndex.toString()),
-                        behavior: SnackBarBehavior.fixed,
-                        duration: Duration(
-                            seconds: 1 * (itemIndex == 0 ? 5 : itemIndex)),
-                        elevation: 100,
-                      ));
                     });
                   },
                   child: BuildItem(

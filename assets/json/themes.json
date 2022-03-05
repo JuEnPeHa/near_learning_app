@@ -1,13 +1,13 @@
     [{
         "title": "Build and deploy a smart contract to NEAR protocol blockchain",
         "color": "Color(0xFFFFFFFF)",
-        "subtitles": ["First things first", "Overview", "Subtitle 3"],
+        "subtitles": ["First things first", "Overview", "Building"],
         "keys": ["a01", "a02", "a03"]
     },
     {
-        "title": "Titulo de ejemplo 2",
+        "title": "Accounts, keys and contracts",
         "color": "Color(0x12341678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "subtitles": ["Account", "Access Keys", "Contracts"],
         "keys": ["b01", "b02", "b03"]
     },
     {

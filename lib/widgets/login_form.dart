@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:near_learning_app/providers/authentication_notifier.dart';
+import 'package:provider/provider.dart';
 import 'widgets.dart';
 
 class LoginForm extends StatefulWidget {
@@ -45,6 +47,8 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthenticationNotifier authenticationNotifier =
+        Provider.of<AuthenticationNotifier>(context, listen: false);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Padding(
@@ -107,8 +111,18 @@ class _LoginFormState extends State<LoginForm> {
                 ElevatedButton(
                   onPressed: !_passwordValid
                       ? null
-                      : () {
-                          _submitForm();
+                      : () async {
+                          FocusScope.of(context).unfocus();
+                          bool isOk = _formLoginKey.currentState!.validate();
+                          if (isOk != null && isOk) {
+                            //_formRegisterKey.currentState.save();
+                            await authenticationNotifier.login(
+                                context: context,
+                                email: formData['email'] ?? "",
+                                password: formData['password'] ?? "");
+                            //* imprimir valores del formulario
+                            print(formData);
+                          } else {}
                           print(formData);
                         },
                   child: const SizedBox(
