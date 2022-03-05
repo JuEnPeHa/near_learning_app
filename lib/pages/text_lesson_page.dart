@@ -2,7 +2,10 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 
 class TextLesson extends StatelessWidget {
-  const TextLesson({Key? key}) : super(key: key);
+  final Widget child;
+  final String title;
+  const TextLesson({required this.child, required this.title, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class TextLesson extends StatelessWidget {
                   padding: EdgeInsets.only(top: 5, bottom: 10),
                   child: Center(
                     child: Text(
-                      'Ejemplo',
+                      title,
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -59,9 +62,13 @@ class TextLesson extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(left: 20, right: 20),
                     color: Colors.white54,
-                    child: textFormater(
-                        "El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta. El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas en el contrato NEAR. También puede mostrar sus tweets guardados en una página superpuesta."),
+                    child: child,
+                    //textFormater(
+                    //  "El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas."),
                   ),
+                  OutlinedButton(onPressed: () {
+                    Navigator.pop(context);
+                  }, child: Text("Continuar"))
                 ],
               ),
             ),

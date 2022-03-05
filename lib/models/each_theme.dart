@@ -15,19 +15,20 @@ class ListThemes {
       };
 
   @override
-  String toString() =>
-      'ListThemes{themes: $themes}';
+  String toString() => 'ListThemes{themes: $themes}';
 }
 
 class EachTheme {
   final String title;
   final Color color;
   final List<String> subtitles;
+  final List<String> keys;
 
   EachTheme({
     required this.title,
     required this.color,
     required this.subtitles,
+    required this.keys,
   });
 
   factory EachTheme.fromJson(Map<String, dynamic> json) {
@@ -38,6 +39,7 @@ class EachTheme {
           radix: 16)),
       subtitles:
           (json['subtitles'] as List<dynamic>).map((e) => e as String).toList(),
+      keys: (json['keys'] as List<dynamic>).map((e) => e as String).toList(),
     );
   }
 
@@ -45,11 +47,12 @@ class EachTheme {
         'title': instance.title,
         'color': instance.color.toString(),
         'subtitles': instance.subtitles,
+        'keys': instance.keys,
         //'subtitles': instance.subtitles.toList(),
       };
 
   @override
   String toString() {
-    return 'EachTheme{title: $title, color: $color, subtitles: $subtitles}';
+    return 'EachTheme{title: $title, color: $color, subtitles: $subtitles, keys: $keys}';
   }
 }

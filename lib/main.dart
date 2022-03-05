@@ -11,6 +11,7 @@ import 'package:near_learning_app/providers/navigation_provider.dart';
 import 'package:near_learning_app/providers/provider.dart';
 import 'package:near_learning_app/router/routes.dart';
 import 'package:near_learning_app/theme/app_theme.dart';
+import 'package:near_learning_app/utils/themes.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -88,7 +89,10 @@ class _MyAppState extends State<MyApp> {
         //'themes': (BuildContext context) => const ThemesPage(),
         'auth': (BuildContext context) => const AuthScreen(),
         'onboarding': (BuildContext context) => OnboardingPage(),
-        'text': (BuildContext context) => const TextLesson(),
+        'text': (BuildContext context) => TextLesson(
+              child: a01(),
+              title: "Example",
+            ),
       },
     );
   }

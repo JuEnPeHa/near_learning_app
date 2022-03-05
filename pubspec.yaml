@@ -31,6 +31,7 @@ dependencies:
   expandable_text: ^2.2.0
   flutter_syntax_view: ^4.0.0
   expansion_tile_card: ^2.0.0
+  velocity_x: ^3.4.0
 
 dev_dependencies:
   flutter_test:

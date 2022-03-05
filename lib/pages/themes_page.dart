@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:near_learning_app/models/each_theme.dart';
+import 'package:near_learning_app/pages/pages.dart';
+import 'package:near_learning_app/utils/themes.dart';
 
 Future<List<EachTheme>> getJson() async {
   String response = await rootBundle.loadString('assets/json/themes.json');
@@ -25,6 +27,7 @@ class _ThemesPageState extends State<ThemesPage> {
   bool _isLittle = false;
   List<EachTheme> themes = [];
 
+  @override
   @override
   void initState() {
     getJson().then((value) => setState(() => themes = value));
@@ -81,32 +84,32 @@ class _ThemesPageState extends State<ThemesPage> {
             ]),
         SliverList(
             delegate: SliverChildListDelegate([
-          PopupMenuButton<WhyFarther>(
-            child: CircularProgressIndicator(),
-            onSelected: (WhyFarther result) {
-              setState(() {
-                // result.toString();
-              });
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<WhyFarther>>[
-              const PopupMenuItem<WhyFarther>(
-                value: WhyFarther.harder,
-                child: Text('Working a lot harder'),
-              ),
-              const PopupMenuItem<WhyFarther>(
-                value: WhyFarther.smarter,
-                child: Text('Being a lot smarter'),
-              ),
-              const PopupMenuItem<WhyFarther>(
-                value: WhyFarther.selfStarter,
-                child: Text('Being a self-starter'),
-              ),
-              const PopupMenuItem<WhyFarther>(
-                value: WhyFarther.tradingCharter,
-                child: Text('Placed in charge of trading charter'),
-              ),
-            ],
-          ),
+          // PopupMenuButton<WhyFarther>(
+          //   child: CircularProgressIndicator(),
+          //   onSelected: (WhyFarther result) {
+          //     setState(() {
+          //       // result.toString();
+          //     });
+          //   },
+          //   itemBuilder: (BuildContext context) => <PopupMenuEntry<WhyFarther>>[
+          //     const PopupMenuItem<WhyFarther>(
+          //       value: WhyFarther.harder,
+          //       child: Text('Working a lot harder'),
+          //     ),
+          //     const PopupMenuItem<WhyFarther>(
+          //       value: WhyFarther.smarter,
+          //       child: Text('Being a lot smarter'),
+          //     ),
+          //     const PopupMenuItem<WhyFarther>(
+          //       value: WhyFarther.selfStarter,
+          //       child: Text('Being a self-starter'),
+          //     ),
+          //     const PopupMenuItem<WhyFarther>(
+          //       value: WhyFarther.tradingCharter,
+          //       child: Text('Placed in charge of trading charter'),
+          //     ),
+          //   ],
+          // ),
           themes.isEmpty
               ? const Text('Loading...')
               : Padding(
@@ -116,13 +119,21 @@ class _ThemesPageState extends State<ThemesPage> {
                       ...themes.map(
                         (EachTheme theme) {
                           return ExpansionTile(
-                            collapsedBackgroundColor: theme.color,
-                            backgroundColor: Colors.transparent,
+                            //collapsedBackgroundColor: theme.color,
+                            //backgroundColor: Colors.transparent,
                             //backgroundColor: theme.color,
                             title: Text(theme.title),
                             children: [
                               ...theme.subtitles.map((e) {
                                 return ListTile(
+                                    onTap: () {
+                                      print("object");
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TextLesson(child: a01(), title: e,)));
+                                    },
                                     //tileColor: theme.color,
                                     title: Text(e));
                               })
@@ -133,13 +144,14 @@ class _ThemesPageState extends State<ThemesPage> {
                       ...themes.map(
                         (EachTheme theme) {
                           return ExpansionTile(
-                            collapsedBackgroundColor: theme.color,
-                            backgroundColor: Colors.blue,
+                            //collapsedBackgroundColor: theme.color,
+                            //backgroundColor: Colors.blue,
                             //backgroundColor: theme.color,
                             title: Text(theme.title),
                             children: [
                               ...theme.subtitles.map((e) {
                                 return ListTile(
+
                                     //tileColor: theme.color,
                                     title: Text(e));
                               })
@@ -154,6 +166,17 @@ class _ThemesPageState extends State<ThemesPage> {
       ],
     );
   }
+
+  Widget _getTheme(final String key) {
+  switch (key) {
+    case key == 'a01':
+      return a01();
+      break;
+    default:
+      return Container();
+  }
+}
 }
 
 enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
+

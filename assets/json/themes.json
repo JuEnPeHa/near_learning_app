@@ -1,51 +1,61 @@
     [{
-        "title": "Titulo de ejemplo 1",
+        "title": "Build and deploy a smart contract to NEAR protocol blockchain",
         "color": "Color(0xFFFFFFFF)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["First things first", "Subtitle 2", "Subtitle 3"],
+        "keys": ["a01", "a02", "a03"]
     },
     {
         "title": "Titulo de ejemplo 2",
         "color": "Color(0x12341678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["b01", "b02", "b03"]
     },
     {
         "title": "Titulo de ejemplo 3",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["c01", "c02", "c03"]
     },
     {
         "title": "Titulo de ejemplo 4",
         "color": "Color(0x80FFFFFF)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["d01", "d02", "d03"]
     },
     {
         "title": "Titulo de ejemplo 5",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["e01", "e02", "e03"]
     },
     {
         "title": "Titulo de ejemplo 6",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["f01", "f02", "f03"]
     },
     {
         "title": "Titulo de ejemplo 7",
         "color": "Color(0x14345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["g01", "g02", "g03"]
     },
     {
         "title": "Titulo de ejemplo 8",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["h01", "h02", "h03"]
     },
     {
         "title": "Titulo de ejemplo 9",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["i01", "i02", "i03"]
     },
     {
         "title": "Titulo de ejemplo 10",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"]
+        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "keys": ["j01", "j02", "j03"]
     }
 ]
