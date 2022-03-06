@@ -10,19 +10,23 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String id = ModalRoute.of(context)!.settings.arguments as String;
-    print("HELOHELOHELOHELOHELO" + id.toString());
+    final supabase.User user =
+        ModalRoute.of(context)!.settings.arguments as supabase.User;
+    print("HELOHELOHELOHELOHELO" + user.toString());
 
     final AuthenticationNotifier authNotifier =
         Provider.of<AuthenticationNotifier>(context);
     List<String> profile = [];
     if (profile == null || profile.isEmpty) {
-      authNotifier.getProfile(context: context, userId: id).then((value) {
-      profile = value ?? [];
-      print(value.toString() + value.toString() + value.toString());
-    });
+      authNotifier.getProfile(context: context, userId: user.id).then((value) {
+        profile = value ?? [];
+        if (profile.length > 0) {
+          _usernameController.text = profile[0] ?? "";
+          _firstnameController.text = profile[1] ?? "";
+        }
+        print(value.toString() + value.toString() + value.toString());
+      });
     }
-    
 
     return GestureDetector(
       onTap: () {
@@ -73,7 +77,17 @@ class AccountPage extends StatelessWidget {
                   ),
                 ],
               ),
-              ElevatedButton(onPressed: () {}, child: Text("Save")),
+              ElevatedButton(
+                  onPressed: () async {
+                    await authNotifier.updateProfile(
+                      userId: user.id,
+                      context: context,
+                      username: _usernameController.text,
+                      firstName: _firstnameController.text,
+                      email: user.email ?? "",
+                    );
+                  },
+                  child: Text("Save")),
             ]),
       ),
     );

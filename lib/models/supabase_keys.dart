@@ -65,10 +65,12 @@ class AuthenticationService {
   Future<String?> logout({
     required BuildContext context,
   }) async {
+    final HiveData hiveData = HiveData();
     final EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
     GotrueResponse response = await SupabaseKeys.supabaseClient.auth.signOut();
     if (response.error == null) {
       await prefs.clear();
+      await hiveData.deleteUserApp();
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Logout successful"),
       ));
@@ -101,7 +103,7 @@ class AuthenticationService {
           content: Text("Recover session successful"),
         ));
         Navigator.pushReplacementNamed(context, 'account',
-            arguments: response.data!.user!.id);
+            arguments: response.data!.user!);
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -154,6 +156,7 @@ class AuthenticationService {
   }
 
   Future<void> updateProfile({
+    required String userId,
     required BuildContext context,
     required String username,
     required String email,
@@ -164,12 +167,14 @@ class AuthenticationService {
     final hiveData = HiveData();
     final updates = avatarUrl != null
         ? {
+          'id': userId,
             'username': username,
             'avatar_url': avatarUrl,
             'first_name': firstName,
             'updated_at': DateTime.now().toIso8601String(),
           }
         : {
+          'id': userId,
             'username': username,
             'first_name': firstName,
             'updated_at': DateTime.now().toIso8601String(),

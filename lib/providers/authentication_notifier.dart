@@ -75,6 +75,7 @@ class AuthenticationNotifier extends ChangeNotifier {
   }
 
   Future<void> updateProfile({
+    required String userId,
     required BuildContext context,
     required String username,
     required String email,
@@ -84,6 +85,7 @@ class AuthenticationNotifier extends ChangeNotifier {
   }) async {
     try {
       await _authenticationService.updateProfile(
+        userId: userId,
         username: username,
         context: context,
         avatarUrl: avatarUrl,

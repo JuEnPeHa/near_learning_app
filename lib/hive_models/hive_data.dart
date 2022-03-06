@@ -107,7 +107,7 @@ class HiveData {
 
   Future<void> setFirstTime() async {
     final box = await Hive.openBox<int>('onboarding');
-    box.putAt(0, 1);
+    box.put('onboarding', 1);
   }
 
   Future<bool> get isFirstTime async {
