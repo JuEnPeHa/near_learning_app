@@ -54,15 +54,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final HiveData hiveData = HiveData();
-  late UserApp userApp;
-  late bool isFirstTime;
-
-  Future<void> _initHive() async {
-    userApp = await hiveData.userApp;
-    isFirstTime = await hiveData.isFirstTime;
-    setState(() {});
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +74,9 @@ class _MyAppState extends State<MyApp> {
       // routes: AppRoutes.getAppRoutes(),
       // initialRoute: AppRoutes.initialRoute,
       // onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: 'onboarding',
+      initialRoute: 'root',
       routes: <String, WidgetBuilder>{
-        //'root': (BuildContext context) => const SplashPage(),
+        'root': (BuildContext context) => const SplashPage(),
         //'login': (BuildContext context) => const LoginPage2(),
         'home': (BuildContext context) => const HomeScreen(),
         //'account': (BuildContext context) => const AccountPage(),

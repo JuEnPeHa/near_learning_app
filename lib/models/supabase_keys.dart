@@ -1,5 +1,6 @@
 import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:near_learning_app/hive_models/hive_data.dart';
 import 'package:supabase/supabase.dart';
 
 class SupabaseKeys {
@@ -67,7 +68,7 @@ class AuthenticationService {
     GotrueResponse response = await SupabaseKeys.supabaseClient.auth.signOut();
     if (response.error == null) {
       await prefs.clear();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Logout successful"),
       ));
       Navigator.pushReplacementNamed(context, 'login');
@@ -75,6 +76,31 @@ class AuthenticationService {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Logout failed : ${response.error!.message}"),
       ));
+    }
+  }
+
+  Future<String?> recoverSession({
+    required BuildContext context,
+  }) async {
+    final hiveData = HiveData();
+    final EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
+    final session = await prefs.getString("token");
+    GotrueSessionResponse response =
+        await SupabaseKeys.supabaseClient.auth.recoverSession(session);
+    if (response.error == null) {
+      await prefs.setString("token", response.data!.persistSessionString);
+      await hiveData.getUserApp();
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Recover session successful"),
+      ));
+      await Future.delayed(Duration(seconds: 5));
+      Navigator.pushReplacementNamed(context, 'home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Recover session failed : ${response.error!.message}"),
+      ));
+      await Future.delayed(Duration(seconds: 5));
+      Navigator.pushReplacementNamed(context, 'auth');
     }
   }
 }

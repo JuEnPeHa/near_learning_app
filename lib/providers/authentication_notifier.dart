@@ -4,6 +4,7 @@ import 'package:near_learning_app/models/supabase_keys.dart';
 class AuthenticationNotifier extends ChangeNotifier {
   final AuthenticationService _authenticationService = AuthenticationService();
 
+
   Future<String?> signup({
     required BuildContext context,
     required String email,
@@ -35,11 +36,24 @@ class AuthenticationNotifier extends ChangeNotifier {
       print(e);
     }
   }
+
   Future<void> logout({
     required BuildContext context,
   }) async {
     try {
       await _authenticationService.logout(
+        context: context,
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<String?> recoverSession({
+    required BuildContext context,
+  }) async {
+    try {
+      await _authenticationService.recoverSession(
         context: context,
       );
     } catch (e) {

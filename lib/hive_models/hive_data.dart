@@ -2,20 +2,23 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:near_learning_app/models/user_model.dart';
 
 class HiveData {
-  const HiveData();
-  Future<int> saveUserApp(UserApp user) async {
+  Future<int> saveUserApp({required UserApp user}) async {
     final box = await Hive.openBox<UserApp>('user');
+
     return box.add(user);
   }
 
   Future<UserApp?> getUserApp() async {
     final box = await Hive.openBox<UserApp>('user');
-    return box.getAt(0);
+    print(box.get('user'));
+    return box.get('user');
   }
 
-  Future<UserApp> get userApp async {
+  Future<UserApp?> get userApp async {
     final Box<UserApp> box = await Hive.openBox<UserApp>('user');
-      return box.values.first;
+    print(box.get('user'));
+
+    return box.get('user');
   }
 
   copyWith({

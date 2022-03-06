@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:near_learning_app/hive_models/hive_data.dart';
+import 'package:near_learning_app/models/user_model.dart';
 
 class UserProvider extends ChangeNotifier {
   String _userName = "";
@@ -12,9 +14,24 @@ class UserProvider extends ChangeNotifier {
   String _lastReadPath = "";
   String _lastReadSyncedPath = "";
 
-  void hasUserStored(String userName, String userEmail, String userLastName,
-      int userLevel, int userLastSyncedLevel, List<String> favoriteThemes, 
-      String preferedLanguage, String lastReadPath, String lastReadSyncedPath) {
+  var hiveData = HiveData();
+
+  Future<void> _initHive() async {
+    userApp = await hiveData.userApp;
+    isFirstTime = await hiveData.isFirstTime;
+    notifyListeners();
+  }
+
+  void saveUserApp({
+      required String userName,
+      required String userEmail,
+      String userLastName = "",
+      int userLevel = 0,
+      int userLastSyncedLevel = 0,
+      List<String> favoriteThemes = const [],
+      String preferedLanguage = "",
+      String lastReadPath = "",
+      String lastReadSyncedPath = ""}) {
     _userName = userName;
     _userEmail = userEmail;
     _userLastName = userLastName;
@@ -24,6 +41,17 @@ class UserProvider extends ChangeNotifier {
     _preferedLanguage = preferedLanguage;
     _lastReadPath = lastReadPath;
     _lastReadSyncedPath = lastReadSyncedPath;
+    hiveData.saveUserApp(
+        user: UserApp(
+            email: _userEmail,
+            favoriteThemes: _favoriteThemes,
+            lastName: _userLastName,
+            lastReadPath: _lastReadPath,
+            lastReadSyncedPath: _lastReadSyncedPath,
+            name: _userName,
+            preferedLanguage: _preferedLanguage,
+            userLastSyncedLevel: _userLastSyncedLevel,
+            userLevel: _userLevel));
     notifyListeners();
   }
 
