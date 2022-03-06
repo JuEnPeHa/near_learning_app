@@ -218,19 +218,20 @@ class _RegisterFormState extends State<RegisterForm> {
                 onPressed: _strength < 1 / 2
                     ? null
                     : () async {
-                      FocusScope.of(context).unfocus();
+                        FocusScope.of(context).unfocus();
                         bool? isOk = _formRegisterKey.currentState?.validate();
+                        String? email = formValues['email']
+                            ?.replaceAll(" ", "")
+                            .toLowerCase();
                         if (isOk != null && isOk) {
                           //_formRegisterKey.currentState.save();
                           await authenticationNotifier.signup(
-                            context: context,
-                              email: formValues['email'] ?? "",
+                              context: context,
+                              email: email ?? "",
                               password: formValues['password'] ?? "");
                           //* imprimir valores del formulario
                           print(formValues);
-                        } else {
-                          
-                        }
+                        } else {}
                       },
               )
             ],

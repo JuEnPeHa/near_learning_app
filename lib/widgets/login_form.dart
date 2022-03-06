@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -44,6 +46,8 @@ class _LoginFormState extends State<LoginForm> {
     final isOk = _formLoginKey.currentState?.validate();
     print(isOk);
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,14 +118,15 @@ class _LoginFormState extends State<LoginForm> {
                       : () async {
                           FocusScope.of(context).unfocus();
                           bool isOk = _formLoginKey.currentState!.validate();
+                          String? email = formData['email']?.replaceAll(" ", "").toLowerCase();
                           if (isOk != null && isOk) {
                             //_formRegisterKey.currentState.save();
                             await authenticationNotifier.login(
                                 context: context,
-                                email: formData['email'] ?? "",
+                                email: email ?? "",
                                 password: formData['password'] ?? "");
                             //* imprimir valores del formulario
-                            print(formData);
+                            print(formData.toString() + email!);
                           } else {}
                           print(formData);
                         },

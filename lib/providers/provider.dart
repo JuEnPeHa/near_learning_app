@@ -6,7 +6,7 @@ import 'package:near_learning_app/models/user_model.dart';
 class UserProvider extends ChangeNotifier {
   String _userName = "";
   String _userEmail = "";
-  String _userLastName = "";
+  String _nearAccountId = "";
   int _userLevel = 0;
   int _userLastSyncedLevel = 0;
   String _preferedLanguage = "";
@@ -17,15 +17,15 @@ class UserProvider extends ChangeNotifier {
   var hiveData = HiveData();
 
   Future<void> _initHive() async {
-    userApp = await hiveData.userApp;
-    isFirstTime = await hiveData.isFirstTime;
+    var userApp = await hiveData.userApp;
+    var isFirstTime = await hiveData.isFirstTime;
     notifyListeners();
   }
 
-  void saveUserApp({
-      required String userName,
+  void saveUserApp(
+      {required String userName,
       required String userEmail,
-      String userLastName = "",
+      String nearAccountId = "",
       int userLevel = 0,
       int userLastSyncedLevel = 0,
       List<String> favoriteThemes = const [],
@@ -34,7 +34,7 @@ class UserProvider extends ChangeNotifier {
       String lastReadSyncedPath = ""}) {
     _userName = userName;
     _userEmail = userEmail;
-    _userLastName = userLastName;
+    _nearAccountId = nearAccountId;
     _userLevel = userLevel;
     _userLastSyncedLevel = userLastSyncedLevel;
     _favoriteThemes = favoriteThemes;
@@ -45,7 +45,7 @@ class UserProvider extends ChangeNotifier {
         user: UserApp(
             email: _userEmail,
             favoriteThemes: _favoriteThemes,
-            lastName: _userLastName,
+            nearAccountId: _nearAccountId,
             lastReadPath: _lastReadPath,
             lastReadSyncedPath: _lastReadSyncedPath,
             name: _userName,
@@ -72,8 +72,8 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setUserLastName(String userLastName) {
-    _userLastName = userLastName;
+  void setUserLastName(String nearAccountId) {
+    _nearAccountId = nearAccountId;
     notifyListeners();
   }
 

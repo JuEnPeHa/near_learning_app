@@ -1,6 +1,7 @@
 import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:near_learning_app/hive_models/hive_data.dart';
+import 'package:near_learning_app/models/user_model.dart';
 import 'package:supabase/supabase.dart';
 
 class SupabaseKeys {
@@ -89,18 +90,134 @@ class AuthenticationService {
         await SupabaseKeys.supabaseClient.auth.recoverSession(session);
     if (response.error == null) {
       await prefs.setString("token", response.data!.persistSessionString);
-      await hiveData.getUserApp();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Recover session successful"),
-      ));
-      await Future.delayed(Duration(seconds: 5));
-      Navigator.pushReplacementNamed(context, 'home');
+      final user = await hiveData.getUserApp();
+      if (user != null) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Recover session successful"),
+        ));
+        Navigator.pushReplacementNamed(context, 'home', arguments: user);
+      } else if (user == null) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Recover session successful"),
+        ));
+        Navigator.pushReplacementNamed(context, 'account',
+            arguments: response.data!.user!.id);
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Recover session failed : ${response.error!.message}"),
       ));
-      await Future.delayed(Duration(seconds: 5));
       Navigator.pushReplacementNamed(context, 'auth');
     }
   }
+
+  Future<List<String>> getProfile({
+    required String userId,
+    required BuildContext context,
+  }) async {
+    final response = await SupabaseKeys.supabaseClient
+        .from('profiles')
+        .select()
+        .eq('id', userId)
+        .single()
+        .execute();
+    final error = response.error;
+    List<String> profile = [];
+    if (error != null && response.status != 406) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Get profile failed : ${error.message}"),
+      ));
+    }
+    final data = response.data;
+    if (data != null) {
+      String username = (data['username'] ?? "") as String;
+      String avatarUrl = (data['avatar_url'] ?? "") as String;
+      String firstName = (data['first_name'] ?? "") as String;
+      String nearAccount = (data['near_account_id'] ?? "") as String;
+      print(username + " " + avatarUrl + " " + firstName + " " + nearAccount);
+      profile.insert(0, username);
+      profile.insert(1, avatarUrl);
+      profile.insert(2, firstName);
+      profile.insert(3, nearAccount);
+      return profile;
+    } else if (data == null) {
+      await SupabaseKeys.supabaseClient.from('profiles').insert({
+        'id': userId,
+      }).execute().then((value) => print(value.error));
+      return profile;
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Get profile failed : ${error?.message}"),
+      ));
+      return profile;
+    }
+  }
+
+  Future<void> updateProfile({
+    required BuildContext context,
+    required String username,
+    required String email,
+    String? avatarUrl,
+    String firstName = "",
+    String nearAccount = "",
+  }) async {
+    final hiveData = HiveData();
+    final updates = avatarUrl != null
+        ? {
+            'username': username,
+            'avatar_url': avatarUrl,
+            'first_name': firstName,
+            'updated_at': DateTime.now().toIso8601String(),
+          }
+        : {
+            'username': username,
+            'first_name': firstName,
+            'updated_at': DateTime.now().toIso8601String(),
+          };
+    final response = await SupabaseKeys.supabaseClient
+        .from('profiles')
+        .upsert(updates)
+        .execute();
+    final error = response.error;
+    if (error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Update profile failed : ${error.message}"),
+      ));
+    } else {
+      hiveData.setFirstTime();
+      final UserApp user = UserApp(
+        email: email,
+        favoriteThemes: [],
+        lastReadPath: '',
+        lastReadSyncedPath: '',
+        name: firstName,
+        nearAccountId: nearAccount,
+        preferedLanguage: '',
+        userLastSyncedLevel: 0,
+        userLevel: 0,
+      );
+      hiveData.saveUserApp(user: user).then((value) =>
+          Navigator.popAndPushNamed(context, 'home', arguments: user));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Update profile successful"),
+      ));
+    }
+  }
 }
+//final hiveData = HiveData();
+    // final user = await hiveData.getUserApp();
+    // if (user != null) {
+    //   await hiveData.getUserApp();
+    // } else {
+    //   await hiveData.getUserApp();
+    // }
+    //} else {
+    //   final profile = response.data!.data![0];
+    //   final user = await HiveData().getUserApp();
+    //   if (user != null) {
+    //     user.profile = profile;
+    //     await HiveData().setUserApp(user);
+    //     Navigator.pushReplacementNamed(context, 'home', arguments: user);
+    //   } else {
+    //     Navigator.pushReplacementNamed(context, 'account');
+    //   }

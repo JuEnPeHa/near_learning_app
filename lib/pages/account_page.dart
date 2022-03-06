@@ -1,12 +1,91 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:near_learning_app/providers/authentication_notifier.dart';
+import 'package:provider/provider.dart';
+import 'package:supabase/supabase.dart' as supabase;
+
+class AccountPage extends StatelessWidget {
+  AccountPage({Key? key}) : super(key: key);
+  final _usernameController = TextEditingController();
+  final _firstnameController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final String id = ModalRoute.of(context)!.settings.arguments as String;
+    print("HELOHELOHELOHELOHELO" + id.toString());
+
+    final AuthenticationNotifier authNotifier =
+        Provider.of<AuthenticationNotifier>(context);
+    List<String> profile = [];
+    if (profile == null || profile.isEmpty) {
+      authNotifier.getProfile(context: context, userId: id).then((value) {
+      profile = value ?? [];
+      print(value.toString() + value.toString() + value.toString());
+    });
+    }
+    
+
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Profile"),
+        ),
+        body: ListView(
+            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'User Name'),
+                controller: _usernameController,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'First Name'),
+                controller: _firstnameController,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: Text("Soon more languages"),
+                  ),
+                  DropdownButton<String>(
+                    hint: Text("Choose Language"),
+                    items: const [
+                      DropdownMenuItem(
+                        child: Text("Spanglish"),
+                        enabled: true,
+                        value: "Spanglish",
+                      )
+                    ],
+                    onChanged: (value) =>
+                        ScaffoldMessenger.of(context).showMaterialBanner(
+                      MaterialBanner(
+                          content: Text("Sorry, just spanglish today"),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              child: Text("OK"),
+                              onPressed: () => ScaffoldMessenger.of(context)
+                                  .hideCurrentMaterialBanner(),
+                            )
+                          ]),
+                    ),
+                  ),
+                ],
+              ),
+              ElevatedButton(onPressed: () {}, child: Text("Save")),
+            ]),
+      ),
+    );
+  }
+}
+
 // import 'package:supabase/supabase.dart';
 // import 'package:near_learning_app/components/auth_required_state.dart';
 // import 'package:near_learning_app/components/avatar.dart';
 // import 'package:near_learning_app/utils/constants.dart';
-
 // class AccountPage extends StatefulWidget {
 //   const AccountPage({Key? key}) : super(key: key);
-
 //   @override
 //   _AccountPageState createState() => _AccountPageState();
 // }

@@ -24,7 +24,7 @@ class HiveData {
   copyWith({
     String? name,
     String? email,
-    String? lastName,
+    String? nearAccountId,
     int? userLevel,
     int? userLastSyncedLevel,
     String? preferedLanguage,
@@ -34,7 +34,7 @@ class HiveData {
     String? lastReadSyncedPath,
   }) async {
     final box = await Hive.openBox<UserApp>('user');
-    final user = box.getAt(0);
+    final user = box.get('user');
     if (user != null) {
       if (name != null) {
         user.name = name;
@@ -46,10 +46,10 @@ class HiveData {
       } else {
         user.email = user.email;
       }
-      if (lastName != null) {
-        user.lastName = lastName;
+      if (nearAccountId != null) {
+        user.nearAccountId = nearAccountId;
       } else {
-        user.lastName = user.lastName;
+        user.nearAccountId = user.nearAccountId;
       }
       if (userLevel != null) {
         user.userLevel = userLevel;
@@ -81,8 +81,8 @@ class HiveData {
       } else {
         user.lastReadSyncedPath = user.lastReadSyncedPath;
       }
-      box.deleteAt(0);
-      box.putAt(0, user);
+      box.delete('user');
+      box.put('user', user);
     }
   }
 

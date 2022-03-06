@@ -19,7 +19,7 @@ class UserAppAdapter extends TypeAdapter<UserApp> {
     return UserApp(
       name: fields[0] as String,
       email: fields[1] as String,
-      lastName: fields[2] as String,
+      nearAccountId: fields[2] as String,
       userLevel: fields[3] as int,
       userLastSyncedLevel: fields[4] as int,
       preferedLanguage: fields[5] as String,
@@ -38,7 +38,7 @@ class UserAppAdapter extends TypeAdapter<UserApp> {
       ..writeByte(1)
       ..write(obj.email)
       ..writeByte(2)
-      ..write(obj.lastName)
+      ..write(obj.nearAccountId)
       ..writeByte(3)
       ..write(obj.userLevel)
       ..writeByte(4)

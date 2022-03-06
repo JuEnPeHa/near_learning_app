@@ -9,7 +9,7 @@ class UserApp extends HiveObject {
   @HiveField(1)
   String email;
   @HiveField(2)
-  String lastName;
+  String nearAccountId;
   @HiveField(3)
   int userLevel;
   @HiveField(4)
@@ -26,7 +26,7 @@ class UserApp extends HiveObject {
   UserApp({
     required this.name,
     required this.email,
-    required this.lastName,
+    required this.nearAccountId,
     required this.userLevel,
     required this.userLastSyncedLevel,
     required this.preferedLanguage,
@@ -38,7 +38,7 @@ class UserApp extends HiveObject {
   factory UserApp.fromJson(Map<String, dynamic> json) => UserApp(
         name: json['name'],
         email: json['email'],
-        lastName: json['lastName'],
+        nearAccountId: json['nearAccountId'],
         userLevel: json['userLevel'],
         userLastSyncedLevel: json['userLastSyncedLevel'],
         preferedLanguage: json['preferedLanguage'],
@@ -52,7 +52,7 @@ class UserApp extends HiveObject {
   Map<String, dynamic> toJson() => {
         'name': name,
         'email': email,
-        'lastName': lastName,
+        'nearAccountId': nearAccountId,
         'userLevel': userLevel,
         'userLastSyncedLevel': userLastSyncedLevel,
         'preferedLanguage': preferedLanguage,
@@ -63,6 +63,6 @@ class UserApp extends HiveObject {
 
   @override
   String toString() {
-    return 'UserApp{name: $name, email: $email, lastName: $lastName, userLevel: $userLevel, userLastSyncedLevel: $userLastSyncedLevel, preferedLanguage: $preferedLanguage, favoriteThemes: $favoriteThemes, lastReadPath: $lastReadPath, lastReadSyncedPath: $lastReadSyncedPath}';
+    return 'UserApp{name: $name, email: $email, nearAccountId: $nearAccountId, userLevel: $userLevel, userLastSyncedLevel: $userLastSyncedLevel, preferedLanguage: $preferedLanguage, favoriteThemes: $favoriteThemes, lastReadPath: $lastReadPath, lastReadSyncedPath: $lastReadSyncedPath}';
   }
 }

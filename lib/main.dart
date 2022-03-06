@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
         'root': (BuildContext context) => const SplashPage(),
         //'login': (BuildContext context) => const LoginPage2(),
         'home': (BuildContext context) => const HomeScreen(),
-        //'account': (BuildContext context) => const AccountPage(),
+        'account': (BuildContext context) => AccountPage(),
         //'themes': (BuildContext context) => const ThemesPage(),
         'auth': (BuildContext context) => const AuthScreen(),
         'onboarding': (BuildContext context) => OnboardingPage(),

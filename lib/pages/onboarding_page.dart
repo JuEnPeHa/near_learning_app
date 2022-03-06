@@ -3,9 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:near_learning_app/models/models.dart';
+import 'package:near_learning_app/providers/authentication_notifier.dart';
 import 'package:near_learning_app/utils/constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:nil/nil.dart';
+import 'package:provider/provider.dart';
 
 Future<List<Onboarding>> getOnboardingData() async {
   String jsonString =
@@ -31,11 +33,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
   bool isIOS = false;
   List<Onboarding> onboardingList = [];
   late PageController _pageController;
+  late final AuthenticationNotifier authenticationNotifier;
 
   @override
   void initState() {
     getOnboardingData().then((value) => setState(() => onboardingList = value));
     _pageController = PageController();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      authenticationNotifier =
+          Provider.of<AuthenticationNotifier>(context, listen: false);
+    });
     super.initState();
   }
 
@@ -129,10 +136,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                             )
                                             .then((value) => {});
                                       } else {
-                                        Navigator.pushReplacementNamed(
-                                            context, 'auth');
+                                        authenticationNotifier.recoverSession(
+                                            context: context);
                                       }
-                                      print("object");
                                     },
                                     child: Container(
                                       //width: 200,
