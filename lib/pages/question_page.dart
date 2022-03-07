@@ -124,6 +124,7 @@ class QuestionCard extends StatelessWidget {
                 press: () => _notificiationQuestion.checkAnswer(
                       choosenAnswer: index,
                       question: question,
+                      context: context,
                     )),
           ),
         ],
@@ -153,11 +154,11 @@ class Option extends StatelessWidget {
     Color getRightColor() {
       if (_notificiationQuestion.isAnswered) {
         if (index == _notificiationQuestion.correctAns) {
-          return Colors.green;
+          return Colors.green.withOpacity(0.25);
         } else if (index == _notificiationQuestion.selectedAns &&
             _notificiationQuestion.selectedAns !=
                 _notificiationQuestion.correctAns) {
-          return Colors.red;
+          return Colors.red.withOpacity(0.25);
         } else {
           return Vx.gray300;
         }
@@ -167,10 +168,9 @@ class Option extends StatelessWidget {
 
     Icon? getRightIcon() {
       if (getRightColor() == Vx.gray300 || getRightColor() == Vx.gray700) {
-       
         WidgetsBinding.instance!.addPostFrameCallback((_) {
-        _notificiationQuestion.notifyListeners();
-      });
+          _notificiationQuestion.notifyListeners();
+        });
         return null;
       } else {
         return Icon(
@@ -313,7 +313,9 @@ class _NotificiationQuestion extends ChangeNotifier {
     _selectedAns = ans;
   }
 
-  void nextQuestion() {
+  void nextQuestion({
+    required BuildContext context
+  }) {
     _currentIndex++;
     if (_currentIndex < questionLength) {
       _isAnswered = false;
@@ -323,12 +325,14 @@ class _NotificiationQuestion extends ChangeNotifier {
         notifyListeners();
       });
     } else if (_currentIndex >= questionLength) {
+      Navigator.of(context).pop();
       //TODO: Navigation to Score Page
       notifyListeners();
     }
   }
 
   void checkAnswer({
+    required BuildContext context,
     required int choosenAnswer,
     required Question question,
   }) {
@@ -340,11 +344,11 @@ class _NotificiationQuestion extends ChangeNotifier {
     }
     print("correctAnsCount: $_conteoDeRespuestasCorrectas");
     Future.delayed(Duration(seconds: 1), () {
-      nextQuestion();
+      nextQuestion(context: context);
     });
   }
 
   void updateQuestionNumber(int index) {
-    _currentIndex = index + 1;
+    _currentIndex;
   }
 }

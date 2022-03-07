@@ -177,11 +177,11 @@ class _LoginFormState extends State<LoginForm> {
                             );
                           });
                     }),
-                CupertinoButton(
-                    child: Text("Botón solo para desarrollo"),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed('home');
-                    })
+                // CupertinoButton(
+                //     child: Text("Botón solo para desarrollo"),
+                //     onPressed: () {
+                //       Navigator.of(context).pushReplacementNamed('home');
+                //     }),
               ],
             )),
       ),

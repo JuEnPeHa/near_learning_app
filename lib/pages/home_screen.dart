@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Provider.of<AuthenticationNotifier>(context, listen: false);
     List<Widget> _screens() => [
           HomePage(user: usar),
-          HomePage(user: usar),
+          TestsPage(),
           SnippetsPage(),
           ThemesPage(),
           ProfilePage(

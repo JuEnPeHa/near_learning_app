@@ -29,26 +29,26 @@ class RegisterWidget extends StatelessWidget {
             ),
             const RegisterForm(),
             const Spacer(),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.090,
-              width: MediaQuery.of(context).size.width * 0.80,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: SnakeButton(
-                  child: const Text("Sign In with NEAR Wallet"),
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content:
-                          Text("Sorry, this feature is not available yet."),
-                    ));
-                  },
-                  snakeColor: Colors.green.withOpacity(0.75),
-                  borderColor: Colors.white.withOpacity(0.8),
-                  borderWidth: 10,
-                  duration: const Duration(milliseconds: 1500),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: MediaQuery.of(context).size.height * 0.090,
+            //   width: MediaQuery.of(context).size.width * 0.80,
+            //   child: Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 50.0),
+            //     child: SnakeButton(
+            //       child: const Text("Sign In with NEAR Wallet"),
+            //       onTap: () {
+            //         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            //           content:
+            //               Text("Sorry, this feature is not available yet."),
+            //         ));
+            //       },
+            //       snakeColor: Colors.green.withOpacity(0.75),
+            //       borderColor: Colors.white.withOpacity(0.8),
+            //       borderWidth: 10,
+            //       duration: const Duration(milliseconds: 1500),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
               height: 65,
             ),
