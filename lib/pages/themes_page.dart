@@ -5,6 +5,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:near_learning_app/models/each_theme.dart';
 import 'package:near_learning_app/pages/pages.dart';
 import 'package:near_learning_app/utils/themes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<List<EachTheme>> getJson() async {
   String response = await rootBundle.loadString('assets/json/themes.json');
@@ -128,33 +129,24 @@ class _ThemesPageState extends State<ThemesPage> {
                                 var id = theme.subtitles.indexOf(e);
                                 return ListTile(
                                     onTap: () {
-                                      Navigator.push(
+                                      if (theme.keys[id] == 'a01' ||
+                                          theme.keys[id] == 'a02' ||
+                                          theme.keys[id] == 'a03' ||
+                                          theme.keys[id] == 'b01' ||
+                                          theme.keys[id] == 'b02') {
+                                        Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => TextLesson(
                                                     child: _getTheme(
                                                         theme.keys[id]),
                                                     title: e,
-                                                  )));
+                                                  )),
+                                        );
+                                      } else {
+                                        _launchURL(_getUrl(theme.keys[id]));
+                                      }
                                     },
-                                    //tileColor: theme.color,
-                                    title: Text(e));
-                              })
-                            ],
-                          );
-                        },
-                      ),
-                      ...themes.map(
-                        (EachTheme theme) {
-                          return ExpansionTile(
-                            //collapsedBackgroundColor: theme.color,
-                            //backgroundColor: Colors.blue,
-                            //backgroundColor: theme.color,
-                            title: Text(theme.title),
-                            children: [
-                              ...theme.subtitles.map((e) {
-                                return ListTile(
-
                                     //tileColor: theme.color,
                                     title: Text(e));
                               })
@@ -184,9 +176,9 @@ class _ThemesPageState extends State<ThemesPage> {
       case 'b01':
         return b01();
         break;
-      // case 'b02':
-      //   return b02();
-      //   break;
+      case 'b02':
+        return b02();
+        break;
       // case 'b03':
       //   return b03();
       //   break;
@@ -230,6 +222,111 @@ class _ThemesPageState extends State<ThemesPage> {
         return Container();
     }
   }
+
+  String _getUrl(final String key) {
+    switch (key) {
+      // case 'a01':
+      //   return a01();
+      //   break;
+      // case 'a02':
+      //   return a02();
+      //   break;
+      // case 'a03':
+      //   return a03();
+      //   break;
+      // case 'b01':
+      //   return b01();
+      //   break;
+      // case 'b02':
+      //   return b02();
+      //   break;
+      // case 'b03':
+      //     return b03();
+      //   break;
+      case 'c01':
+        return "https://docs.near.org/docs/concepts/data-storage";
+        break;
+      case 'c02':
+        return "https://docs.near.org/docs/concepts/data-storage#rust-collection-types";
+        break;
+      // case 'c03':
+      //   return c03();
+      //   break;
+      case 'd01':
+        return "https://docs.near.org/docs/concepts/storage-staking";
+        break;
+      case 'd02':
+        return "https://docs.near.org/docs/concepts/storage-staking#how-much-does-it-cost";
+        break;
+      case 'd03':
+        return "https://docs.near.org/docs/concepts/storage-staking#store-data-off-chain";
+        break;
+      case 'e01':
+        return "https://docs.near.org/docs/concepts/storage-solutions#arweave";
+        break;
+      case 'e02':
+        return "https://docs.near.org/docs/concepts/storage-solutions#ipfs";
+        break;
+      case 'e03':
+        return "https://docs.near.org/docs/concepts/storage-solutions#sia";
+        break;
+      case 'f01':
+        return "https://docs.near.org/docs/concepts/gas";
+        break;
+      case 'f02':
+        return "https://docs.near.org/docs/concepts/gas#thinking-in-gas";
+        break;
+      case 'f03':
+        return "https://docs.near.org/docs/concepts/gas#how-do-i-buy-gas";
+        break;
+      case 'g01':
+        return "https://docs.near.org/docs/api/naj-cookbook";
+        break;
+      case 'g02':
+        return "https://docs.near.org/docs/api/naj-cookbook#transactions";
+        break;
+      case 'g03':
+        return "https://docs.near.org/docs/api/naj-cookbook#utils";
+        break;
+      case 'h01':
+        return "https://www.near-sdk.io/";
+        break;
+      case 'h02':
+        return "https://www.near-sdk.io/contract-structure/near-bindgen";
+        break;
+      case 'h03':
+        return "https://www.near-sdk.io/contract-structure/collections";
+        break;
+      case 'i01':
+        return "https://docs.near.org/docs/develop/contracts/as/intro";
+        break;
+      case 'i02':
+        return "https://docs.near.org/docs/develop/contracts/as/intro#state-and-data";
+        break;
+      case 'i03':
+        return "https://docs.near.org/docs/develop/contracts/as/intro#assemblyscript-tips";
+        break;
+      case 'j01':
+        return "https://docs.near.org/docs/api/rpc";
+        break;
+      case 'j02':
+        return "https://docs.near.org/docs/api/rpc/access-keys";
+        break;
+      case 'j03':
+        return "https://docs.near.org/docs/api/rpc/contracts";
+        break;
+      default:
+        return "https://docs.near.org/docs/develop/basics/getting-started";
+    }
+  }
 }
 
 enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
+
+_launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}

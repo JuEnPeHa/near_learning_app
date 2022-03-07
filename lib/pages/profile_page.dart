@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:near_learning_app/models/user_model.dart';
 import 'package:near_learning_app/providers/authentication_notifier.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class ProfilePage extends StatefulWidget {
   final AuthenticationNotifier authenticationNotifier;
@@ -18,6 +19,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  ImageProvider logoColumn =
+      const AssetImage('assets/logos_app/complete_logo_column.png');
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -42,7 +45,55 @@ class _ProfilePageState extends State<ProfilePage> {
                 lineWidth: 10,
               )),
           divider(),
-          bwTiles(() {},
+          bwTiles(
+              () => showAboutDialog(
+                    context: context,
+                    applicationVersion: "0.0.1",
+                    applicationIcon: Image(
+                      image: logoColumn,
+                      fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width * 0.25,
+                    ),
+                    applicationName: "Near Learning App",
+                    children: [
+                      ClipRRect(
+                        child: Container(
+                          height: size.height * 0.075,
+                          width: size.width * 0.075,
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                            image: NetworkImage(
+                                "https://gateway.pinata.cloud/ipfs/QmQRbL5GuwuDAiza1S2riRgbSC7DxEFFduHbkCtDPRZrUN",
+                                scale: 0.5),
+                          )),
+                        ),
+                      ),
+                      "Desarrollado por: JEPH.near junto con NEAR y NEAR Education"
+                          .text
+                          .bold
+                          .make()
+                          .box
+                          .width(size.width * 0.4)
+                          .height(size.height * 0.05)
+                          .make(),
+                      "Agradecimiento especial a Sherif por la oportunidad"
+                          .text
+                          .bold
+                          .make()
+                          .box
+                          .width(size.width * 0.4)
+                          .height(size.height * 0.05)
+                          .make(),
+                      "y a Aleida y Nacho por sus contribuciones"
+                          .text
+                          .bold
+                          .make()
+                          .box
+                          .width(size.width * 0.4)
+                          .height(size.height * 0.05)
+                          .make(),
+                    ],
+                  ),
               () => widget.authenticationNotifier.logout(context: context)),
         ],
       ),
@@ -93,7 +144,7 @@ Widget bwTiles(void Function()? onTap1, onTap2) {
   Color color = Colors.black;
   return Column(
     children: [
-      colorTile(Icons.info_outline, color, "Preguntas Frecuentes",
+      colorTile(Icons.info_outline, color, "Acerca de:",
           blackAndWhite: true, onTap: onTap1),
       colorTile(Icons.handshake, color, "Cerrar Sesión - Logout",
           blackAndWhite: true, onTap: onTap2),

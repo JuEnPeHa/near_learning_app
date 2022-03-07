@@ -13,19 +13,19 @@ class QuestionProviderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => _NotificiationQuestion(),
-      child: QuestionPage(test: questions),
+      child: QuestionPage(questions: questions),
     );
   }
 }
 
 class QuestionPage extends StatelessWidget {
-  const QuestionPage({required this.test, Key? key}) : super(key: key);
-  final List<Question> test;
+  const QuestionPage({required this.questions, Key? key}) : super(key: key);
+  final List<Question> questions;
   @override
   Widget build(BuildContext context) {
     final _NotificiationQuestion _notificiationQuestion =
         Provider.of<_NotificiationQuestion>(context);
-    _notificiationQuestion.questionLength = test.length;
+    _notificiationQuestion.questionLength = questions.length;
     _notificiationQuestion.pageController = PageController();
     return Scaffold(
       body: Stack(
@@ -73,7 +73,7 @@ class QuestionPage extends StatelessWidget {
                           _notificiationQuestion.updateQuestionNumber,
                       itemCount: _notificiationQuestion.questionLength,
                       itemBuilder: (context, index) => QuestionCard(
-                            question: test[index],
+                            question: questions[index],
                           )))
             ],
           ))
@@ -160,7 +160,7 @@ class Option extends StatelessWidget {
                 _notificiationQuestion.correctAns) {
           return Colors.red.withOpacity(0.25);
         } else {
-          return Vx.gray300;
+          return Vx.gray300.withOpacity(0.25);
         }
       }
       return Vx.gray700;
@@ -317,14 +317,14 @@ class _NotificiationQuestion extends ChangeNotifier {
     required BuildContext context
   }) {
     _currentIndex++;
-    if (_currentIndex < questionLength) {
+    if (_currentIndex-1 < questionLength) {
       _isAnswered = false;
       _pageController.nextPage(
           duration: Duration(milliseconds: 500), curve: Curves.easeIn);
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         notifyListeners();
       });
-    } else if (_currentIndex >= questionLength) {
+    } else if (_currentIndex-1 >= questionLength) {
       Navigator.of(context).pop();
       //TODO: Navigation to Score Page
       notifyListeners();

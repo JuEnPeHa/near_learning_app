@@ -13,107 +13,116 @@ class Question {
 List<Question> testUno = [
   Question(
     id: 1,
-    question: "What is the capital of India?",
-    answer: 1,
-    options: ["New Delhi", "Mumbai", "Chennai", "Kolkata"],
+    question:
+        "¿Cual o cuales lenguajes de programación puedes usar para desarrollar en NEAR Protocol?",
+    answer: 2,
+    options: [
+      "RUST",
+      "AssemblyScript",
+      "Ambos",
+      "Ninguno",
+    ],
   ),
   Question(
     id: 2,
-    question: "Who is the president of India?",
-    answer: 3,
+    question: "¿A qué tipo de bytecode se compilan tus contratos en NEAR?",
+    answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "WASM",
+      "GNU Lightning",
+      ".NET Framework",
+      "Dalvik",
     ],
   ),
   Question(
     id: 3,
-    question: "Who is the prime minister of India?",
-    answer: 0,
+    question: "¿Qué clase de Blockchain es NEAR Protocol?",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Proof of Work:",
+      "Proof of Stake",
+      "Proof of Authority",
+      "Proof of Space & Proof of Time",
     ],
   ),
   Question(
     id: 4,
-    question: "Who is the current president of India?",
-    answer: 0,
+    question: "Dapplet, Overlay y contract son los componentes principales de ",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Modo de desarrollador",
+      "la estructura de la aplicación",
+      "De los frameworks",
+      "React",
     ],
   ),
   Question(
     id: 5,
-    question: "Who is the current prime minister of India?",
-    answer: 0,
+    question: "Tiempo entre generación de bloques en NEAR.",
+    answer: 2,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "15 segundos.",
+      "19 segundos.",
+      "1.15 segundos.",
+      "4.5 segundos.",
     ],
   ),
   Question(
     id: 6,
-    question: "Who is the current president of India?",
-    answer: 0,
+    question:
+        "Las aplicaciones en NEAR tienen dos partes distintas: un back-end y un front-end. El backend es …",
+    answer: 2,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Mainnet (Red Principal)",
+      "Testnet (Red de Pruebas)",
+      "Contratos inteligentes",
+      "Nodo Validador",
     ],
   ),
   Question(
     id: 7,
-    question: "Who is the current prime minister of India?",
-    answer: 0,
+    question:
+        "Todo el código de contrato se compila en WebAssembly y se implementa en la red para ejecutarse dentro de una _______",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Sandbox (Entorno de pruebas)",
+      "Máquina virtual compatible con Wasm",
+      "EVM",
+      "AVM",
     ],
   ),
   Question(
     id: 8,
-    question: "Who is the current president of India?",
+    question:
+        "Al igual que con cualquier ecosistema basado en blockchain, el protocolo NEAR se ejecuta en una colección de computadoras mantenidas públicamente llamadas _______",
     answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Nodos",
+      "Blockchain",
+      "Near Protocol",
+      "Servidores",
     ],
   ),
   Question(
     id: 9,
-    question: "Who is the current prime minister of India?",
-    answer: 0,
+    question: "Cada contrato inteligente en NEAR tiene su propio ____ asociado",
+    answer: 2,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Token",
+      "Billetera",
+      "Cuenta",
+      "Todas las anteriores",
     ],
   ),
   Question(
     id: 10,
-    question: "Who is the current president of India?",
+    question: "Cofundadores de NEAR Protocol:",
     answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Alex Skidanov e Illia Polosukhin",
+      "Vitalik Buterin y Robert Habermeier",
+      "Bram Cohen y Bill Gates",
+      "Silvio Micali y Elon Musk",
     ],
   ),
 ];
@@ -121,107 +130,115 @@ List<Question> testUno = [
 List<Question> testDos = [
   Question(
     id: 1,
-    question: "What is the capital of India?",
-    answer: 1,
-    options: ["New Delhi", "Mumbai", "Chennai", "Kolkata"],
+    question:
+        "¿Cuántas transacciones por segundo puede procesar NEAR Protocol?",
+    answer: 3,
+    options: [
+      "7 tps.",
+      "25 tps.",
+      "1000 tps.",
+      "100,000 tps.",
+    ],
   ),
   Question(
     id: 2,
-    question: "Who is the president of India?",
-    answer: 3,
+    question:
+        "Un simple contrato Near que se crea para un Dapplet puede ubicarse:",
+    answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "fuera del nodo",
+      "fuera del Dapplet",
+      "fuera del framework",
+      "Modo de desarrollador",
     ],
   ),
   Question(
     id: 3,
-    question: "Who is the prime minister of India?",
-    answer: 0,
+    question: "Los Contratos inteligentes son el _____ de su aplicación",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Front-desk",
+      "Back-end",
+      "Front-end",
+      "fuera del framework",
     ],
   ),
   Question(
     id: 4,
-    question: "Who is the current president of India?",
-    answer: 0,
+    question: "AssemblyScript no es recomendado para:",
+    answer: 2,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Aplicaciones de NFTs",
+      "Aplicaciones de Diseño ",
+      "Aplicaciones financieras",
+      "Front-end",
     ],
   ),
   Question(
     id: 5,
-    question: "Who is the current prime minister of India?",
-    answer: 0,
+    question: "Meta, Tick-tock, Uber, etc, nacieron en la ",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Web 1.0",
+      "Web 2.0",
+      "Web 3.0",
+      "Ref.finance",
     ],
   ),
   Question(
     id: 6,
-    question: "Who is the current president of India?",
+    question: "La Web3 tiene los siguientes principios básicos:",
     answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Componibilidad e Inteligencia artificial",
+      "Escalabilidad y centralización",
+      "Descentralización y seguimiento",
+      "Importables en sí mismos",
     ],
   ),
   Question(
     id: 7,
-    question: "Who is the current prime minister of India?",
-    answer: 0,
+    question: "El siguiente es un caso de uso de la Web3:",
+    answer: 2,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "NFTs",
+      "Organizaciones Autónomas Descentralizadas",
+      "Ambas",
+      "Ninguna",
     ],
   ),
   Question(
     id: 8,
-    question: "Who is the current president of India?",
-    answer: 0,
+    question:
+        "Una particularidad de Web3 es que puede conectarse a diferentes sitios web a través de ",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Correo electrónico",
+      "Billetera de criptomonedas",
+      "Con su cuenta Google",
+      "White paper",
     ],
   ),
   Question(
     id: 9,
-    question: "Who is the current prime minister of India?",
+    question: "En Berry Farm, éstos provienen del Contrato de Berry Club:",
     answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      " Aguacates y bananas ",
+      "Near y Bananas ",
+      "Aguacates y Near",
+      "La calidad del proceso",
     ],
   ),
   Question(
     id: 10,
-    question: "Who is the current president of India?",
-    answer: 0,
+    question: "La quema de Tokens, controla:",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Los tokens de las wallets",
+      "El suministro circulante",
+      "Los tokens en los nodos",
+      "Web 2.0",
     ],
   ),
 ];
@@ -229,107 +246,114 @@ List<Question> testDos = [
 List<Question> testTres = [
   Question(
     id: 1,
-    question: "What is the capital of India?",
+    question: "La tercera generación de blockchain, resuelve principalmente:",
     answer: 1,
-    options: ["New Delhi", "Mumbai", "Chennai", "Kolkata"],
+    options: [
+      "Delegar tareas",
+      "La escalabilidad",
+      "Ser un sistema de pago",
+      "Diseños",
+    ],
   ),
   Question(
     id: 2,
-    question: "Who is the president of India?",
-    answer: 3,
+    question: "¿Qué es el Sharding?",
+    answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Una técnica de escalabilidad",
+      "Un billetera virtual",
+      "Un contrato inteligente",
+      "Near Development",
     ],
   ),
   Question(
     id: 3,
-    question: "Who is the prime minister of India?",
+    question: "¿Cómo se llama el mecanismo de consenso de NEAR?",
     answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Staking",
+      "Minting",
+      "Nightshade",
+      "la presentación",
     ],
   ),
   Question(
     id: 4,
-    question: "Who is the current president of India?",
-    answer: 0,
+    question: "¿Cuánto dura un TeraGas o TGas?",
+    answer: 2,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "1 segundo de tiempo de cómputo",
+      "1 microsegundo de tiempo de cómputo",
+      "1 milisegundo de tiempo de cómputo",
+      "Near Wallet",
     ],
   ),
   Question(
     id: 5,
-    question: "Who is the current prime minister of India?",
+    question:
+        "El contenedor que proporciona seguridad mejorada para el lenguaje de programación Rust para contratos de alto valor es",
     answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Rust - Near-sdk-rs",
+      "Rust - Near-skd-rs",
+      "Rust - Near-srk-rs",
+      "Octopus",
     ],
   ),
   Question(
     id: 6,
-    question: "Who is the current president of India?",
-    answer: 0,
+    question: "¿Dónde se compila el código de contrato?",
+    answer: 2,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "AssemblyScript",
+      "TypeScript",
+      "WebAssembly",
+      "Los nodos",
     ],
   ),
   Question(
     id: 7,
-    question: "Who is the current prime minister of India?",
-    answer: 0,
+    question:
+        "Una de las siguientes es una razón para ejecutar un nodo propio:",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Para unirte a un bloque y buscar transacciones ejecutadas en la blockchain",
+      "Para unirte a una red como validador ejecutando un “nodo validador”",
+      "Para unirte a un nodo e implementar tu lenguaje de nodos",
+      "Swam, IPFS y SIA",
     ],
   ),
   Question(
     id: 8,
-    question: "Who is the current president of India?",
-    answer: 0,
+    question: "Al ejecutar el código “Guest Book”",
+    answer: 2,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Se ejecuta un nodo de programación en TGas y visitas otros nodos",
+      "Se ejecuta el código de la billetera de Near y visitas los usuarios",
+      "Para iniciar sesión con Near y agregar un mensaje al libro de visitas",
+      "NPunks",
     ],
   ),
   Question(
     id: 9,
-    question: "Who is the current prime minister of India?",
-    answer: 0,
+    question: "¿Cuál de los siguientes no incluye NFTs?",
+    answer: 1,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Hip Hop Heads - Paras - Mintbase",
+      "Overlay - NEARnauts",
+      "NearPunks - NEAR Mistfits - NEAR Wallet",
+      "Web 3.0",
     ],
   ),
   Question(
     id: 10,
-    question: "Who is the current president of India?",
+    question: "¿Qué rol roles pueden asumir sus tokens? ",
     answer: 0,
     options: [
-      "Narendra Modi",
-      "Rahul Gandhi",
-      "Sonia Gandhi",
-      "Manmohan Singh"
+      "Pagos dentro y fuera del protocolo",
+      "Mapear componentes",
+      "Diseño de Testnet",
+      "Verano 2019",
     ],
   ),
 ];

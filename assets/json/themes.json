@@ -7,55 +7,55 @@
     {
         "title": "Accounts, keys and contracts",
         "color": "Color(0x12341678)",
-        "subtitles": ["Account", "Access Keys", "Contracts"],
-        "keys": ["b01", "b02", "b03"]
+        "subtitles": ["Account", "Access Keys, and Contracts"],
+        "keys": ["b01", "b02"]
     },
     {
-        "title": "Titulo de ejemplo 3",
+        "title": "Data Storage / Collections",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
-        "keys": ["c01", "c02", "c03"]
+        "subtitles": ["AssemblyScript Collection Types", "Rust Collection Types"],
+        "keys": ["c01", "c02"]
     },
     {
-        "title": "Titulo de ejemplo 4",
+        "title": "Storage Staking",
         "color": "Color(0x80FFFFFF)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "subtitles": ["Storage Staking", "How much does it cost?", "Store data off-chain"],
         "keys": ["d01", "d02", "d03"]
     },
     {
-        "title": "Titulo de ejemplo 5",
+        "title": "Decentralized Storage Solutions",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "subtitles": ["Arweave", "IPFS", "Sia"],
         "keys": ["e01", "e02", "e03"]
     },
     {
-        "title": "Titulo de ejemplo 6",
+        "title": "Introduction",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "subtitles": ["Introduction", "Thinking in gas", "How do I buy gas?"],
         "keys": ["f01", "f02", "f03"]
     },
     {
-        "title": "Titulo de ejemplo 7",
+        "title": "NEAR-API-JS Cookbook",
         "color": "Color(0x14345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "subtitles": ["Create Account", "Transactions", "Utils"],
         "keys": ["g01", "g02", "g03"]
     },
     {
-        "title": "Titulo de ejemplo 8",
+        "title": "NEAR RUST SDK",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "subtitles": ["Getting Started", "near_bindgen", "Collections"],
         "keys": ["h01", "h02", "h03"]
     },
     {
-        "title": "Titulo de ejemplo 9",
+        "title": "AssemblyScript",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "subtitles": ["Quickstart", "State and Data", "AssemblyScript Tips"],
         "keys": ["i01", "i02", "i03"]
     },
     {
-        "title": "Titulo de ejemplo 10",
+        "title": "RPC Endpoints",
         "color": "Color(0x12345678)",
-        "subtitles": ["Subtitle 1", "Subtitle 2", "Subtitle 3"],
+        "subtitles": ["Setup", "Access Keys", "Accounts / Contracts"],
         "keys": ["j01", "j02", "j03"]
     }
 ]

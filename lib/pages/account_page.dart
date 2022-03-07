@@ -39,14 +39,17 @@ class AccountPage extends StatelessWidget {
         body: ListView(
             padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
             children: [
+              SizedBox(height: 18),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'User Name'),
                 controller: _usernameController,
               ),
+              SizedBox(height: 12),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'First Name'),
                 controller: _firstnameController,
               ),
+              SizedBox(height: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -77,6 +80,7 @@ class AccountPage extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 12),
               ElevatedButton(
                   onPressed: () async {
                     await authNotifier.updateProfile(
@@ -88,6 +92,7 @@ class AccountPage extends StatelessWidget {
                     );
                   },
                   child: Text("Save")),
+              Spacer(),
             ]),
       ),
     );
