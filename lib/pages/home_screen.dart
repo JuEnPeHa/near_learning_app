@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:near_learning_app/hive_models/hive_data.dart';
+import 'package:near_learning_app/models/user_model.dart';
 import 'package:near_learning_app/pages/pages.dart';
 import 'package:flutter/services.dart';
 import 'package:near_learning_app/providers/authentication_notifier.dart';
@@ -17,7 +19,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  static int selectedIndex = 0;
+  final hiveData = HiveData();
+  late UserApp usar;
+
+  @override
+  void initState() {
+    usar = hiveData.getUserAppSync();
+    super.initState();
+  }
+
+  int selectedIndex = 0;
 
   static final List<Color> _bgColor = [
     Color(0xFF8BDB81),
@@ -37,15 +48,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //var user = ModalRoute.of(context)!.settings.arguments as UserApp;
     final AuthenticationNotifier authenticationNotifier =
         Provider.of<AuthenticationNotifier>(context, listen: false);
     List<Widget> _screens() => [
-          HomePage(),
-          HomePage(),
+          HomePage(user: usar),
+          HomePage(user: usar),
           SnippetsPage(),
           ThemesPage(),
           ProfilePage(
             authenticationNotifier: authenticationNotifier,
+            user: usar,
           )
         ];
 

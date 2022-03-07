@@ -35,13 +35,13 @@ final itemsFirst = [
 
 final itemsSecond = [
   DrawerItem(
-      title: 'NEAR Forum',
+      title: 'NEAR Academy',
       icon: Icons.person_add,
-      url: "https://gov.near.org/"),
+      url: "https://near.academy/"),
   DrawerItem(
-      title: 'NFT Gallery',
+      title: 'NEAR in minutes',
       icon: Icons.browse_gallery,
-      url: "https://juenpeha.github.io/flutter_web_nft_gallery/#/"),
+      url: "https://near-in-minutes.com/"),
 ];
 
 extension ShowSnackBar on BuildContext {

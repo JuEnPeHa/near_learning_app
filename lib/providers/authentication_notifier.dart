@@ -96,4 +96,16 @@ class AuthenticationNotifier extends ChangeNotifier {
       print(e);
     }
   }
+
+  Future<void> shouldOnboardingBeShown({
+    required BuildContext context,
+  }) async {
+    try {
+      await _authenticationService.shouldOnboardingBeShown(
+        context: context,
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
 }

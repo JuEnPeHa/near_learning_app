@@ -19,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(UserAppAdapter());
+  await Hive.openBox<UserApp>('user');
   // await Supabase.initialize(
   //   url: YOUR_SUPABASE_URL,
   //   anonKey: YOUR_SUPABASE_ANON_KEY,
@@ -39,7 +40,6 @@ class AppState extends StatelessWidget {
           create: (_) => UserProvider(),
           lazy: false,
         ),
-        
       ],
       child: const MyApp(),
     );
@@ -54,8 +54,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
-
   @override
   Widget build(BuildContext context) {
     precacheImage(
@@ -74,11 +72,11 @@ class _MyAppState extends State<MyApp> {
       // routes: AppRoutes.getAppRoutes(),
       // initialRoute: AppRoutes.initialRoute,
       // onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: 'root',
+      initialRoute: 'test',
       routes: <String, WidgetBuilder>{
         'root': (BuildContext context) => const SplashPage(),
         //'login': (BuildContext context) => const LoginPage2(),
-        'home': (BuildContext context) => const HomeScreen(),
+        'home': (BuildContext context) => HomeScreen(),
         'account': (BuildContext context) => AccountPage(),
         //'themes': (BuildContext context) => const ThemesPage(),
         'auth': (BuildContext context) => const AuthScreen(),
@@ -87,6 +85,7 @@ class _MyAppState extends State<MyApp> {
               child: a01(),
               title: "Example",
             ),
+        'test': (BuildContext context) => TestsPage(),
       },
     );
   }

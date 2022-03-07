@@ -3,21 +3,28 @@ import 'package:near_learning_app/models/user_model.dart';
 
 class HiveData {
   Future<int> saveUserApp({required UserApp user}) async {
-    final box = await Hive.openBox<UserApp>('user');
-
-    return box.add(user);
+    final box = Hive.box<UserApp>('user');
+    if (box.isNotEmpty) {
+      box.clear();
+      await Future.delayed(Duration(seconds: 3));
+    }
+    return await box.add(user);
   }
 
   Future<UserApp?> getUserApp() async {
-    final box = await Hive.openBox<UserApp>('user');
-    print(box.get('user'));
-    return box.get('user');
+    final box = await Hive.box<UserApp>('user');
+    print("BOXUSER" + box.getAt(0).toString());
+    return box.getAt(0);
+  }
+
+  UserApp getUserAppSync() {
+    final box = Hive.box<UserApp>('user');
+    return box.getAt(0)!;
   }
 
   Future<UserApp?> get userApp async {
-    final Box<UserApp> box = await Hive.openBox<UserApp>('user');
+    final Box<UserApp> box = await Hive.box<UserApp>('user');
     print(box.get('user'));
-
     return box.get('user');
   }
 
@@ -33,7 +40,7 @@ class HiveData {
     String? lastReadPath,
     String? lastReadSyncedPath,
   }) async {
-    final box = await Hive.openBox<UserApp>('user');
+    final box = await Hive.box<UserApp>('user');
     final user = box.get('user');
     if (user != null) {
       if (name != null) {
@@ -86,14 +93,16 @@ class HiveData {
     }
   }
 
-  Future<void> deleteUserApp() async {
-    final box = await Hive.openBox<UserApp>('user');
+  void deleteUserApp() {
+    final box = Hive.box<UserApp>('user');
     box.deleteAt(0);
   }
 
-  Future<void> deleteAll() async {
-    final box = await Hive.openBox<UserApp>('user');
+  void deleteAll() {
+    final box = Hive.box<UserApp>('user');
+    final onb = Hive.box<int>('onboarding');
     box.clear();
+    onb.clear();
   }
 
   Future<bool> isFirstTime2() async {
@@ -107,7 +116,7 @@ class HiveData {
 
   Future<void> setFirstTime() async {
     final box = await Hive.openBox<int>('onboarding');
-    box.put('onboarding', 1);
+    box.add(1);
   }
 
   Future<bool> get isFirstTime async {

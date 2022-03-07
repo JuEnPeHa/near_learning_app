@@ -15,38 +15,21 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
-  late final EncryptedSharedPreferences prefs;
+  //late final EncryptedSharedPreferences prefs;
   late final AnimationController animationController;
-  late HiveData hiveData;
   late final AuthenticationNotifier authenticationNotifier;
-
-  //late bool isFirstTime;
-
-  Future<void> _nextPage() async {
-    await Future.delayed(const Duration(milliseconds: 5500));
-    hiveData.isFirstTime.then((value) {
-      print(value);
-      if (value == true) {
-        Navigator.pushReplacementNamed(context, 'onboarding');
-      } else {
-        Navigator.pushReplacementNamed(context, 'onboarding');
-        authenticationNotifier.recoverSession(context: context);
-      }
-    });
-  }
 
   @override
   void initState() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       authenticationNotifier =
           Provider.of<AuthenticationNotifier>(context, listen: false);
+      authenticationNotifier.shouldOnboardingBeShown(context: context);
     });
     //recoverSupabaseSession();
     animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 15));
-    hiveData = HiveData();
-    animationController.repeat();
-    _nextPage();
+    animationController.forward();
     super.initState();
   }
 

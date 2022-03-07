@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:near_learning_app/models/user_model.dart';
 import 'package:near_learning_app/providers/authentication_notifier.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ProfilePage extends StatefulWidget {
   final AuthenticationNotifier authenticationNotifier;
+  final UserApp user;
 
   ProfilePage({
-    Key? key, required this.authenticationNotifier,
+    Key? key,
+    required this.authenticationNotifier,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -26,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(
             height: 20,
           ),
-          userTile(),
+          userTile(widget.user.name),
           divider(),
           colorTiles(),
           divider(),
@@ -38,16 +42,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 lineWidth: 10,
               )),
           divider(),
-          bwTiles((){}, () => widget.authenticationNotifier.logout(context: context)),
+          bwTiles(() {},
+              () => widget.authenticationNotifier.logout(context: context)),
         ],
       ),
     );
   }
 }
 
-Widget userTile() {
-  return const ListTile(
-    leading: CircleAvatar(
+Widget userTile(String name) {
+  return ListTile(
+    leading: const CircleAvatar(
       radius: 50,
       backgroundColor: Colors.blue,
       child: Icon(
@@ -56,8 +61,8 @@ Widget userTile() {
       ),
     ),
     title: Text(
-      "\$\{user.FirstName\} + \$\{user.LastName\}",
-      style: TextStyle(fontWeight: FontWeight.bold),
+      name,
+      style: const TextStyle(fontWeight: FontWeight.bold),
     ),
   );
 }
@@ -143,21 +148,47 @@ class CustomCircularIndicator extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: CircularPercentIndicator(
-            radius: radius / 4,
-            lineWidth: lineWidth,
-            percent: getChapterCompleted() / 100,
-            animation: true,
-            circularStrokeCap: CircularStrokeCap.round,
-            center: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _percentText(context),
-                _subtitleText(context, "Capitulos Completados")
-              ],
-            ),
-            backgroundColor: Colors.grey[300]!,
-            progressColor: Theme.of(context).primaryColor.withBlue(100),
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Center(
+                child: CircularPercentIndicator(
+                  radius: radius / 4,
+                  lineWidth: lineWidth,
+                  percent: getChapterCompleted() / 100,
+                  animation: true,
+                  circularStrokeCap: CircularStrokeCap.round,
+                  center: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _percentText(context),
+                      _subtitleText(context, "Capitulos Completados")
+                    ],
+                  ),
+                  backgroundColor: Colors.grey[300]!,
+                  progressColor: Theme.of(context).primaryColor.withBlue(100),
+                ),
+              ),
+              Center(
+                child: Text(
+                  "soon",
+                  style: TextStyle(
+                      fontSize: radius / 4,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
+                ),
+              ),
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(radius / 2),
+                  child: Container(
+                    color: Colors.black87,
+                    height: radius / 2,
+                    width: radius / 1,
+                  ),
+                ),
+              )
+            ],
           ),
         ),
         const SizedBox(

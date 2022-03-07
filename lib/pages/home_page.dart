@@ -1,11 +1,18 @@
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:near_learning_app/hive_models/hive_data.dart';
 import 'package:near_learning_app/models/models.dart';
+import 'package:near_learning_app/models/user_model.dart';
+import 'package:near_learning_app/pages/text_lesson_page.dart';
+import 'package:near_learning_app/utils/themes.dart';
 import 'package:near_learning_app/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
+  final UserApp user;
+
   const HomePage({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -43,6 +50,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   ];
 
   bool _isOpen = false;
+
+  @override
+  void initState() {
+//    userBox = Hive.box('user');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +99,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           Container(
             margin: const EdgeInsets.only(left: 20),
             child: Text(
-              "Hola \$\{user.firstName\}, tienes \$\{user.actualPoints\}",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              "Hola ${widget.user.name}" /*tienes ${widget.user.userLevel} puntos*/,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
           const SizedBox(
@@ -139,12 +152,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               flex: 3,
                               child: InkWell(
                                 onTap: () {
-                                  print("InkWell 1");
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    content: Text("Ejemplo"),
-                                    behavior: SnackBarBehavior.floating,
-                                  ));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => TextLesson(
+                                              child: a01(),
+                                              title: "First things first")));
                                 },
                                 customBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),
@@ -159,7 +172,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         padding: const EdgeInsets.all(12.0),
                                         child: Center(
                                             child: Text(
-                                          "Quis pariatur dolor ut nostrud ipsum. Proident irure eu sit est nulla aliqua velit. Incididunt mollit commodo proident deserunt cupidatat fugiat non fugiat minim magna magna nisi culpa dolore.",
+                                          "Build and deploy a smart contract to NEAR protocol blockchain.",
                                           textAlign: TextAlign.justify,
                                         )),
                                       ),
@@ -178,7 +191,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               flex: 2,
                               child: InkWell(
                                 onTap: () {
-                                  print("InkWell 2");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => TextLesson(
+                                              child: a02(),
+                                              title: "Overview")));
                                 },
                                 customBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),
@@ -193,7 +211,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         padding: const EdgeInsets.all(12.0),
                                         child: Center(
                                             child: Text(
-                                          "Quis pariatur dolor ut nostrud ipsum. Proident irure eu sit est nulla aliqua velit. Incididunt mollit commodo proident deserunt cupidatat fugiat non fugiat minim magna magna nisi culpa dolore.",
+                                          "Let’s have a closer look at the content of our project.",
                                           textAlign: TextAlign.justify,
                                         )),
                                       ),
@@ -217,10 +235,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(25),
                           ),
                           onTap: () {
-                            print("InkWell 3");
-                          },
-                          onDoubleTap: () {
-                            print("InkWell double tap 3");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TextLesson(
+                                        child: a03(), title: "Building")));
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -237,7 +256,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.all(12.0),
                                   child: Center(
                                       child: Text(
-                                    "Quis pariatur dolor ut nostrud ipsum. Proident irure eu sit est nulla aliqua velit. Incididunt mollit commodo proident deserunt cupidatat fugiat non fugiat minim magna magna nisi culpa dolore.",
+                                    "To deploy our contract we will use NEAR CLI. Take a look at commands here. After we’re going to deploy our contracts to testnet using two different ways.",
                                     textAlign: TextAlign.justify,
                                   )),
                                 ),
@@ -271,7 +290,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   //         ),
                   //       );
                   //     }, separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 10,),),
-                  Text("ListView 2"),
+                  Column(
+                    children: [
+                      Text("ListView 2"),
+                      ElevatedButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(widget.user.name),
+                            behavior: SnackBarBehavior.floating,
+                          ));
+                        },
+                        child: Text("ElevatedButton"),
+                      ),
+                    ],
+                  ),
                   Text("ListView 3"),
                 ]),
           ),

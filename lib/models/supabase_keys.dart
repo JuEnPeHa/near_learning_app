@@ -29,7 +29,8 @@ class AuthenticationService {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Signup successful : $userEmail"),
       ));
-      Navigator.pushReplacementNamed(context, 'home');
+      Navigator.pushReplacementNamed(context, 'account',
+          arguments: response.data!.user);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Signup failed : ${response.error!.message}"),
@@ -54,7 +55,8 @@ class AuthenticationService {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Login successful : $userEmail"),
       ));
-      Navigator.pushReplacementNamed(context, 'home');
+      Navigator.pushReplacementNamed(context, 'account',
+          arguments: response.data!.user);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Login failed : ${response.error!.message}"),
@@ -70,11 +72,11 @@ class AuthenticationService {
     GotrueResponse response = await SupabaseKeys.supabaseClient.auth.signOut();
     if (response.error == null) {
       await prefs.clear();
-      await hiveData.deleteUserApp();
+      hiveData.deleteAll();
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Logout successful"),
       ));
-      Navigator.pushReplacementNamed(context, 'login');
+      Navigator.pushReplacementNamed(context, 'auth');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Logout failed : ${response.error!.message}"),
@@ -84,28 +86,34 @@ class AuthenticationService {
 
   Future<String?> recoverSession({
     required BuildContext context,
+    HiveData? hiveDataC,
   }) async {
-    final hiveData = HiveData();
+    final hiveData = hiveDataC ?? HiveData();
     final EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
     final session = await prefs.getString("token");
     GotrueSessionResponse response =
         await SupabaseKeys.supabaseClient.auth.recoverSession(session);
     if (response.error == null) {
       await prefs.setString("token", response.data!.persistSessionString);
-      final user = await hiveData.getUserApp();
-      if (user != null) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Recover session successful"),
-        ));
-        Navigator.pushReplacementNamed(context, 'home', arguments: user);
-      } else if (user == null) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Recover session successful"),
-        ));
-        Navigator.pushReplacementNamed(context, 'account',
-            arguments: response.data!.user!);
-      }
+      hiveData.getUserApp().then((value) {
+        final user = value;
+        if (user != null) {
+          //await Future.delayed(Duration(milliseconds: 500));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Recover session successful"),
+          ));
+          Navigator.pushReplacementNamed(context, 'home');
+        } else if (user == null) {
+          //await Future.delayed(Duration(milliseconds: 500));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Recover session successful"),
+          ));
+          Navigator.pushReplacementNamed(context, 'account',
+              arguments: response.data!.user!);
+        }
+      });
     } else {
+      await Future.delayed(Duration(milliseconds: 500));
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Recover session failed : ${response.error!.message}"),
       ));
@@ -143,9 +151,14 @@ class AuthenticationService {
       profile.insert(3, nearAccount);
       return profile;
     } else if (data == null) {
-      await SupabaseKeys.supabaseClient.from('profiles').insert({
-        'id': userId,
-      }).execute().then((value) => print(value.error));
+      await SupabaseKeys.supabaseClient
+          .from('profiles')
+          .insert({
+            'id': userId,
+            'updated_at': DateTime.now().toIso8601String(),
+          })
+          .execute()
+          .then((value) => print(value.error));
       return profile;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -167,14 +180,14 @@ class AuthenticationService {
     final hiveData = HiveData();
     final updates = avatarUrl != null
         ? {
-          'id': userId,
+            'id': userId,
             'username': username,
             'avatar_url': avatarUrl,
             'first_name': firstName,
             'updated_at': DateTime.now().toIso8601String(),
           }
         : {
-          'id': userId,
+            'id': userId,
             'username': username,
             'first_name': firstName,
             'updated_at': DateTime.now().toIso8601String(),
@@ -189,7 +202,7 @@ class AuthenticationService {
         content: Text("Update profile failed : ${error.message}"),
       ));
     } else {
-      hiveData.setFirstTime();
+      await hiveData.setFirstTime();
       final UserApp user = UserApp(
         email: email,
         favoriteThemes: [],
@@ -201,12 +214,28 @@ class AuthenticationService {
         userLastSyncedLevel: 0,
         userLevel: 0,
       );
-      hiveData.saveUserApp(user: user).then((value) =>
-          Navigator.popAndPushNamed(context, 'home', arguments: user));
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Update profile successful"),
       ));
+      await hiveData
+          .saveUserApp(user: user)
+          .then((value) => Navigator.popAndPushNamed(context, 'home'));
     }
+  }
+
+  Future<void> shouldOnboardingBeShown({
+    required BuildContext context,
+  }) async {
+    final hiveData = HiveData();
+    hiveData.isFirstTime.then((value) async {
+      if (value) {
+        await Future.delayed(Duration(seconds: 1));
+        Navigator.pushReplacementNamed(context, 'onboarding');
+      } else {
+        await Future.delayed(Duration(seconds: 1));
+        recoverSession(context: context, hiveDataC: hiveData);
+      }
+    });
   }
 }
 //final hiveData = HiveData();

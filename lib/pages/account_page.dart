@@ -21,8 +21,8 @@ class AccountPage extends StatelessWidget {
       authNotifier.getProfile(context: context, userId: user.id).then((value) {
         profile = value ?? [];
         if (profile.length > 0) {
-          _usernameController.text = profile[0] ?? "";
-          _firstnameController.text = profile[1] ?? "";
+          _usernameController.text = profile[0];
+          _firstnameController.text = profile[1];
         }
         print(value.toString() + value.toString() + value.toString());
       });
