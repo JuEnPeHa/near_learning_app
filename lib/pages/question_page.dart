@@ -27,57 +27,58 @@ class QuestionPage extends StatelessWidget {
         Provider.of<_NotificiationQuestion>(context);
     _notificiationQuestion.questionLength = test.length;
     _notificiationQuestion.pageController = PageController();
-    _notificiationQuestion.animation = Tween(begin: 0.0, end: 1.0)
-        .animate(_notificiationQuestion.animationController);
-    return Stack(
-      children: [
-        SafeArea(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: CustomProgressBar(),
-            ),
-            SizedBox(height: 16),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Text.rich(
-                TextSpan(
-                  text: "Question ${_notificiationQuestion.currentIndex}",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4
-                      ?.copyWith(color: CupertinoColors.secondaryLabel),
-                  children: [
-                    TextSpan(
-                      text: "/${_notificiationQuestion.questionLength}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4
-                          ?.copyWith(color: CupertinoColors.secondaryLabel),
-                    ),
-                  ],
+    return Scaffold(
+      body: Stack(
+        children: [
+          SafeArea(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Container(), //CustomProgressBar(),
+              ),
+              SizedBox(height: 16),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text.rich(
+                  TextSpan(
+                    text: "Question ${_notificiationQuestion.currentIndex}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        ?.copyWith(color: CupertinoColors.secondaryLabel),
+                    children: [
+                      TextSpan(
+                        text: "/${_notificiationQuestion.questionLength}",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline4
+                            ?.copyWith(color: CupertinoColors.secondaryLabel),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Divider(
-              thickness: 2,
-              color: Colors.black,
-            ),
-            SizedBox(height: 16),
-            Expanded(
-                child: PageView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _notificiationQuestion.pageController,
-                    onPageChanged: _notificiationQuestion.updateQuestionNumber,
-                    itemCount: _notificiationQuestion.questionLength,
-                    itemBuilder: (context, index) => QuestionCard(
-                          question: test[index],
-                        )))
-          ],
-        ))
-      ],
+              Divider(
+                thickness: 2,
+                color: Colors.black,
+              ),
+              SizedBox(height: 16),
+              Expanded(
+                  child: PageView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      controller: _notificiationQuestion.pageController,
+                      onPageChanged:
+                          _notificiationQuestion.updateQuestionNumber,
+                      itemCount: _notificiationQuestion.questionLength,
+                      itemBuilder: (context, index) => QuestionCard(
+                            question: test[index],
+                          )))
+            ],
+          ))
+        ],
+      ),
     );
   }
 }
@@ -151,9 +152,7 @@ class Option extends StatelessWidget {
         Provider.of<_NotificiationQuestion>(context);
     Color getRightColor() {
       if (_notificiationQuestion.isAnswered) {
-        if (index == _notificiationQuestion.selectedAns &&
-            _notificiationQuestion.selectedAns !=
-                _notificiationQuestion.correctAns) {
+        if (index == _notificiationQuestion.correctAns) {
           return Colors.green;
         } else if (index == _notificiationQuestion.selectedAns &&
             _notificiationQuestion.selectedAns !=
@@ -168,6 +167,10 @@ class Option extends StatelessWidget {
 
     Icon? getRightIcon() {
       if (getRightColor() == Vx.gray300 || getRightColor() == Vx.gray700) {
+       
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+        _notificiationQuestion.notifyListeners();
+      });
         return null;
       } else {
         return Icon(
@@ -213,67 +216,8 @@ class Option extends StatelessWidget {
   }
 }
 
-class CustomProgressBar extends StatefulWidget with SingleTickerProviderStateMixin<StatefulWidget> {
-   CustomProgressBar({Key? key}) : super(key: key);
-
-  @override
-  State<CustomProgressBar> createState() => _CustomProgressBarState();
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-
-  @override
-  // TODO: implement context
-  BuildContext get context => throw UnimplementedError();
-
-  @override
-  void deactivate() {
-    // TODO: implement deactivate
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-  }
-
-  @override
-  void didUpdateWidget(covariant StatefulWidget oldWidget) {
-    // TODO: implement didUpdateWidget
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-  }
-
-  @override
-  // TODO: implement mounted
-  bool get mounted => throw UnimplementedError();
-
-  @override
-  void reassemble() {
-    // TODO: implement reassemble
-  }
-
-  @override
-  void setState(VoidCallback fn) {
-    // TODO: implement setState
-  }
-
-  @override
-  // TODO: implement widget
-  StatefulWidget get widget => throw UnimplementedError();
-}
-
-class _CustomProgressBarState extends State<CustomProgressBar> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+class CustomProgressBar extends StatelessWidget {
+  CustomProgressBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final _notificationQuestion = Provider.of<_NotificiationQuestion>(context);
@@ -318,28 +262,19 @@ class _CustomProgressBarState extends State<CustomProgressBar> {
       ),
     );
   }
-} //controller.animation.value * 60
+}
 
 class _NotificiationQuestion extends ChangeNotifier {
-  late AnimationController _animationController;
-  AnimationController get animationController => _animationController;
-  set animationController(AnimationController controller) {
-    _animationController = controller;
-    notifyListeners();
-  }
-
   late PageController _pageController;
   PageController get pageController => _pageController;
   set pageController(PageController controller) {
     _pageController = controller;
-    notifyListeners();
   }
 
   late Animation _animation;
   Animation get animation => _animation;
   set animation(Animation animation) {
     _animation = animation;
-    notifyListeners();
   }
 
   bool _isAnswered = false;
@@ -356,32 +291,26 @@ class _NotificiationQuestion extends ChangeNotifier {
   int? get selectedAns => _selectedAns;
   set conteoDeRespuestasCorrectas(int value) {
     _conteoDeRespuestasCorrectas = value;
-    notifyListeners();
   }
 
   set isAnswered(bool value) {
     _isAnswered = value;
-    notifyListeners();
   }
 
   set currentIndex(int value) {
     _currentIndex = value;
-    notifyListeners();
   }
 
   set correctAns(int value) {
     _correctAns = value;
-    notifyListeners();
   }
 
   set questionLength(int value) {
     _questionLength = value;
-    notifyListeners();
   }
 
   set selectedAns(int? ans) {
     _selectedAns = ans;
-    notifyListeners();
   }
 
   void nextQuestion() {
@@ -390,9 +319,9 @@ class _NotificiationQuestion extends ChangeNotifier {
       _isAnswered = false;
       _pageController.nextPage(
           duration: Duration(milliseconds: 500), curve: Curves.easeIn);
-      _animationController.reset();
-      _animationController.forward().whenComplete(() => nextQuestion());
-      notifyListeners();
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        notifyListeners();
+      });
     } else if (_currentIndex >= questionLength) {
       //TODO: Navigation to Score Page
       notifyListeners();
@@ -409,8 +338,6 @@ class _NotificiationQuestion extends ChangeNotifier {
     if (choosenAnswer == question.answer) {
       _conteoDeRespuestasCorrectas++;
     }
-    _animationController.stop();
-    notifyListeners();
     print("correctAnsCount: $_conteoDeRespuestasCorrectas");
     Future.delayed(Duration(seconds: 1), () {
       nextQuestion();
