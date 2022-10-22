@@ -30,8 +30,8 @@ class _AuthScreenState extends State<AuthScreen> {
     super.dispose();
   }
 
-  var textLogin = "Don't have an account yet?";
-  var textRegister = "Already have an account?";
+  final String textLogin = "Don't have an account yet?";
+  final String textRegister = "Already have an account?";
   bool isLogin = true;
 
   @override

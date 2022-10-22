@@ -6,7 +6,6 @@ import 'package:near_learning_app/models/models.dart';
 import 'package:near_learning_app/providers/authentication_notifier.dart';
 import 'package:near_learning_app/utils/constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:nil/nil.dart';
 import 'package:provider/provider.dart';
 
 Future<List<Onboarding>> getOnboardingData() async {

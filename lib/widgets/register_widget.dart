@@ -19,10 +19,8 @@ class RegisterWidget extends StatelessWidget {
             SizedBox(
               height: 52,
             ),
-            CircleAvatar(
-              backgroundColor: Colors.white54,
-              radius: 80,
-              child: Image.asset('assets/logos_app/complete_logo_column.png'),
+            CircleAvatarNEARLearningAppLogoWidget(
+              radius: 50,
             ),
             const SizedBox(
               height: 10,

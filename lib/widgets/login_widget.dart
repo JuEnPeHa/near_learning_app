@@ -7,8 +7,7 @@ class LoginWidget extends StatelessWidget {
     required this.context,
   }) : super(key: key);
   final BuildContext context;
-  ImageProvider logoColumn =
-      const AssetImage('assets/logos_app/complete_logo_column.png');
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,11 +20,7 @@ class LoginWidget extends StatelessWidget {
             const SizedBox(
               height: 52,
             ),
-            CircleAvatar(
-              backgroundColor: Colors.white54,
-              radius: 100,
-              child: Image(image: logoColumn),
-            ),
+            CircleAvatarNEARLearningAppLogoWidget(),
             const LoginForm(),
             const Spacer(),
             // SizedBox(
@@ -53,6 +48,29 @@ class LoginWidget extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CircleAvatarNEARLearningAppLogoWidget extends StatelessWidget {
+  const CircleAvatarNEARLearningAppLogoWidget({
+    super.key,
+    this.radius = 100,
+  });
+
+  final double radius;
+  final ImageProvider<Object> logoColumn =
+      const AssetImage('assets/logos_app/complete_logo_column.png');
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: 'CircleAvatarNEARLearningAppLogoWidget',
+      child: CircleAvatar(
+        backgroundColor: Colors.white54,
+        radius: radius,
+        child: Image(image: logoColumn),
       ),
     );
   }
