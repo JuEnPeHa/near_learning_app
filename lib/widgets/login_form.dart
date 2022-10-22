@@ -47,8 +47,6 @@ class _LoginFormState extends State<LoginForm> {
     print(isOk);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final AuthenticationNotifier authenticationNotifier =
@@ -99,8 +97,7 @@ class _LoginFormState extends State<LoginForm> {
                           ? Icon(Icons.lock)
                           : Icon(Icons.lock_open)),
                   validator: (text) {
-                    SchedulerBinding.instance
-                        ?.addPostFrameCallback((timeStamp) {
+                    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
                       //para que se ejecute despues de que se haya renderizado el widget
                       _checkPassword(text!);
                     });
@@ -118,7 +115,9 @@ class _LoginFormState extends State<LoginForm> {
                       : () async {
                           FocusScope.of(context).unfocus();
                           bool isOk = _formLoginKey.currentState!.validate();
-                          String? email = formData['email']?.replaceAll(" ", "").toLowerCase();
+                          String? email = formData['email']
+                              ?.replaceAll(" ", "")
+                              .toLowerCase();
                           if (isOk != null && isOk) {
                             //_formRegisterKey.currentState.save();
                             await authenticationNotifier.login(

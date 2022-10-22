@@ -105,14 +105,14 @@ class HiveData {
     onb.clear();
   }
 
-  Future<bool> isFirstTime2() async {
-    final box = await Hive.openBox<int>('onboarding');
-    if (box.values.isEmpty) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // Future<bool> isFirstTime2() async {
+  //   final box = await Hive.openBox<int>('onboarding');
+  //   if (box.values.isEmpty) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   Future<void> setFirstTime() async {
     final box = await Hive.openBox<int>('onboarding');
