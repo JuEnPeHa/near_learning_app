@@ -45,3 +45,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 pubspec.lock
+
+key.properties
+app/upload-keystore.jks

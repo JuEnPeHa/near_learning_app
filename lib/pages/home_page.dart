@@ -2,6 +2,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:near_learning_app/hive_models/hive_data.dart';
 import 'package:near_learning_app/models/models.dart';
 import 'package:near_learning_app/models/user_model.dart';
+import 'package:near_learning_app/pages/pages.dart';
 import 'package:near_learning_app/pages/text_lesson_page.dart';
 import 'package:near_learning_app/utils/themes.dart';
 import 'package:near_learning_app/widgets/widgets.dart';
@@ -22,31 +23,45 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   static List<LogosExploreMore> imagesLogos = [
     LogosExploreMore(
-        image: "mintbase.jpeg",
-        title: "Mintbase",
-        url: "https://www.mintbase.io/"),
+      title: "Astrodao",
+      image: "astrodao.jpeg",
+      url: "https://astrodao.com/",
+    ),
     LogosExploreMore(
-        image: "near-docs.jpeg",
-        title: "NEAR docs",
-        url: "https://docs.near.org/docs/develop/basics/getting-started"),
+      image: "trisolaris.jpeg",
+      title: "Trisolaris",
+      url: "https://www.trisolaris.io/",
+    ),
     LogosExploreMore(
-        image: "paras.jpeg", title: "Paras", url: "https://paras.id/"),
+      title: "Ref Finance",
+      image: "ref.png",
+      url: "https://ref.finance/",
+    ),
     LogosExploreMore(
-        image: "aurora-dev.jpeg",
-        title: "Aurora Dev",
-        url: "https://aurora.dev/"),
+      image: "onet.jpeg",
+      title: "Octopus",
+      url: "https://oct.network/",
+    ),
     LogosExploreMore(
-        title: "astrodao",
-        image: "astrodao.jpeg",
-        url: "https://astrodao.com/"),
+      image: "mintbase.jpeg",
+      title: "Mintbase",
+      url: "https://www.mintbase.io/",
+    ),
     LogosExploreMore(
-        image: "trisolaris.jpeg",
-        title: "Trisolaris",
-        url: "https://www.trisolaris.io/"),
+      image: "near-docs.jpeg",
+      title: "NEAR docs",
+      url: "https://docs.near.org/docs/develop/basics/getting-started",
+    ),
     LogosExploreMore(
-        title: "Ref Finance", image: "ref.png", url: "https://ref.finance/"),
+      image: "paras.jpeg",
+      title: "Paras",
+      url: "https://paras.id/",
+    ),
     LogosExploreMore(
-        image: "onet.jpeg", title: "Octopus", url: "https://oct.network/"),
+      image: "aurora-dev.jpeg",
+      title: "Aurora Dev",
+      url: "https://aurora.dev/",
+    ),
   ];
 
   bool _isOpen = false;
@@ -94,7 +109,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           const SizedBox(
-            height: 40,
+            height: 15,
           ),
           Container(
             margin: const EdgeInsets.only(left: 20),
@@ -104,7 +119,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 15,
           ),
           Container(
             child: Align(
@@ -126,10 +141,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     text: "Hoy",
                   ),
                   Tab(
-                    text: "Inspiraciones",
+                    text: "Tests",
                   ),
                   Tab(
-                    text: "Avances",
+                    text: "Novedades",
                   ),
                 ],
               ),
@@ -290,21 +305,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   //         ),
                   //       );
                   //     }, separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 10,),),
-                  Column(
-                    children: [
-                      Text("ListView 2"),
-                      ElevatedButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(widget.user.name),
-                            behavior: SnackBarBehavior.floating,
-                          ));
-                        },
-                        child: Text("ElevatedButton"),
-                      ),
-                    ],
+                  TestsPage(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        child: ListView.separated(
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile();
+                          },
+                          itemCount: 5,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return Divider();
+                          },
+                        )),
                   ),
-                  Text("ListView 3"),
                 ]),
           ),
           ExpansionPanelList(
@@ -339,7 +355,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   );
                 },
                 body: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
                   width: double.maxFinite,
                   height: 125,
                   color: Colors.transparent,
@@ -365,7 +381,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     image: DecorationImage(
                                         image: AssetImage(
                                             "assets/images_logos/" +
-                                                imagesLogos[index + 4].image),
+                                                imagesLogos[index].image),
                                         fit: BoxFit.cover),
                                   ),
                                 ),
@@ -391,7 +407,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             },
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 15),
+            margin: const EdgeInsets.symmetric(horizontal: 15),
             width: double.maxFinite,
             height: 125,
             color: Colors.transparent,
@@ -399,6 +415,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 itemCount: 4,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
+                  final rightIndex = index + 4;
                   return Container(
                     margin: const EdgeInsets.only(right: 5),
                     child: Column(
@@ -406,7 +423,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            _launchURL(imagesLogos[index].url);
+                            _launchURL(imagesLogos[rightIndex].url);
                           },
                           child: Container(
                             width: 90,
@@ -416,14 +433,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               color: Colors.black,
                               image: DecorationImage(
                                   image: AssetImage("assets/images_logos/" +
-                                      imagesLogos[index].image),
+                                      imagesLogos[rightIndex].image),
                                   fit: BoxFit.cover),
                             ),
                           ),
                         ),
                         Container(
                           child: Text(
-                            imagesLogos[index].title,
+                            imagesLogos[rightIndex].title,
                             style: TextStyle(fontSize: 18, color: Colors.black),
                           ),
                         )

@@ -52,6 +52,7 @@ class AuthenticationService {
     if (response.error == null) {
       await prefs.setString("token", response.data!.persistSessionString);
       String? userEmail = response.data!.user!.email;
+      Navigator.of(context).popUntil((route) => route.isFirst);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Login successful : $userEmail"),
       ));
@@ -73,10 +74,11 @@ class AuthenticationService {
     if (response.error == null) {
       await prefs.clear();
       hiveData.deleteAll();
+      Navigator.of(context).popUntil((route) => route.isFirst);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Logout successful"),
       ));
-      Navigator.pushReplacementNamed(context, 'auth');
+      Navigator.pushReplacementNamed(context, 'login');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Logout failed : ${response.error!.message}"),
@@ -117,7 +119,7 @@ class AuthenticationService {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Recover session failed : ${response.error!.message}"),
       ));
-      Navigator.pushReplacementNamed(context, 'auth');
+      Navigator.pushReplacementNamed(context, 'login');
     }
   }
 

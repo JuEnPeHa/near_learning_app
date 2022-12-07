@@ -13,7 +13,8 @@ class SnippetsPage extends StatefulWidget {
 }
 
 class _SnippetsPageState extends State<SnippetsPage> {
-  late ScrollController _scrollController;
+  late ScrollController _scrollControllerHorizontal;
+  late ScrollController _scrollControllerVertical;
   final _snipp = [];
   var _codeToShow = '';
 
@@ -28,14 +29,16 @@ class _SnippetsPageState extends State<SnippetsPage> {
 
   @override
   void initState() {
-    _scrollController = ScrollController();
+    _scrollControllerHorizontal = ScrollController();
+    _scrollControllerVertical = ScrollController();
     _fillList();
     super.initState();
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollControllerHorizontal.dispose();
+    _scrollControllerVertical.dispose();
     super.dispose();
   }
 
@@ -93,36 +96,26 @@ class _SnippetsPageState extends State<SnippetsPage> {
                           thickness: 1.0,
                           height: 1.0,
                         ),
-                        Container(
-                          width: double.infinity,
-                          height: _snipp[index].code.length < 500 ? 150 : _snipp[index].code.length < 1500 ? 300 : 500,
-                          color: Colors.transparent,
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(0),
-                                bottomRight: Radius.circular(0)),
-                            child: CustomScrollView(
-                              controller: _scrollController,
-                              scrollDirection: Axis.horizontal,
-                              scrollBehavior: const CupertinoScrollBehavior(),
-                              physics: const BouncingScrollPhysics(),
-                              slivers: [
-                                SliverList(
-                                    delegate: SliverChildListDelegate.fixed([
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.vertical,
-                                    child: SyntaxView(
-                                      code: _snipp[index].code,
-                                      syntax: Syntax.JAVASCRIPT,
-                                      fontSize: 13,
-                                      syntaxTheme: SyntaxTheme.vscodeDark(),
-                                      expanded: false,
-                                      withZoom: false,
-                                    ),
+                        SizedBox(
+                          height: 250,
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  controller: _scrollControllerHorizontal,
+                                  scrollDirection: Axis.horizontal,
+                                  physics: const BouncingScrollPhysics(),
+                                  child: SyntaxView(
+                                    code: _snipp[index].code,
+                                    syntax: Syntax.JAVASCRIPT,
+                                    fontSize: 13,
+                                    syntaxTheme: SyntaxTheme.vscodeDark(),
+                                    expanded: false,
+                                    withZoom: false,
                                   ),
-                                ])),
-                              ],
-                            ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

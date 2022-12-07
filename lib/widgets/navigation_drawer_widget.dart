@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
-  NavigationDrawerWidget({Key? key}) : super(key: key);
+  const NavigationDrawerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     final NavigationProvider provider =
         Provider.of<NavigationProvider>(context);
     final bool isCollapsed = provider.isCollapsed;
-    final padding = EdgeInsets.symmetric(vertical: 20);
+    const padding = EdgeInsets.symmetric(vertical: 20);
     return Container(
       width: isCollapsed ? MediaQuery.of(context).size.width * 0.3 : null,
       child: Drawer(

@@ -5,8 +5,8 @@ class HiveData {
   Future<int> saveUserApp({required UserApp user}) async {
     final box = Hive.box<UserApp>('user');
     if (box.isNotEmpty) {
-      box.clear();
-      await Future.delayed(Duration(seconds: 3));
+      await box.clear();
+      await Future.delayed(Duration(milliseconds: 800));
     }
     return await box.add(user);
   }
@@ -105,18 +105,18 @@ class HiveData {
     onb.clear();
   }
 
-  Future<bool> isFirstTime2() async {
-    final box = await Hive.openBox<int>('onboarding');
-    if (box.values.isEmpty) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // Future<bool> isFirstTime2() async {
+  //   final box = await Hive.openBox<int>('onboarding');
+  //   if (box.values.isEmpty) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
-  Future<void> setFirstTime() async {
+  Future<int> setFirstTime() async {
     final box = await Hive.openBox<int>('onboarding');
-    box.add(1);
+    return await box.add(1);
   }
 
   Future<bool> get isFirstTime async {

@@ -67,9 +67,11 @@ class TextLesson extends StatelessWidget {
                     //  "El ejemplo Dapplets × NEAR es un Dapplet (una aplicación de aumento) que puede analizar publicaciones de Twitter y almacenarlas."),
                   ),
                   Divider(),
-                  OutlinedButton(onPressed: () {
-                    Navigator.pop(context);
-                  }, child: Text("Continuar")),
+                  OutlinedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("Continuar")),
                   SizedBox(
                     height: 20,
                   ),

@@ -120,6 +120,7 @@ class _ThemesPageState extends State<ThemesPage> {
                       ...themes.map(
                         (EachTheme theme) {
                           return ExpansionTile(
+                            textColor: Colors.black,
                             //collapsedBackgroundColor: theme.color,
                             //backgroundColor: Colors.transparent,
                             //backgroundColor: theme.color,

@@ -92,7 +92,7 @@ class AccountPage extends StatelessWidget {
                     );
                   },
                   child: Text("Save")),
-              Spacer(),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.2),
             ]),
       ),
     );

@@ -6,7 +6,6 @@ import 'package:near_learning_app/models/models.dart';
 import 'package:near_learning_app/providers/authentication_notifier.dart';
 import 'package:near_learning_app/utils/constants.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:nil/nil.dart';
 import 'package:provider/provider.dart';
 
 Future<List<Onboarding>> getOnboardingData() async {
@@ -22,14 +21,14 @@ Future<List<Onboarding>> getOnboardingData() async {
 }
 
 class OnboardingPage extends StatefulWidget {
-  OnboardingPage({Key? key}) : super(key: key);
+  const OnboardingPage({Key? key}) : super(key: key);
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  int _index = 0;
+  static const int _index = 0;
   bool isIOS = false;
   List<Onboarding> onboardingList = [];
   late PageController _pageController;
@@ -39,7 +38,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   void initState() {
     getOnboardingData().then((value) => setState(() => onboardingList = value));
     _pageController = PageController();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       authenticationNotifier =
           Provider.of<AuthenticationNotifier>(context, listen: false);
     });
@@ -55,6 +54,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
+    print(_size);
     if (Platform.isIOS) {
       isIOS = true;
     } else {
@@ -64,115 +64,126 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: PageView.builder(
           controller: _pageController,
           scrollDirection: Axis.vertical,
-          itemCount: lottieAnim(index: _index)[1],
+          itemCount: lottieAnim()[1],
           itemBuilder: (context, index) {
             Color color = Colors.black;
-            double size = 25;
+            double size = 24;
             return Stack(children: <Widget>[
-              BodyBackGroundAnimation(
-                index: index,
-                size: _size,
-                isIOS: isIOS,
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: BodyBackGroundAnimation(
+                  index: index,
+                  size: _size,
+                  isIOS: isIOS,
+                ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 0, left: 20, right: 20),
-                child: Column(
-                  children: [
-                    SizedBox(
-                        height: 150,
-                        width: _size.width - 40,
-                        child: DecoratedBox(
-                            decoration: BoxDecoration(color: Colors.grey[50]))),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        onboardingList.isNotEmpty
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    onboardingList[index].title,
-                                    style: TextStyle(
-                                        //backgroundColor: Vx.white,
-                                        color: color,
-                                        fontSize: size * 0.90,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    onboardingList[index].subTitle,
-                                    style: TextStyle(
-                                        color: color,
-                                        fontSize: size * 0.80,
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Container(
-                                    width: 250,
-                                    //color: redNEAR,
-                                    child: Text(
-                                      onboardingList[index].description,
-                                      maxLines: 5,
-                                      overflow: TextOverflow.ellipsis,
-                                      textAlign: TextAlign.justify,
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 0, left: 20, right: 20),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: _size.height <= 600
+                            ? _size.height * 0.075
+                            : _size.height * 0.15,
+                        width: _size.width,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          onboardingList.isNotEmpty
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      onboardingList[index].title,
                                       style: TextStyle(
-                                          fontSize: size * 0.60,
-                                          color: Color(0xFF878593)),
+                                          //backgroundColor: Vx.white,
+                                          color: color,
+                                          fontSize: size * 0.80,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 40,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      if (index < 2) {
-                                        _pageController
-                                            .animateToPage(
-                                              _pageController.page!.toInt() + 1,
-                                              duration: const Duration(
-                                                  milliseconds: 750),
-                                              curve: Curves.easeInOut,
-                                            )
-                                            .then((value) => {});
-                                      } else {
-                                        authenticationNotifier.recoverSession(
-                                            context: context);
-                                      }
-                                    },
-                                    child: Container(
-                                      //width: 200,
-                                      child: Row(
-                                        children: [
-                                          ResponsiveButton(
-                                            isResponsive: true,
-                                          ),
-                                        ],
+                                    Text(
+                                      onboardingList[index].subTitle,
+                                      style: TextStyle(
+                                          color: color,
+                                          fontSize: size * 0.70,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      width: 250,
+                                      //color: redNEAR,
+                                      child: Text(
+                                        onboardingList[index].description,
+                                        maxLines: 5,
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(
+                                            fontSize: size * 0.50,
+                                            color: Color(0xFF878593)),
                                       ),
                                     ),
-                                  )
-                                ],
-                              )
-                            : Container(),
-                        Column(
-                            children: List.generate(
-                          3,
-                          (indexDots) => Container(
-                            margin:
-                                const EdgeInsets.only(bottom: 4.0, top: 0.0),
-                            width: 8.0,
-                            height: index == indexDots ? 25.0 : 8,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              color: index == indexDots
-                                  ? const Color.fromARGB(255, 66, 146, 70)
-                                  : const Color.fromARGB(255, 56, 73, 60),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        if (index < 2) {
+                                          _pageController
+                                              .animateToPage(
+                                                _pageController.page!.toInt() +
+                                                    1,
+                                                duration: const Duration(
+                                                    milliseconds: 750),
+                                                curve: Curves.easeInOut,
+                                              )
+                                              .then((value) => {});
+                                        } else {
+                                          authenticationNotifier.recoverSession(
+                                              context: context);
+                                        }
+                                      },
+                                      child: Container(
+                                        child: Row(
+                                          children: [
+                                            ResponsiveButton(
+                                              isResponsive: true,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                )
+                              : Container(),
+                          Column(
+                              children: List.generate(
+                            3,
+                            (indexDots) => Container(
+                              margin:
+                                  const EdgeInsets.only(bottom: 4.0, top: 0.0),
+                              width: 8.0,
+                              height: index == indexDots ? 25.0 : 8,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                color: index == indexDots
+                                    ? const Color.fromARGB(255, 66, 146, 70)
+                                    : const Color.fromARGB(255, 56, 73, 60),
+                              ),
                             ),
-                          ),
-                        )),
-                      ],
-                    )
-                  ],
+                          )),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ]);
@@ -215,7 +226,7 @@ class ResponsiveButton extends StatelessWidget {
                       ),
                     ),
                   )
-                : Container(),
+                : const SizedBox.shrink(),
             Expanded(
               child: Row(
                 children: const [
@@ -247,10 +258,10 @@ class BodyBackGroundAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: size.width,
-      height: size.height,
-      alignment: const FractionalOffset(0.5, 0.5),
-      padding: const EdgeInsets.symmetric(vertical: 0.0),
-      transform: Matrix4.identity()..scale(1.0, 1.50),
+      height: size.height / 2,
+      //alignment: const FractionalOffset(0.5, 0.5),
+      //padding: const EdgeInsets.symmetric(vertical: 5.0),
+      //transform: Matrix4.identity()..scale(1.0, 1.50),
       child: lottieAnim(index: index, animate: isIOS)[0],
     );
   }

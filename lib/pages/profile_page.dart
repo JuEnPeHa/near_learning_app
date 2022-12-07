@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:near_learning_app/models/user_model.dart';
 import 'package:near_learning_app/providers/authentication_notifier.dart';
@@ -35,7 +36,33 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           userTile(widget.user.name),
           divider(),
-          colorTiles(),
+          colorTiles(() {
+            showCupertinoDialog(
+                context: context,
+                builder: (context) {
+                  return CupertinoAlertDialog(
+                    title: Text(
+                        "Por el momento puedes actualizar tus datos cerrando y volviendo a abrir sesión"),
+                    content: Column(
+                      children: [],
+                    ),
+                    actions: <Widget>[
+                      CupertinoDialogAction(
+                        child: Text("Regresar"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      CupertinoDialogAction(
+                        child: Text("Continuar"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                });
+          }, () {}),
           divider(),
           SizedBox(
               height: size.width / 2 + 20,
@@ -73,24 +100,40 @@ class _ProfilePageState extends State<ProfilePage> {
                           .bold
                           .make()
                           .box
-                          .width(size.width * 0.4)
-                          .height(size.height * 0.05)
+                          .width(size.width * 0.45)
+                          .height(size.height * 0.055)
                           .make(),
-                      "Agradecimiento especial a Sherif por la oportunidad"
+                      "Agradecimiento especial a Sherif por la oportunidad,"
                           .text
                           .bold
                           .make()
                           .box
-                          .width(size.width * 0.4)
-                          .height(size.height * 0.05)
+                          .width(size.width * 0.45)
+                          .height(size.height * 0.055)
                           .make(),
-                      "y a Aleida y Nacho por sus contribuciones"
+                      "a Aleida y a Nacho por sus contribuciones,"
                           .text
                           .bold
                           .make()
                           .box
-                          .width(size.width * 0.4)
-                          .height(size.height * 0.05)
+                          .width(size.width * 0.45)
+                          .height(size.height * 0.055)
+                          .make(),
+                      "a Alexis por su trabajo y esfuerzo,"
+                          .text
+                          .bold
+                          .make()
+                          .box
+                          .width(size.width * 0.45)
+                          .height(size.height * 0.055)
+                          .make(),
+                      "y a Aeryn por ser mi inspiración, aunque no lo sepa."
+                          .text
+                          .bold
+                          .make()
+                          .box
+                          .width(size.width * 0.45)
+                          .height(size.height * 0.055)
                           .make(),
                     ],
                   ),
@@ -127,13 +170,13 @@ Widget divider() {
   );
 }
 
-Widget colorTiles() {
+Widget colorTiles(void Function()? onTap1, onTap2) {
   return Column(
     children: [
-      colorTile(
-          Icons.person_outline_outlined, Colors.green, "Datos Personales"),
-      colorTile(
-          Icons.settings_outlined, Colors.red, "Ajustes de la Aplicación"),
+      colorTile(Icons.person_outline_outlined, Colors.green, "Datos Personales",
+          onTap: onTap1),
+      colorTile(Icons.settings_outlined, Colors.red, "Ajustes de la Aplicación",
+          onTap: onTap2),
       //colorTile(Icons.person_outline_outlined, yellowNEAR, "Datos Personales"),
       //colorTile(Icons.person_outline_outlined, orangeNEAR, "Datos Personales"),
     ],

@@ -42,10 +42,10 @@ final syntax = Syntax.JAVASCRIPT;
 
 Widget a01() {
   String code1 = '''
-      "npm Node.JS package manager".text.make(),
-      "git version control".text.make(),
-      "yarn (npm install -g yarn@1.22.15)".text.make(),
-      "near-cli".text.make(),
+      npm Node.JS package manager
+      git version control
+      yarn (npm install -g yarn@1.22.15)
+      near-cli
       ''';
   String code2 = "git clone https://github.com/Learn-NEAR/starter--near-sdk-as";
   String code3 = '''PS C:\Github\starter--near-sdk-as> yarn 

@@ -13,6 +13,8 @@ import 'package:near_learning_app/providers/provider.dart';
 import 'package:near_learning_app/router/routes.dart';
 import 'package:near_learning_app/theme/app_theme.dart';
 import 'package:near_learning_app/utils/themes.dart';
+import 'package:near_learning_app/widgets/login_page.dart';
+import 'package:near_learning_app/widgets/register_page.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -54,6 +56,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  static const String _title = 'Near Learning App';
+
   @override
   Widget build(BuildContext context) {
     precacheImage(
@@ -67,16 +71,16 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'NEAR Learning App',
+      title: _title,
       theme: AppTheme.lightTheme /*NeumorphicThemeData()*/,
       // routes: AppRoutes.getAppRoutes(),
       // initialRoute: AppRoutes.initialRoute,
       // onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: 'root',
+      initialRoute: 'root', //'root',
       routes: <String, WidgetBuilder>{
         'root': (BuildContext context) => const SplashPage(),
         //'login': (BuildContext context) => const LoginPage2(),
-        'home': (BuildContext context) => HomeScreen(),
+        'home': (BuildContext context) => const HomeScreen(),
         'account': (BuildContext context) => AccountPage(),
         //'themes': (BuildContext context) => const ThemesPage(),
         'auth': (BuildContext context) => const AuthScreen(),
@@ -85,7 +89,9 @@ class _MyAppState extends State<MyApp> {
               child: a01(),
               title: "Example",
             ),
-        'test': (BuildContext context) => TestsPage(),
+        'test': (BuildContext context) => const TestsPage(),
+        'login': (BuildContext context) => LoginPage(),
+        'register': (BuildContext context) => RegisterPage(),
       },
     );
   }

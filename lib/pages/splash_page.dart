@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage>
 
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       authenticationNotifier =
           Provider.of<AuthenticationNotifier>(context, listen: false);
       authenticationNotifier.shouldOnboardingBeShown(context: context);
@@ -36,7 +36,6 @@ class _SplashPageState extends State<SplashPage>
   @override
   void dispose() {
     animationController.dispose();
-
     super.dispose();
   }
 
@@ -54,7 +53,7 @@ class _SplashPageState extends State<SplashPage>
                   child: child,
                 );
               },
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height / 3 * 1.75,
                 width: MediaQuery.of(context).size.width / 3 * 1.75,
                 child: Image.asset("assets/logos_app/phone_without_n.png"),
@@ -70,7 +69,7 @@ class _SplashPageState extends State<SplashPage>
                   child: child,
                 );
               },
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height / 3 / 2,
                 width: MediaQuery.of(context).size.width / 3 / 2,
                 child: Image.asset("assets/logos_app/just_n.png"),

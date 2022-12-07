@@ -53,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
         Provider.of<AuthenticationNotifier>(context, listen: false);
     List<Widget> _screens() => [
           HomePage(user: usar),
-          TestsPage(),
           SnippetsPage(),
           ThemesPage(),
           ProfilePage(
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
     ];
     return Scaffold(
-      appBar: selectedIndex == 2
+      appBar: selectedIndex == 1
           ? AppBar(
               title: Text("Snippets"),
               backgroundColor: Color.fromARGB(255, 145, 111, 9),
@@ -82,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor:
-          selectedIndex != 3 ? Color(0xFF74959A) : Color(0xFFF9F9F2),
+          selectedIndex != 2 ? Color(0xFF74959A) : Color(0xFFF9F9F2),
       body: screens[selectedIndex],
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 25, right: 25),
