@@ -1,20 +1,29 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:near_learning_app/models/user_model.dart';
 
-class HiveData {
-  Future<int> saveUserApp({required UserApp user}) async {
+final _HiveData hiveDataSingleton = _HiveData._internal();
+
+class _HiveData {
+  _HiveData._internal();
+
+  factory _HiveData() {
+    return hiveDataSingleton;
+  }
+
+  Future<void> saveUserApp({required UserApp user}) async {
     final box = Hive.box<UserApp>('user');
     if (box.isNotEmpty) {
       await box.clear();
       await Future.delayed(Duration(milliseconds: 800));
     }
-    return await box.add(user);
+    await box.put('user', user);
   }
 
-  Future<UserApp?> getUserApp() async {
-    final box = await Hive.box<UserApp>('user');
-    print("BOXUSER" + box.getAt(0).toString());
-    return box.getAt(0);
+  UserApp? getUserApp() {
+    final box = Hive.box<UserApp>('user');
+    final user = box.get('user');
+    print("BOXUSER" + user.toString());
+    return user;
   }
 
   UserApp getUserAppSync() {
@@ -23,7 +32,7 @@ class HiveData {
   }
 
   Future<UserApp?> get userApp async {
-    final Box<UserApp> box = await Hive.box<UserApp>('user');
+    final Box<UserApp> box = Hive.box<UserApp>('user');
     print(box.get('user'));
     return box.get('user');
   }
@@ -125,6 +134,26 @@ class HiveData {
       return true;
     } else {
       return false;
+    }
+  }
+}
+
+// Create Enum for Hive
+enum HiveBox {
+  user,
+  onboarding,
+}
+
+// Create Enum to get the box name
+extension HiveBoxExtension on HiveBox {
+  String get name {
+    switch (this) {
+      case HiveBox.user:
+        return 'user';
+      case HiveBox.onboarding:
+        return 'onboarding';
+      default:
+        return '';
     }
   }
 }

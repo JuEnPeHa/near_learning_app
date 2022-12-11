@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:near_learning_app/providers/authentication_notifier.dart';
-import 'package:provider/provider.dart';
-import 'package:supabase/supabase.dart' as supabase;
+import 'package:provider/provider.dart' as Provi;
+import 'package:supabase/supabase.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({Key? key}) : super(key: key);
@@ -10,12 +10,11 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final supabase.User user =
-        ModalRoute.of(context)!.settings.arguments as supabase.User;
-    print("HELOHELOHELOHELOHELO" + user.toString());
+    final User user = ModalRoute.of(context)!.settings.arguments as User;
+    print("HELOHELOHELOHELOHELO $user ${user.email} ${user.id}");
 
     final AuthenticationNotifier authNotifier =
-        Provider.of<AuthenticationNotifier>(context);
+        Provi.Provider.of<AuthenticationNotifier>(context);
     List<String> profile = [];
     if (profile == null || profile.isEmpty) {
       authNotifier.getProfile(context: context, userId: user.id).then((value) {

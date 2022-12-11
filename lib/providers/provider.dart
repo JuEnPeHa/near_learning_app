@@ -14,11 +14,9 @@ class UserProvider extends ChangeNotifier {
   String _lastReadPath = "";
   String _lastReadSyncedPath = "";
 
-  var hiveData = HiveData();
-
   Future<void> _initHive() async {
-    var userApp = await hiveData.userApp;
-    var isFirstTime = await hiveData.isFirstTime;
+    final UserApp? userApp = await hiveDataSingleton.userApp;
+    final bool isFirstTime = await hiveDataSingleton.isFirstTime;
     notifyListeners();
   }
 
@@ -41,7 +39,7 @@ class UserProvider extends ChangeNotifier {
     _preferedLanguage = preferedLanguage;
     _lastReadPath = lastReadPath;
     _lastReadSyncedPath = lastReadSyncedPath;
-    hiveData.saveUserApp(
+    hiveDataSingleton.saveUserApp(
         user: UserApp(
             email: _userEmail,
             favoriteThemes: _favoriteThemes,

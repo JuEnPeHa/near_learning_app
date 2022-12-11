@@ -28,7 +28,7 @@ class _SplashPageState extends State<SplashPage>
     });
     //recoverSupabaseSession();
     animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 15));
+        AnimationController(vsync: this, duration: const Duration(seconds: 10));
     animationController.forward();
     super.initState();
   }

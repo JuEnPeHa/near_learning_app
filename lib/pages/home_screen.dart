@@ -19,12 +19,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final hiveData = HiveData();
   late UserApp usar;
 
   @override
   void initState() {
-    usar = hiveData.getUserAppSync();
+    usar = hiveDataSingleton.getUserAppSync();
     super.initState();
   }
 
@@ -54,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> _screens() => [
           HomePage(user: usar),
           SnippetsPage(),
-          ThemesPage(),
+          const ThemesPage(),
           ProfilePage(
             authenticationNotifier: authenticationNotifier,
             user: usar,

@@ -28,8 +28,8 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  static const int _index = 0;
-  bool isIOS = false;
+  // static const int _index = 0;
+  // bool isIOS = false;
   List<Onboarding> onboardingList = [];
   late PageController _pageController;
   late final AuthenticationNotifier authenticationNotifier;
@@ -54,12 +54,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
+    final bool isIOS = Platform.isIOS;
     print(_size);
-    if (Platform.isIOS) {
-      isIOS = true;
-    } else {
-      isIOS = false;
-    }
+    // if () {
+    //   isIOS = true;
+    // } else {
+    //   isIOS = false;
+    // }
     return Scaffold(
       body: PageView.builder(
           controller: _pageController,

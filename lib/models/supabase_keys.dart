@@ -26,15 +26,16 @@ class AuthenticationService {
     if (response.error == null) {
       await prefs.setString("token", response.data!.persistSessionString);
       String? userEmail = response.data!.user!.email;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Signup successful : $userEmail"),
-      ));
+
+      ConstsFunctions.showSnackBar(
+          message: "Signup successful : $userEmail", context: context);
       Navigator.pushReplacementNamed(context, 'account',
           arguments: response.data!.user);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Signup failed : ${response.error!.message}"),
-      ));
+      ConstsFunctions.showSnackBar(
+          message: "Signup failed : ${response.error!.message}",
+          context: context,
+          isError: true);
     }
   }
 
@@ -53,72 +54,76 @@ class AuthenticationService {
       await prefs.setString("token", response.data!.persistSessionString);
       String? userEmail = response.data!.user!.email;
       Navigator.of(context).popUntil((route) => route.isFirst);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Login successful : $userEmail"),
-      ));
+
+      ConstsFunctions.showSnackBar(
+          message: "Login successful : $userEmail", context: context);
       Navigator.pushReplacementNamed(context, 'account',
           arguments: response.data!.user);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Login failed : ${response.error!.message}"),
-      ));
+      ConstsFunctions.showSnackBar(
+          message: "Login failed : ${response.error!.message}",
+          context: context,
+          isError: true);
     }
   }
 
   Future<String?> logout({
     required BuildContext context,
   }) async {
-    final HiveData hiveData = HiveData();
     final EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
     GotrueResponse response = await SupabaseKeys.supabaseClient.auth.signOut();
     if (response.error == null) {
       await prefs.clear();
-      hiveData.deleteAll();
+      hiveDataSingleton.deleteAll();
       Navigator.of(context).popUntil((route) => route.isFirst);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Logout successful"),
-      ));
+      ConstsFunctions.showSnackBar(
+          message: "Logout successful", context: context);
+
       Navigator.pushReplacementNamed(context, 'login');
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Logout failed : ${response.error!.message}"),
-      ));
+      ConstsFunctions.showSnackBar(
+          message: "Logout failed : ${response.error!.message}",
+          context: context,
+          isError: true);
     }
   }
 
   Future<String?> recoverSession({
     required BuildContext context,
-    HiveData? hiveDataC,
   }) async {
-    final hiveData = hiveDataC ?? HiveData();
     final EncryptedSharedPreferences prefs = EncryptedSharedPreferences();
     final session = await prefs.getString("token");
     GotrueSessionResponse response =
         await SupabaseKeys.supabaseClient.auth.recoverSession(session);
     if (response.error == null) {
+      print("Here everything is ok 1 + ${response.data!.user!.email}");
       await prefs.setString("token", response.data!.persistSessionString);
-      hiveData.getUserApp().then((value) {
-        final user = value;
-        if (user != null) {
-          //await Future.delayed(Duration(milliseconds: 500));
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("Recover session successful"),
-          ));
-          Navigator.pushReplacementNamed(context, 'home');
-        } else if (user == null) {
-          //await Future.delayed(Duration(milliseconds: 500));
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("Recover session successful"),
-          ));
-          Navigator.pushReplacementNamed(context, 'account',
-              arguments: response.data!.user!);
-        }
-      });
+      print("Here everything is ok 2");
+      final UserApp? user = hiveDataSingleton.getUserApp();
+      print("This is the paramenter $user");
+      if (user != null) {
+        //await Future.delayed(Duration(milliseconds: 500));
+
+        ConstsFunctions.showSnackBar(
+            message: "Recover session successful with user $user",
+            context: context);
+        Navigator.pushReplacementNamed(context, 'home');
+      } else if (user == null) {
+        //await Future.delayed(Duration(milliseconds: 500));
+
+        ConstsFunctions.showSnackBar(
+            message: "Recover session successful without user",
+            context: context);
+        Navigator.pushReplacementNamed(context, 'account',
+            arguments: response.data!.user!);
+      }
     } else {
       await Future.delayed(Duration(milliseconds: 500));
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Recover session failed : ${response.error!.message}"),
-      ));
+
+      ConstsFunctions.showSnackBar(
+          message: "Recover session failed : ${response.error!.message}",
+          context: context,
+          isError: true);
       Navigator.pushReplacementNamed(context, 'login');
     }
   }
@@ -136,9 +141,10 @@ class AuthenticationService {
     final error = response.error;
     List<String> profile = [];
     if (error != null && response.status != 406) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Get profile failed : ${error.message}"),
-      ));
+      ConstsFunctions.showSnackBar(
+          message: "Get profile failed : ${error.message}",
+          context: context,
+          isError: true);
     }
     final data = response.data;
     if (data != null) {
@@ -163,9 +169,10 @@ class AuthenticationService {
           .then((value) => print(value.error));
       return profile;
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Get profile failed : ${error?.message}"),
-      ));
+      ConstsFunctions.showSnackBar(
+          message: "Get profile failed : ${error?.message}",
+          context: context,
+          isError: true);
       return profile;
     }
   }
@@ -179,7 +186,6 @@ class AuthenticationService {
     String firstName = "",
     String nearAccount = "",
   }) async {
-    final hiveData = HiveData();
     final updates = avatarUrl != null
         ? {
             'id': userId,
@@ -200,11 +206,12 @@ class AuthenticationService {
         .execute();
     final error = response.error;
     if (error != null) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Update profile failed : ${error.message}"),
-      ));
+      ConstsFunctions.showSnackBar(
+          message: "Update profile failed : ${error.message}",
+          context: context,
+          isError: true);
     } else {
-      await hiveData.setFirstTime();
+      await hiveDataSingleton.setFirstTime();
       final UserApp user = UserApp(
         email: email,
         favoriteThemes: [],
@@ -216,10 +223,10 @@ class AuthenticationService {
         userLastSyncedLevel: 0,
         userLevel: 0,
       );
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Update profile successful"),
-      ));
-      await hiveData
+
+      ConstsFunctions.showSnackBar(
+          message: "Update profile successful", context: context);
+      await hiveDataSingleton
           .saveUserApp(user: user)
           .then((value) => Navigator.popAndPushNamed(context, 'home'));
     }
@@ -228,32 +235,63 @@ class AuthenticationService {
   Future<void> shouldOnboardingBeShown({
     required BuildContext context,
   }) async {
-    final hiveData = HiveData();
-    hiveData.isFirstTime.then((value) async {
+    hiveDataSingleton.isFirstTime.then((value) async {
       if (value) {
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(const Duration(milliseconds: 500));
         Navigator.pushReplacementNamed(context, 'onboarding');
       } else {
-        await Future.delayed(Duration(seconds: 1));
-        recoverSession(context: context, hiveDataC: hiveData);
+        Future.delayed(const Duration(milliseconds: 500))
+            .then((_) => recoverSession(context: context));
       }
     });
   }
 }
 //final hiveData = HiveData();
-    // final user = await hiveData.getUserApp();
-    // if (user != null) {
-    //   await hiveData.getUserApp();
-    // } else {
-    //   await hiveData.getUserApp();
-    // }
-    //} else {
-    //   final profile = response.data!.data![0];
-    //   final user = await HiveData().getUserApp();
-    //   if (user != null) {
-    //     user.profile = profile;
-    //     await HiveData().setUserApp(user);
-    //     Navigator.pushReplacementNamed(context, 'home', arguments: user);
-    //   } else {
-    //     Navigator.pushReplacementNamed(context, 'account');
-    //   }
+// final user = await hiveData.getUserApp();
+// if (user != null) {
+//   await hiveData.getUserApp();
+// } else {
+//   await hiveData.getUserApp();
+// }
+//} else {
+//   final profile = response.data!.data![0];
+//   final user = await HiveData().getUserApp();
+//   if (user != null) {
+//     user.profile = profile;
+//     await HiveData().setUserApp(user);
+//     Navigator.pushReplacementNamed(context, 'home', arguments: user);
+//   } else {
+//     Navigator.pushReplacementNamed(context, 'account');
+//   }
+
+//     abstract class HiveDataSingleton {
+//   Future<void> saveUserApp({required UserApp user});
+//   Future<UserApp?> getUserApp();
+//   Future<void> setFirstTime();
+//   Future<bool> get isFirstTime;
+// }
+
+class ConstsFunctions {
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
+      {required String message,
+      required BuildContext context,
+      bool isError = false}) {
+    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      backgroundColor: isError ? Colors.red : Colors.green,
+      // action: SnackBarAction(
+      //   label: 'OK',
+      //   onPressed: () {
+      //     ScaffoldMessenger.maybeOf(context)?.hideCurrentSnackBar();
+      //   },
+      // ),
+      dismissDirection: DismissDirection.horizontal,
+      duration: const Duration(seconds: 2),
+      elevation: 15.0,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    ));
+  }
+}
