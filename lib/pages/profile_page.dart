@@ -47,14 +47,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [],
                     ),
                     actions: <Widget>[
+                      // CupertinoDialogAction(
+                      //   child: Text("Regresar"),
+                      //   onPressed: () {
+                      //     Navigator.of(context).pop();
+                      //   },
+                      // ),
                       CupertinoDialogAction(
-                        child: Text("Regresar"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      CupertinoDialogAction(
-                        child: Text("Continuar"),
+                        child: Text("Entendido"),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
@@ -281,7 +281,9 @@ class CustomCircularIndicator extends StatelessWidget {
                     width: radius / 1,
                   ),
                 ),
-              )
+              ),
+              Positioned.fill(
+                  child: ColoredBox(color: Theme.of(context).primaryColor)),
             ],
           ),
         ),

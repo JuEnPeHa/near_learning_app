@@ -80,8 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: NavigationDrawerWidget(),
       extendBodyBehindAppBar: true,
       extendBody: true,
-      backgroundColor:
-          selectedIndex != 2 ? Color(0xFF74959A) : Color(0xFFF9F9F2),
+      backgroundColor: selectedIndex != 2
+          ? Theme.of(context).primaryColor
+          : Color(0xFFF9F9F2),
       body: screens[selectedIndex],
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 25, right: 25),

@@ -72,7 +72,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: _title,
-      theme: AppTheme.lightTheme /*NeumorphicThemeData()*/,
+      theme: AppTheme.lightTheme.copyWith(
+        primaryColor: Color(0xFF74959A),
+      ) /*NeumorphicThemeData()*/,
       // routes: AppRoutes.getAppRoutes(),
       // initialRoute: AppRoutes.initialRoute,
       // onGenerateRoute: AppRoutes.onGenerateRoute,

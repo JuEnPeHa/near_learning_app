@@ -16,7 +16,7 @@ class _SnippetsPageState extends State<SnippetsPage> {
   late ScrollController _scrollControllerHorizontal;
   late ScrollController _scrollControllerVertical;
   final _snipp = [];
-  var _codeToShow = '';
+  // var _codeToShow = '';
 
   void _fillList() {
     for (var element in snippetsConstEs) {
@@ -62,28 +62,65 @@ class _SnippetsPageState extends State<SnippetsPage> {
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(15),
                         bottomRight: Radius.circular(15)),
-                    child: ExpansionTileCard(
-                      expandedTextColor: Colors.black,
-                      colorCurve: Curves.bounceIn,
-                      elevationCurve: Curves.easeInCubic,
-                      onExpansionChanged: (_) {
-                        print(_snipp[index].code.length);
+                    child: ListTile(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(_snipp[index].title),
+                                content: SyntaxView(
+                                  code: _snipp[index].code,
+                                  syntax: Syntax.DART,
+                                  syntaxTheme: SyntaxTheme.dracula(),
+                                  withZoom: true,
+                                  withLinesCount: true,
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Close'),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      // setState(() {
+                                      //   _codeToShow = _snipp[index].code;
+                                      // });
+                                      Clipboard.setData(ClipboardData(
+                                          text: _snipp[index].code));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content: Text('Copied')));
+                                    },
+                                    icon: const Icon(Icons.copy_all),
+                                  ),
+                                ],
+                              );
+                            });
                       },
+                      // expandedTextColor: Colors.black,
+                      // colorCurve: Curves.bounceIn,
+                      // elevationCurve: Curves.easeInCubic,
+                      // onExpansionChanged: (_) {
+                      //   print(_snipp[index].code.length);
+                      // },
                       title: Text(
                         _snipp[index].title,
                         style: const TextStyle(fontSize: 17),
                       ),
-                      baseColor: Colors.white54,
-                      expandedColor: Colors.white70,
+                      // baseColor: Colors.white54,
+                      // expandedColor: Colors.white70,
                       subtitle: Text(
                         _snipp[index].description,
                         style: const TextStyle(fontSize: 14),
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          setState(() {
-                            _codeToShow = _snipp[index].code;
-                          });
+                          // setState(() {
+                          //   _codeToShow = _snipp[index].code;
+                          // });
                           Clipboard.setData(
                               ClipboardData(text: _snipp[index].code));
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -91,34 +128,12 @@ class _SnippetsPageState extends State<SnippetsPage> {
                         },
                         icon: const Icon(Icons.copy_all),
                       ),
-                      children: <Widget>[
-                        const Divider(
-                          thickness: 1.0,
-                          height: 1.0,
-                        ),
-                        SizedBox(
-                          height: 250,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  controller: _scrollControllerHorizontal,
-                                  scrollDirection: Axis.horizontal,
-                                  physics: const BouncingScrollPhysics(),
-                                  child: SyntaxView(
-                                    code: _snipp[index].code,
-                                    syntax: Syntax.JAVASCRIPT,
-                                    fontSize: 13,
-                                    syntaxTheme: SyntaxTheme.vscodeDark(),
-                                    expanded: false,
-                                    withZoom: false,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      // children: <Widget>[
+                      //   const Divider(
+                      //     thickness: 1.0,
+                      //     height: 1.0,
+                      //   ),
+                      // ],
                     ),
                   );
                 }),
@@ -168,3 +183,26 @@ var result = fibonacci(20);
     ),
   );
 }
+
+// SizedBox(
+//                           height: 250,
+//                           child: Column(
+//                             children: [
+//                               Expanded(
+//                                 child: SingleChildScrollView(
+//                                   controller: _scrollControllerHorizontal,
+//                                   scrollDirection: Axis.horizontal,
+//                                   physics: const BouncingScrollPhysics(),
+//                                   child: SyntaxView(
+//                                     code: _snipp[index].code,
+//                                     syntax: Syntax.JAVASCRIPT,
+//                                     fontSize: 13,
+//                                     syntaxTheme: SyntaxTheme.vscodeDark(),
+//                                     expanded: false,
+//                                     withZoom: false,
+//                                   ),
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                         ),
